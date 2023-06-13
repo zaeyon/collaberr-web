@@ -1,2 +1,15 @@
 .main {
+    width: 600px;
+    margin-top: 48px;
+    padding: 0px 40px;
+    background-color: white;
+}
+
+.title {
+    font-family: 'Pretendard';
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 52px;
+    letter-spacing: -0.015em;
+    text-align: left;
 }
