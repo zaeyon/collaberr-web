@@ -1,0 +1,39 @@
+.container {
+    position: fixed;
+    top: 0;
+    width: 100vw;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 24px;
+    padding-right: 32px;
+    border-bottom: 1px solid #CFD6DC;
+    background-color: white;
+    z-index: 1;
+}
+
+.container div {
+    display: flex;
+    align-items: center;
+}
+
+.collaberrLogo {
+    margin-left: 4px;
+    width: 114.4px;
+    height: 21.6px;
+}
+
+.collaberrIcon {
+    margin-left: 32px;
+}
+
+.login {
+    font-family: 'Pretendard';
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: -0.015em;
+    text-align: left;
+    color: #536878;
+}

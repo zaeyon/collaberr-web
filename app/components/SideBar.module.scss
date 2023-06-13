@@ -1,0 +1,31 @@
+.container {
+    width: 240px;
+    height: 100vh;
+    background-color: #ffffff;
+    border-right: 1px solid #E6EAEF;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    left: 0;
+    padding: 30px 32px;
+}
+
+.categoryItem {
+    font-size: 15px;
+    line-height: 24px;
+    font-family: 'Pretendard';
+    font-weight: 400;
+    margin-top: 20px;
+    color: #445462;
+    cursor: pointer;
+
+}
+
+.categoryItem:nth-child(1) {
+    margin-top: 0px;
+}
+
+.categoryItem:nth-child(3) {
+    margin-top: 32px;
+}
+
