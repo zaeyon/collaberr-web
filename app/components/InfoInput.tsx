@@ -4,7 +4,7 @@ interface ContainerProps {
     label: string
 }
 
-const Container = styled.div(props => ({
+const Container = styled.div<ContainerProps>(props => ({
     marginTop: props.label === 'Email' ? 32 : 24,
     display: 'flex',
     flexDirection: 'column',
@@ -29,6 +29,13 @@ padding: 14px 18px;
 border-radius: 8px;
 border: 1px solid #E6EAEF;
 color: #35424C;
+font-family: 'Pretendard';
+font-size: 15px;
+font-weight: 400;
+line-height: 24px;
+letter-spacing: -0.015em;
+text-align: left;
+
 
 ::placeholder {
     color: #8696AB;

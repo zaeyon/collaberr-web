@@ -60,6 +60,20 @@ a {
   }
 }
 
+select {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+
+color: #35424C;
+font-family: 'Pretendard';
+font-size: 15px;
+font-weight: 400;
+line-height: 24px;
+letter-spacing: -0.015em;
+text-align: left;
+}
+
 @font-face {
 	font-family: 'Pretendard';
 	font-weight: 45 920;
