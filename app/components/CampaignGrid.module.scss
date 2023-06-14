@@ -1,0 +1,23 @@
+.container {
+    margin-top: 56px;
+}
+
+.subTitle {
+    font-family: 'Pretendard';
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 34px;
+    letter-spacing: -0.015em;
+    text-align: left;
+    color: #242D35;
+}
+
+.gridContainer {
+    margin-top: 8px;
+    margin-bottom: 50px;
+    display: grid;
+	grid-template-columns: repeat(3, 1fr);
+    row-gap: 40px;
+    column-gap: 16px;
+    
+}

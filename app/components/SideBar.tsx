@@ -1,5 +1,5 @@
 import styles from './SideBar.module.scss';
-
+import Link from 'next/link'
 
 export default function SideBar() {
     return (
@@ -9,22 +9,25 @@ export default function SideBar() {
             className={styles.categoryItem}>
                 Campaign
             </div>
-            <div
+            <Link
+            href={"/campaigns"}
             className={styles.categoryItem}>
                 All Campaigns
-            </div>
+            </Link>
             <div
             className={styles.categoryItem}>
                 Business
             </div>
-            <div
+            <Link
+            href={"/"}
             className={styles.categoryItem}>
-                Create Campaign
-            </div>
-            <div
+                My Campaigns
+            </Link>
+            <Link
+            href={"/dashboard"}
             className={styles.categoryItem}>
                 Dashboard
-            </div>
+            </Link>
         </div>
     )
 }
