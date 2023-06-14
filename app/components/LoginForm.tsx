@@ -6,7 +6,7 @@ import Link from 'next/link'
 
 import InfoInput from './InfoInput';
 
-const Container = styled.div`
+const Container = styled.form`
 width: 600px;
 margin-top: 48px;
 padding: 0px 40px;
@@ -76,7 +76,15 @@ text-align: left;
 color: #D1D7DF;
 `
 
-export default function LoginForm() {
+interface props {
+    email: string;
+    password: string;
+    onChangeEmail: (value: string) => void;
+    onChangePassword: (value: string) => void;
+}
+
+export default function LoginForm({email, password, onChangeEmail, onChangePassword}: props) {
+
 
     return (
         <Container>
@@ -87,9 +95,13 @@ export default function LoginForm() {
                 Please log in to use more functions
             </Description>
             <InfoInput
+            value={email}
+            onChangeInput={onChangeEmail}
             label={"Email"}
             placeholder={"Please enter your Email"}/>
             <InfoInput
+            value={password}
+            onChangeInput={onChangePassword}
             label={"Password"}
             placeholder={"Please enter Password"}/>
             <Footer>

@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 import collaberr_logo from '../assets/collaberr_logo.png';
 import collaberr_icon from '../assets/collaberr_icon.png';
-import hamburger_icon from '../assets/icons/icon-hamburger.png';
+import hamburger_icon from '../assets/icons/icon_hamburger.png';
 
 interface props {
     onClickHamburger: () => void;
@@ -16,6 +16,7 @@ export default function TopBar({onClickHamburger}: props) {
         className={styles.container}>
             <div>
                 <Image
+                style={{cursor: 'pointer'}}
                 onClick={() => onClickHamburger()}
                 width={24}
                 height={24}

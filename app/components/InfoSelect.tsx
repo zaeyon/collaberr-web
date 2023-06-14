@@ -1,5 +1,8 @@
-import {useState} from 'react'
+import React, {useState, useRef, ReactElement, LegacyRef} from 'react'
 import styled from '@emotion/styled'
+import Image from 'next/image';
+
+import icon_down from '../assets/icons/icon_down.png'
 
 interface ContainerProps {
     label: string
@@ -47,7 +50,7 @@ top: 14px;
     line-height: 24px;
     letter-spacing: -0.015em;
     text-align: left;
-}
+    pointer-events: none;
 `;
 
 const SelectContainer = styled.div`
@@ -55,29 +58,53 @@ margin-top: 6px;
 position: relative;
 `;
 
+const DownIcon = styled(Image)`
+position: absolute;
+right: 18px;
+top: 14px;
+pointer-events: none;
+`
+
+
 interface roleObj {
     id: number;
     value: string;
 }
 
 interface props {
+    value: string;
     label: string;
     placeholder: string;
-    options: roleObj []
+    options: roleObj [];
+    onChangeSelect: (value: string) => void;
 }
 
-export default function InfoSelect({label, placeholder, options}: props) {
+export default function InfoSelect({value, label, placeholder, options, onChangeSelect}: props) {
+
+    const selectRef = useRef<HTMLSelectElement>(null);
+
+    
     
     return (
         <Container
         label={label}>
             <Label>{label}</Label>
             <SelectContainer>
-                <SelectPlaceholder>{placeholder}</SelectPlaceholder>
-            <Select defaultValue={"default"}>
+                {value === "" && (
+                    <SelectPlaceholder>{placeholder}</SelectPlaceholder>
+                )}
+            <Select 
+            ref={selectRef}
+            defaultValue={"default"}
+            onChange={(e) => onChangeSelect(e.target.value)}>
                 <option disabled hidden value={"default"}></option>
                 {options.map((item) => <option key={item.id} value={item.value}>{item.value}</option>)}
             </Select>
+            <DownIcon
+            alt={"down"}
+            width={24}
+            height={24}
+            src={icon_down}/>
             </SelectContainer>
         </Container>
     )

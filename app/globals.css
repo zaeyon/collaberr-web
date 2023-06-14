@@ -44,9 +44,10 @@
 }
 
 body {
-  padding-top: 64px;
+  margin-top: 64px;
+  margin-left: 240px;
+
   display: flex;
-  justify-content: center;
 }
 
 a {
