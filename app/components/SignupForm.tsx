@@ -123,7 +123,7 @@ export default function SignupForm({onSubmitForm, email, password, firstName, la
                     Sign up
                 </SubmitButton>
                 <div>
-                    <TextLink href={""}>I already have and account</TextLink>
+                    <TextLink href={"/login"}>I already have and account</TextLink>
                 </div>
             </Footer>
         </Container>

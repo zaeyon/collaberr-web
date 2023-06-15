@@ -1,0 +1,149 @@
+.main {
+    display: flex;
+    flex-direction: row;
+}
+
+.mainInfoContainer {
+    width: 44vw;
+    display: flex; 
+    flex-direction: column;
+}
+
+.representativeImage {
+    border-radius: 16px;
+    background-color: #F1F4F7;
+    object-fit: cover;
+}
+
+.brandName {
+    margin-top: 32px;
+    font-family: 'Pretendard';
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: -0.015em;
+    text-align: left;
+    color: #8696AB;
+}
+
+.title {
+    font-family: 'Pretendard';
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 38px;
+    letter-spacing: -0.015em;
+    color: #242D35
+}
+
+.subItem  {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: 'Pretendard';
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: -0.015em;
+    text-align: left;
+}
+
+
+.subItem > .subLabel {
+    color: #8696AB;
+} 
+
+.subItem > .subValue {
+    margin-left: 40px;
+    color: #445462;
+}
+
+.label {
+    margin-top: 48px;
+    font-family: 'Pretendard';
+    font-size: 21px;
+    font-weight: 600;
+    line-height: 34px;
+    letter-spacing: -0.015em;
+    text-align: left;
+    color: #242D35;
+}
+
+.description {
+    margin-top: 16px;
+    font-family: 'Pretendard';
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: -0.015em;
+    text-align: left;
+    color: #445462
+}
+
+.fileItemContainer {
+    padding: 19px 2px;
+    margin-top: 16px;
+    display: flex;
+    flex-direction: row;
+    align-items: center; 
+    border-bottom: 1px solid #E6EAEF;
+}
+
+.filePath {
+    margin-left: 16px;
+    font-family: 'Pretendard';
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: -0.015em;
+    text-align: left;
+    color: #536878;
+}
+
+.joinContainer {
+    right: 45px;
+    position: fixed;
+    width: 26vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.summaryInfoContainer {
+    padding: 16px;
+    border-radius: 16px;
+    border: 1px solid #E6EAEF;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.summaryTitle {
+    font-family: 'Pretendard';
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 27px;
+    letter-spacing: -0.015em;
+    text-align: left;
+    color: #242D35;
+}
+
+.joinButton {
+    margin-top: 24px;
+    left: 0px;
+    border-radius: 8px;
+    padding: 16px 28px;
+    background-color: #3183F6; 
+    font-family: 'Pretendard';
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: -0.015em;
+    text-align: left;
+    color: #F7F9FB;
+
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
