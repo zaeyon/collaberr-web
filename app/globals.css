@@ -17,6 +17,10 @@ body {
   display: flex;
 }
 
+main {
+  padding: 48px 40px 48px 48px;
+}
+
 a {
   color: inherit;
   text-decoration: none;

@@ -11,7 +11,7 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const [isVisSideBar, setIsVisSideBar] = useState(false);
+  const [isVisSideBar, setIsVisSideBar] = useState(true);
 
   const onClickHamburger = () => {
     setIsVisSideBar(!isVisSideBar);
