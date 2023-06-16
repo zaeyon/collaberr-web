@@ -63,6 +63,7 @@ export default function InfoInput({value, onChangeInput, label, placeholder}: pr
         label={label}>
             <Label>{label}</Label>
             <Input
+            type={label === 'Password' ? 'password' : 'text'} 
             value={value}
             onChange={(e) => onChangeInput(e.target.value)}
             placeholder={placeholder}/>

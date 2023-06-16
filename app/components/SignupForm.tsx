@@ -50,6 +50,7 @@ line-height: 24px;
 letter-spacing: -0.015em;
 text-align: left;
 color: #F7F9FB;
+cursor: pointer;
 `;
 
 const TextLink = styled(Link)`
@@ -119,7 +120,8 @@ export default function SignupForm({onSubmitForm, email, password, firstName, la
             placeholder={"Please select your Role"}
             options={[{id: 1, value: "Business"}, {id: 2, value: "Influence"}]}/>
             <Footer>
-                <SubmitButton>
+                <SubmitButton
+                onClick={() => onSubmitForm()}>
                     Sign up
                 </SubmitButton>
                 <div>
