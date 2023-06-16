@@ -1,8 +1,12 @@
 'use client';
 import {useState} from 'react';
+import { useRouter } from 'next/navigation';
 import styled from '@emotion/styled';
 
 import SignupForm from '../components/SignupForm';
+
+import { POST_signup } from '../api/auth';
+
 
 const Container = styled.div`
     
@@ -14,6 +18,8 @@ export default function Signup() {
     const [firstName, setFirstName] = useState<string>("");
     const [lastName, setLastName] = useState<string>("");
     const [role, setRole] = useState<string>("");
+
+    const router = useRouter();
 
     const onChangeEmail = (value: string) => {
         setEmail(value);
@@ -36,6 +42,22 @@ export default function Signup() {
     }
 
     const onSubmitForm = () => {
+        const signupForm = {
+            username: firstName + lastName,
+            email,
+            password,
+            role: role === "Business" ? 'BUSINESS' : 'CREATOR',
+        }
+
+        POST_signup(signupForm)
+        .then((res) => {
+            console.log("signup success", res)
+            alert('Sign up Success!');
+            router.push('/')
+        })
+        .catch((err) => {
+            console.log("signup failed", err); 
+        })
 
     }
     
