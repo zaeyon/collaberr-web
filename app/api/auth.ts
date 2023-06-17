@@ -1,14 +1,24 @@
 import axios from 'axios';
 import { baseUrl } from '.';
-import { signupForm } from '../type';
+import { signupType, loginType } from '../type';
 
-export const POST_signup = ({username, email, password, role}: signupForm) => {
-    console.log("POST_signup", username, email, password, role)
+export const POST_signup = ({username, email, password, role}: signupType) => {
     const promise = axios.post(`${baseUrl}/api/accounts`, {
         username,
         email,
         password,
         role,
+    });
+
+    const res = promise.then((res) => res);
+
+    return res;
+}
+
+export const POST_login = ({email, password}: loginType) => {
+    const promise = axios.post(`${baseUrl}/api/login`, {
+        email,
+        password,
     });
 
     const res = promise.then((res) => res);

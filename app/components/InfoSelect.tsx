@@ -34,6 +34,15 @@ border: 1px solid #E6EAEF;
 color: #35424C;
 font-family: 'Pretendard';
 
+:hover {
+    border: 1px solid #91C8FF;
+}
+
+:focus  {
+    outline: none;
+    border: 1px solid #2E92FF;
+}
+
 -webkit-appearance:none; /* 크롬 화살표 없애기 */
     -moz-appearance:none; /* 파이어폭스 화살표 없애기 */
     appearance:none; /* 화살표 없애기 */
@@ -43,14 +52,18 @@ const SelectPlaceholder = styled.span`
 position: absolute;
 left: 18px;
 top: 14px;
-    color: #8696AB;
-    font-family: 'Pretendard';
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 24px;
-    letter-spacing: -0.015em;
-    text-align: left;
-    pointer-events: none;
+color: #8696AB;
+font-family: 'Pretendard';
+font-size: 15px;
+font-weight: 400;
+line-height: 24px;
+letter-spacing: -0.015em;
+text-align: left;
+pointer-events: none;
+
+
+
+
 `;
 
 const SelectContainer = styled.div`

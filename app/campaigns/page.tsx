@@ -4,8 +4,8 @@ import CampaignGrid from '../components/CampaignGrid';
 
 export default function Campaigns() {
     return (
-        <main className={styles.main}>
-            <h1 className={styles.title}>
+        <main>
+            <h1>
                 Campaign
             </h1>
             <CampaignGrid

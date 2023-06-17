@@ -5,13 +5,13 @@ import styled from '@emotion/styled';
 import Link from 'next/link'
 
 import InfoInput from './InfoInput';
-import InfoSelect from './InfoSelect';
+import { loginType } from '../type';
 
 interface SubmitButtonType {
     isVaildForm: boolean;
 }
 
-const Container = styled.form`
+const Form = styled.form`
 width: 600px;
 margin-top: 48px;
 padding: 0px 40px;
@@ -71,74 +71,57 @@ text-underline-offset : 3px;
 text-decoration-color: #8696AB;
 `
 
+const Divider = styled.span`
+margin-left: 12px;
+margin-right: 12px;
+font-family: 'Pretendard';
+font-size: 15px;
+font-weight: 300;
+line-height: 24px;
+letter-spacing: -0.015em;
+text-align: left;
+color: #D1D7DF;
+`
+
 interface props {
-    submitSignup: () => void;
+    submitEmailVerify: () => void;
     email: string;
-    password: string;
-    username: string;
-    role: string;
     onChangeEmail: (value: string) => void;
-    onChangePassword: (value: string) => void;
-    onChangeUsername: (value: string) => void;
-    onChangeRole: (value: string) => void;
-    isExistedEmail: boolean;
-    isExistedUsername: boolean;
-    isInvaildEmail: boolean;
 }
 
-export default function SignupForm({submitSignup, email, password, username, role, onChangeEmail, onChangePassword, onChangeUsername, onChangeRole, isExistedEmail, isExistedUsername, isInvaildEmail}: props) {
-    const [isVaildForm, setIsVaildForm] = useState(false);
+export default function LoginForm({submitEmailVerify, email, onChangeEmail}: props) {
+    const [isVaildForm, setIsVaildForm] = useState(false); 
 
     useEffect(() => {
-        if(email !== "" && password !== "" && username !== "" && role !== "") setIsVaildForm(true);
+        if(email !== "") setIsVaildForm(true);
         else setIsVaildForm(false);
 
-    }, [email, password, username, role])
+    }, [email])
+
 
     return (
-        <Container onSubmit={() => submitSignup()}>
+        <Form
+        onSubmit={() => submitEmailVerify()}>
             <Title>
-                Sign up
+            Reset Password
             </Title>
             <Description>
-            Make an account fast and simple
+            Please verify your Email to reset password
             </Description>
             <InfoInput
             value={email}
             onChangeInput={onChangeEmail}
-            isExistedEmail={isExistedEmail}
-            isInvaildEmail={isInvaildEmail}
             label={"Email"}
             placeholder={"Please enter your Email"}/>
-            <InfoInput
-            value={password}
-            onChangeInput={onChangePassword}
-            label={"Password"}
-            placeholder={"Please enter Password"}/>
-            <InfoInput
-            value={username}
-            onChangeInput={onChangeUsername}
-            label={"Username"}
-            placeholder={"Please enter your user name"}
-            isExistedUsername={isExistedUsername}/>
-            <InfoSelect
-            value={role}
-            onChangeSelect={onChangeRole}
-            label={"Role"}
-            placeholder={"Please select your Role"}
-            options={[{id: 1, value: "Business"}, {id: 2, value: "Influence"}]}/>
             <Footer>
                 <SubmitButton
                 type={"button"}
                 isVaildForm={isVaildForm}
                 disabled={!isVaildForm}
-                onClick={() => submitSignup()}>
-                    Sign up
+                onClick={() => submitEmailVerify()}>
+                    Verify
                 </SubmitButton>
-                <div>
-                    <TextLink href={"/login"}>I already have and account</TextLink>
-                </div>
             </Footer>
-        </Container>
+        </Form>
     )
 }
