@@ -26,6 +26,15 @@ a {
   text-decoration: none;
 }
 
+h1 {
+  font-family: 'Pretendard';
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 52px;
+  letter-spacing: -0.015em;
+  color: #242D35;
+}
+
 @media (prefers-color-scheme: dark) {
   /* html {
     color-scheme: dark;

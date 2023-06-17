@@ -1,12 +1,17 @@
 'use client';
 
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import styled from '@emotion/styled';
 import Link from 'next/link'
 
 import InfoInput from './InfoInput';
+import { loginType } from '../type';
 
-const Container = styled.form`
+interface SubmitButtonType {
+    isVaildForm: boolean;
+}
+
+const Form = styled.form`
 width: 600px;
 margin-top: 48px;
 padding: 0px 40px;
@@ -38,17 +43,19 @@ align-items: center;
 justify-content: space-between;
 `;
 
-const SubmitButton = styled.div`
+const SubmitButton = styled.button<SubmitButtonType>`
 padding: 12px 20px;
-background-color: #3183F6;
 border-radius: 8px;
+border: none;
 font-family: 'Pretendard';
 font-size: 15px;
 font-weight: 500;
 line-height: 24px;
 letter-spacing: -0.015em;
 text-align: left;
-color: #F7F9FB;
+background-color:${(props) => props.isVaildForm ? '#3183F6' : '#F1F4F7'};
+color:${(props) => props.isVaildForm ? '#F7F9FB' : '#242D35'};
+cursor: ${(props) => props.isVaildForm ? 'pointer' : 'default'};
 `;
 
 const TextLink = styled(Link)`
@@ -77,17 +84,25 @@ color: #D1D7DF;
 `
 
 interface props {
+    submitLogin: () => void;
     email: string;
     password: string;
     onChangeEmail: (value: string) => void;
     onChangePassword: (value: string) => void;
 }
 
-export default function LoginForm({email, password, onChangeEmail, onChangePassword}: props) {
+export default function LoginForm({submitLogin, email, password, onChangeEmail, onChangePassword}: props) {
+    const [isVaildForm, setIsVaildForm] = useState(false); 
+
+    useEffect(() => {
+        if(email !== "" && password !== "") setIsVaildForm(true);
+
+    }, [email, password])
 
 
     return (
-        <Container>
+        <Form
+        onSubmit={() => submitLogin()}>
             <Title>
                 Login
             </Title>
@@ -105,15 +120,19 @@ export default function LoginForm({email, password, onChangeEmail, onChangePassw
             label={"Password"}
             placeholder={"Please enter Password"}/>
             <Footer>
-                <SubmitButton>
+                <SubmitButton
+                type={"button"}
+                isVaildForm={isVaildForm}
+                disabled={!isVaildForm}
+                onClick={() => submitLogin()}>
                     Login
                 </SubmitButton>
                 <div>
                     <TextLink href={"/signup"}>I’m new</TextLink>
                     <Divider>|</Divider>
-                    <TextLink href={""}>Lost password</TextLink>
+                    <TextLink href={"/passwordReset"}>Lost password</TextLink>
                 </div>
             </Footer>
-        </Container>
+        </Form>
     )
 }

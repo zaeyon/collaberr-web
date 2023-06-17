@@ -1,33 +1,32 @@
 import styles from './SideBar.module.scss';
 import Link from 'next/link'
 
+import CategoryLinkItem from './CategoryLinkItem';
+
 export default function SideBar() {
     return (
         <div
         className={styles.container}>
             <div
-            className={styles.categoryItem}>
+            className={styles.categoryClassification}>
                 Campaign
             </div>
-            <Link
+            <CategoryLinkItem
+            label={"All Campaigns"}
             href={"/campaigns"}
-            className={styles.categoryItem}>
-                All Campaigns
-            </Link>
+            />
             <div
-            className={styles.categoryItem}>
+            className={styles.categoryClassification}>
                 Business
             </div>
-            <Link
-            href={"/"}
-            className={styles.categoryItem}>
-                My Campaigns
-            </Link>
-            <Link
+            <CategoryLinkItem
+            label={"My Campaigns"}
+            href={"/myCampaigns"}
+            />
+            <CategoryLinkItem
+            label={"Dashboard"}
             href={"/dashboard"}
-            className={styles.categoryItem}>
-                Dashboard
-            </Link>
+            />
         </div>
     )
 }

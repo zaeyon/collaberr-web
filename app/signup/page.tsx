@@ -15,41 +15,43 @@ const Container = styled.div`
 export default function Signup() {
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
-    const [firstName, setFirstName] = useState<string>("");
-    const [lastName, setLastName] = useState<string>("");
+    const [username, setUserName] = useState<string>("");
     const [role, setRole] = useState<string>("");
+    const [isExistedEmail, setIsExistedEmail] = useState(false);
+    const [isExistedUsername, setIsExistedUsername] = useState(false);
+    const [isInvaildEmail, setisInvaildEmail] = useState(false);
 
     const router = useRouter();
 
     const onChangeEmail = (value: string) => {
         setEmail(value);
+        if(isExistedEmail) setIsExistedEmail(false);
+        if(isInvaildEmail) setisInvaildEmail(false);
     }
 
     const onChangePassword = (value: string) => {
         setPassword(value);
     }
 
-    const onChangeFirstName = (value: string) => {
-        setFirstName(value);
+    const onChangeUsername = (value: string) => {
+        setUserName(value);
+        if(isExistedUsername) setIsExistedUsername(false);
     }
 
-    const onChangeLastName = (value: string) => {
-        setLastName(value); 
-    }
 
     const onChangeRole = (value: string) => {
         setRole(value);
     }
 
-    const onSubmitForm = () => {
-        const signupForm = {
-            username: firstName + lastName,
+    const submitSignup = () => {
+        const signupType = {
+            username,
             email,
             password,
             role: role === "Business" ? 'BUSINESS' : 'CREATOR',
         }
 
-        POST_signup(signupForm)
+        POST_signup(signupType)
         .then((res) => {
             console.log("signup success", res)
             alert('Sign up Success!');
@@ -57,6 +59,9 @@ export default function Signup() {
         })
         .catch((err) => {
             console.log("signup failed", err); 
+            if(err.response.data.email[0] === "Account with this email already exists.") setIsExistedEmail(true)
+            if(err.response.data.email[0] === "Enter a valid email address.") setisInvaildEmail(true);
+            if(err.response.data.username[0] === "Account with this username already exists.") setIsExistedUsername(true);
         })
 
     }
@@ -65,17 +70,18 @@ export default function Signup() {
     return (
         <Container>
             <SignupForm
-            onSubmitForm={onSubmitForm}
+            submitSignup={submitSignup}
             email={email}
             password={password}
-            firstName={firstName}
-            lastName={lastName}
+            username={username}
             role={role}
             onChangeEmail={onChangeEmail}
             onChangePassword={onChangePassword}
-            onChangeFirstName={onChangeFirstName}
-            onChangeLastName={onChangeLastName}
-            onChangeRole={onChangeRole}/>
+            onChangeUsername={onChangeUsername}
+            onChangeRole={onChangeRole}
+            isExistedEmail={isExistedEmail}
+            isExistedUsername={isExistedUsername}
+            isInvaildEmail={isInvaildEmail}/>
         </Container>
     )
 }

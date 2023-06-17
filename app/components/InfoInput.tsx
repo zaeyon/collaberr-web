@@ -1,10 +1,18 @@
 import styled from '@emotion/styled'
+import { relative } from 'node:path/win32';
 
 interface ContainerProps {
     label: string
 }
 
+interface InputProps {
+    isExistedEmail: boolean | undefined;
+    isExistedUsername: boolean | undefined;
+    isInvaildEmail: boolean | undefined;
+}
+
 const Container = styled.div<ContainerProps>(props => ({
+position: 'relative',
 marginTop: props.label === 'Email' ? 32 : 24,
 display: 'flex',
 flexDirection: 'column',
@@ -24,11 +32,10 @@ text-align: left;
 color: #35424C;
 `;
 
-const Input = styled.input`
+const Input = styled.input<InputProps>`
 margin-top: 6px;
 padding: 14px 18px;
 border-radius: 8px;
-border: 1px solid #E6EAEF;
 color: #35424C;
 font-family: 'Pretendard';
 font-size: 15px;
@@ -36,6 +43,7 @@ font-weight: 400;
 line-height: 24px;
 letter-spacing: -0.015em;
 text-align: left;
+
 
 
 ::placeholder {
@@ -47,6 +55,30 @@ text-align: left;
     letter-spacing: -0.015em;
     text-align: left;
 }
+
+
+:hover {
+    border: ${(props) => (props.isExistedEmail || props.isExistedUsername || props.isInvaildEmail) ? '1px solid #F04D3E' : '1px solid #91C8FF'};
+}
+
+:focus  {
+    outline: none;
+    border: ${(props) => (props.isExistedEmail || props.isExistedUsername || props.isInvaildEmail) ? '1px solid #F04D3E' : '1px solid #2E92FF'};
+}
+
+border: ${(props) =>( props.isExistedEmail || props.isExistedUsername || props.isInvaildEmail) ? '1px solid #F04D3E' : '1px solid #E6EAEF'};
+`;
+
+const Error = styled.div`
+position: absolute;
+bottom: -22px;
+left: 0px;
+font-family: 'Pretendard';
+font-size: 15px;
+font-weight: 400;
+line-height: 24px;
+letter-spacing: -0.015em;
+color: #F04D3E;    
 `;
 
 interface props {
@@ -54,9 +86,12 @@ interface props {
     onChangeInput: (value: string) => void;
     label: string;
     placeholder: string;
+    isExistedEmail?: boolean;
+    isExistedUsername?: boolean;
+    isInvaildEmail?: boolean;
 }
 
-export default function InfoInput({value, onChangeInput, label, placeholder}: props) {
+export default function InfoInput({value, onChangeInput, label, placeholder, isExistedEmail, isExistedUsername, isInvaildEmail}: props) {
     
     return (
         <Container
@@ -66,7 +101,26 @@ export default function InfoInput({value, onChangeInput, label, placeholder}: pr
             type={label === 'Password' ? 'password' : 'text'} 
             value={value}
             onChange={(e) => onChangeInput(e.target.value)}
-            placeholder={placeholder}/>
+            placeholder={placeholder}
+            isExistedUsername={isExistedUsername}
+            isExistedEmail={isExistedEmail}
+            isInvaildEmail={isInvaildEmail}/>
+            {isExistedEmail && (
+                <Error>
+                Account with this email already exists.
+                </Error>
+            )}
+            {isExistedUsername && (
+                <Error>
+                Account with this username already exists.
+                </Error>
+            )}
+            {isInvaildEmail && (
+                <Error>
+                Enter a valid email address.
+                </Error>
+
+            )}
         </Container>
     )
 }
