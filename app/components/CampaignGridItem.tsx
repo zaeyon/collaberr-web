@@ -1,4 +1,7 @@
+'use client';
+
 import styles from './CampaignGridItem.module.scss';
+import {motion, MotionConfig} from "framer-motion";
 import Link from 'next/link';
 import Image from 'next/image'
 
@@ -10,24 +13,46 @@ interface props {
 }
 
 export default function GampaignGridItem({campaign}: props) {
+
+    const thumbnailAni = {
+        initial: {boxShadow: 'none',},
+        animate: {boxShadow: '0px 8px 16px 0px #242D351A', transform: 'translateY(-5px)'}
+    }
+
+    const titleAni = {
+        initial: {color: '#242D35'}, 
+        animate: {color: '#3183F6'},
+    }
+
     return (
+        <MotionConfig
+        transition={{duration: 0.25, type: 'ease-in-out'}}>
+        <motion.div
+        initial="initial"
+        animate="initial"
+        whileHover="animate">
         <Link
         href={`/campaigns/${campaign.id}`}
         className={styles.container}>
+            <motion.div
+            className={styles.thumbnail}
+            variants={thumbnailAni}>
             <Image
             width={309}
             height={180}
             alt={"campaign_thumbnail"}
             src={thumbnail}
             className={styles.thumbnail}/>
+            </motion.div>
             <div
             className={styles.brandName}>
                 {campaign.brand_name}
             </div>
-            <div
+            <motion.div
+            variants={titleAni}
             className={styles.title}>
                 {campaign.title}
-            </div>
+            </motion.div>
             <Image
             width={24}
             height={24}
@@ -35,5 +60,7 @@ export default function GampaignGridItem({campaign}: props) {
             src={icon_facebook}
             className={styles.platformIcon}/>
         </Link>
+        </motion.div>
+        </MotionConfig>
     )
 }
