@@ -6,6 +6,7 @@ import Link from 'next/link'
 
 import InfoInput from './InfoInput';
 import InfoSelect from './InfoSelect';
+import Button from './Button';
 
 interface SubmitButtonType {
     isVaildForm: boolean;
@@ -41,21 +42,6 @@ flex-direction: row;
 margin-top: 24px;
 align-items: center;
 justify-content: space-between;
-`;
-
-const SubmitButton = styled.button<SubmitButtonType>`
-padding: 12px 20px;
-border-radius: 8px;
-border: none;
-font-family: 'Pretendard';
-font-size: 15px;
-font-weight: 500;
-line-height: 24px;
-letter-spacing: -0.015em;
-text-align: left;
-background-color:${(props) => props.isVaildForm ? '#3183F6' : '#F1F4F7'};
-color:${(props) => props.isVaildForm ? '#F7F9FB' : '#242D35'};
-cursor: ${(props) => props.isVaildForm ? 'pointer' : 'default'};
 `;
 
 const TextLink = styled(Link)`
@@ -128,13 +114,13 @@ export default function SignupForm({submitSignup, email, password, username, rol
             placeholder={"Please select your Role"}
             options={[{id: 1, value: "Business"}, {id: 2, value: "Influence"}]}/>
             <Footer>
-                <SubmitButton
-                type={"button"}
-                isVaildForm={isVaildForm}
-                disabled={!isVaildForm}
-                onClick={() => submitSignup()}>
-                    Sign up
-                </SubmitButton>
+                <Button
+                label={"Sign up"}
+                size={"medium"}
+                style={"primary"}
+                state={isVaildForm ? "default" : "disabled"}
+                onClick={submitSignup}
+                />
                 <div>
                     <TextLink href={"/login"}>I already have and account</TextLink>
                 </div>
