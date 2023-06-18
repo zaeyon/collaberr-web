@@ -59,7 +59,7 @@ export default function TopBar({onClickHamburger}: props) {
             </div>
             </Link>
             </div>
-            {(user.isLogin || localStorage.getItem('access_token')) && (
+            {user.isLogin && (
                 <Link
                 href={"/setting"}
                 className={styles.username}>
