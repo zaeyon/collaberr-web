@@ -1,0 +1,68 @@
+
+.joinContainer {
+    right: 45px;
+    position: fixed;
+    width: 26vw;
+    display: flex;
+    flex-direction: column;
+}
+
+.summaryInfoContainer {
+    padding: 16px;
+    border-radius: 16px;
+    border: 1px solid #E6EAEF;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+}
+
+.summaryTitle {
+    font-family: 'Pretendard';
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 27px;
+    letter-spacing: -0.015em;
+    text-align: left;
+    color: #242D35;
+}
+
+.joinButton {
+    margin-top: 24px;
+    left: 0px;
+    border-radius: 8px;
+    padding: 16px 28px;
+    background-color: #3183F6; 
+    font-family: 'Pretendard';
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: -0.015em;
+    text-align: left;
+    color: #F7F9FB;
+
+    display: flex;
+    justify-content: center;
+}
+
+
+.subItem  {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-family: 'Pretendard';
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 27px;
+    letter-spacing: -0.015em;
+    text-align: left;
+}
+
+
+.subItem > .subLabel {
+    color: #8696AB;
+} 
+
+.subItem > .subValue {
+    margin-left: 40px;
+    color: #445462;
+}

@@ -1,5 +1,6 @@
 'use client';
 
+import {useRouter} from 'next/navigation'
 import styled from '@emotion/styled';
 
 import Button from './Button';
@@ -48,6 +49,8 @@ interface props {
 
 export default function MyCampaignList({myCampaignsData}: props) {
 
+    const router = useRouter(); 
+
     return (
         <Container>
             <Header>
@@ -56,7 +59,8 @@ export default function MyCampaignList({myCampaignsData}: props) {
                 size={"small"}
                 style={"primary"}
                 label={"Create New"}
-                state={"default"}/>
+                state={"default"}
+                onClick={() => router.push('/myCampaigns/create')}/>
             </Header>
             <TableContainer>
                 <TableColumn>
