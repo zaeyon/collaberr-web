@@ -81,17 +81,29 @@ letter-spacing: -0.015em;
 color: #F04D3E;    
 `;
 
+const Description = styled.div`
+margin-top: 6px;
+font-family: 'Pretendard';
+font-size: 15px;
+font-weight: 400;
+line-height: 24px;
+letter-spacing: -0.015em;
+text-align: left;
+color :#ACB8C8;
+`;
+
 interface props {
     value: string;
     onChangeInput: (value: string) => void;
     label: string;
-    placeholder: string;
+    placeholder?: string;
     isExistedEmail?: boolean;
     isExistedUsername?: boolean;
     isInvaildEmail?: boolean;
+    description?: string;
 }
 
-export default function InfoInput({value, onChangeInput, label, placeholder, isExistedEmail, isExistedUsername, isInvaildEmail}: props) {
+export default function InfoInput({value, onChangeInput, label, placeholder, isExistedEmail, isExistedUsername, isInvaildEmail, description}: props) {
     
     return (
         <Container
@@ -119,7 +131,11 @@ export default function InfoInput({value, onChangeInput, label, placeholder, isE
                 <Error>
                 Enter a valid email address.
                 </Error>
-
+            )}
+            {description && (
+                <Description>
+                    {description}
+                </Description>
             )}
         </Container>
     )

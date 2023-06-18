@@ -1,12 +1,17 @@
 $primary_back: #3183F6;
 $primary_font: #F7F9FB;
 $primary_hover: #305FCF;
-$primary_disabled_back: #91C8FF;
-$primary_disabled_font: #F7F9FB;
 
 $tertiery_back: #F1F4F7;
 $tertiery_font: #242D35;
 $tertiery_hover: #D1D7DF;
+
+$danger_back: #FFEAEC;
+$danger_font: #F87A71;
+$danger_hover: #FFCBCD;
+
+$primary_disabled_back: #91C8FF;
+$primary_disabled_font: #F7F9FB;
 
 .Button {
     border-radius: 8px;
@@ -34,6 +39,7 @@ $tertiery_hover: #D1D7DF;
         padding: 6px 10px;
         font-weight: 400;
         font-size: 13px;
+        line-height: 21px;
     }
 
     &.small {
@@ -54,11 +60,18 @@ $tertiery_hover: #D1D7DF;
         @include button-style($primary_back, $primary_font, $primary_hover)
     }
 
+    &.tertiery {
+        @include button-style($tertiery_back, $tertiery_font, $tertiery_hover)
+    }
+
+    &.danger {
+        @include button-style($danger_back, $danger_font, $danger_hover)
+    }
+
+
     &.primary_disabled {
         @include button-disabled-style($primary_disabled_back, $primary_disabled_font)
     }
 
-    &.tertiery {
-        @include button-style($tertiery_back, $tertiery_font, $tertiery_hover)
-    }
+
 }

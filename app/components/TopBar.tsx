@@ -1,6 +1,10 @@
+import { useEffect } from 'react';
 import styles from './TopBar.module.scss'; 
 import Image from 'next/image';
 import Link from 'next/link';
+import {useRecoilState} from 'recoil';
+
+import {userState} from '../recoil/user';
 
 import collaberr_logo from '../assets/collaberr_logo.png';
 import collaberr_icon from '../assets/collaberr_icon.png';
@@ -11,6 +15,20 @@ interface props {
 }
 
 export default function TopBar({onClickHamburger}: props) {
+    const [user, setUser] = useRecoilState(userState);
+
+    useEffect(() => {
+      if(localStorage.getItem("access_token")) {
+        setUser({
+          isLogin: true
+        })
+      } else {
+        setUser({
+          isLogin: false
+        })
+      }
+    }, [setUser])
+
     return (
         <div
         className={styles.container}>
@@ -41,11 +59,20 @@ export default function TopBar({onClickHamburger}: props) {
             </div>
             </Link>
             </div>
+            {user.isLogin && (
+                <Link
+                href={"/setting"}
+                className={styles.username}>
+                Username
+                </Link>
+            )}
+            {!user.isLogin && (
                 <Link
                 href={"/login"}
                 className={styles.login}>
                 Login
-            </Link>
+                </Link>
+            )}
         </div>
     )
 }
