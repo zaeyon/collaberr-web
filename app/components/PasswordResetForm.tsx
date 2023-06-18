@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react';
 import styled from '@emotion/styled';
 import Link from 'next/link'
 
+import Button from './Button';
 import InfoInput from './InfoInput';
 import { loginType } from '../type';
 
@@ -114,13 +115,13 @@ export default function LoginForm({submitEmailVerify, email, onChangeEmail}: pro
             label={"Email"}
             placeholder={"Please enter your Email"}/>
             <Footer>
-                <SubmitButton
-                type={"button"}
-                isVaildForm={isVaildForm}
-                disabled={!isVaildForm}
-                onClick={() => submitEmailVerify()}>
-                    Verify
-                </SubmitButton>
+                <Button
+                label={"Verify"}
+                size={"medium"}
+                style={"primary"}
+                state={isVaildForm ? "default" : "disabled"}
+                onClick={submitEmailVerify}
+                />
             </Footer>
         </Form>
     )

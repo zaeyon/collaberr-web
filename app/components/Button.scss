@@ -1,0 +1,64 @@
+$primary_back: #3183F6;
+$primary_font: #F7F9FB;
+$primary_hover: #305FCF;
+$primary_disabled_back: #91C8FF;
+$primary_disabled_font: #F7F9FB;
+
+$tertiery_back: #F1F4F7;
+$tertiery_font: #242D35;
+$tertiery_hover: #D1D7DF;
+
+.Button {
+    border-radius: 8px;
+    font-family: "Pretendard";
+    letter-spacing: -0.015em;
+    text-align: left;
+    border: none;
+
+    @mixin button-style($style_back, $style_font, $style_hover) {
+        background-color: $style_back;
+        color: $style_font;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $style_hover;
+        }
+    }
+    @mixin button-disabled-style($style_back, $style_font) {
+        cursor: default;
+        background-color: $style_back;
+        color: $style_font;
+    }
+
+    &.xsmall {
+        padding: 6px 10px;
+        font-weight: 400;
+        font-size: 13px;
+    }
+
+    &.small {
+        padding: 8px 14px;
+        line-height: 24px;
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    &.medium {
+        padding: 12px 20px;
+        line-height: 24px;
+        font-size: 15px;
+        font-weight: 500;
+    }
+
+    &.primary {
+        @include button-style($primary_back, $primary_font, $primary_hover)
+    }
+
+    &.primary_disabled {
+        @include button-disabled-style($primary_disabled_back, $primary_disabled_font)
+    }
+
+    &.tertiery {
+        @include button-style($tertiery_back, $tertiery_font, $tertiery_hover)
+    }
+}

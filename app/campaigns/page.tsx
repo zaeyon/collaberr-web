@@ -40,7 +40,7 @@ const CAMPAIGNS_DATA = [
         thumbnail_url: 'https://thumb.mt.co.kr/06/2018/11/2018110909255321103_3.jpg/dims/optimize/',
         brand_name: 'Brand Name1',
         title: 'Campaign Title1',
-        platform: 'tictok',
+        platform: 'tiktok',
         description: 'Description',
         data: '2022-00-00 - 2023-00-00',
         bid: '100$',
