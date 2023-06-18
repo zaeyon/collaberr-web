@@ -59,9 +59,9 @@ export default function Signup() {
         })
         .catch((err) => {
             console.log("signup failed", err); 
-            if(err.response.data.email[0] === "Account with this email already exists.") setIsExistedEmail(true)
-            if(err.response.data.email[0] === "Enter a valid email address.") setisInvaildEmail(true);
-            if(err.response.data.username[0] === "Account with this username already exists.") setIsExistedUsername(true);
+            if(err.response.data.email?.[0] === "Account with this email already exists.") setIsExistedEmail(true)
+            if(err.response.data.email?.[0] === "Enter a valid email address.") setisInvaildEmail(true);
+            if(err.response.data.username?.[0] === "Account with this username already exists.") setIsExistedUsername(true);
         })
 
     }

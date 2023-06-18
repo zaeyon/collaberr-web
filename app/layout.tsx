@@ -1,7 +1,10 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import {RecoilRoot, useSetRecoilState} from 'recoil';
 import './globals.css'
+
+import { userState } from './recoil/user';
 import TopBar from './components/TopBar'
 import SideBar from './components/SideBar';
 
@@ -13,6 +16,7 @@ export default function RootLayout({
 }) {
   const [isVisSideBar, setIsVisSideBar] = useState(true);
 
+
   const onClickHamburger = () => {
     setIsVisSideBar(!isVisSideBar);
   }
@@ -20,12 +24,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
+        <RecoilRoot>
         <TopBar
         onClickHamburger={onClickHamburger}/>
         {isVisSideBar && (
         <SideBar/>
         )}
         {children}
+        </RecoilRoot>
       </body>
     </html>
   )

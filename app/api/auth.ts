@@ -3,7 +3,7 @@ import { baseUrl } from '.';
 import { signupType, loginType } from '../type';
 
 export const POST_signup = ({username, email, password, role}: signupType) => {
-    const promise = axios.post(`${baseUrl}/api/accounts`, {
+    const promise = axios.post(`${baseUrl}/api/accounts/`, {
         username,
         email,
         password,
@@ -16,7 +16,7 @@ export const POST_signup = ({username, email, password, role}: signupType) => {
 }
 
 export const POST_login = ({email, password}: loginType) => {
-    const promise = axios.post(`${baseUrl}/api/login`, {
+    const promise = axios.post(`${baseUrl}/api/login/`, {
         email,
         password,
     });

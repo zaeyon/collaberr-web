@@ -87,9 +87,9 @@ interface roleObj {
 interface props {
     value: string;
     label: string;
-    placeholder: string;
-    options: roleObj [];
-    onChangeSelect: (value: string) => void;
+    placeholder?: string;
+    options?: roleObj [];
+    onChangeSelect?: (value: string) => void;
 }
 
 export default function InfoSelect({value, label, placeholder, options, onChangeSelect}: props) {
@@ -109,9 +109,9 @@ export default function InfoSelect({value, label, placeholder, options, onChange
             <Select 
             ref={selectRef}
             defaultValue={"default"}
-            onChange={(e) => onChangeSelect(e.target.value)}>
+            onChange={(e) => onChangeSelect ? onChangeSelect(e.target.value) : ""}>
                 <option disabled hidden value={"default"}></option>
-                {options.map((item) => <option key={item.id} value={item.value}>{item.value}</option>)}
+                {options?.map((item) => <option key={item.id} value={item.value}>{item.value}</option>)}
             </Select>
             <DownIcon
             alt={"down"}
