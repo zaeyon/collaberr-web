@@ -46,7 +46,6 @@ export default function Signup() {
         if(isExistedUsername) setIsExistedUsername(false);
     }
 
-
     const onChangeRole = (value: string) => {
         setRole(value);
     }
