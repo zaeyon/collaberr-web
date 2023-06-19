@@ -9,6 +9,7 @@ interface InputProps {
     isExistedEmail: boolean | undefined;
     isExistedUsername: boolean | undefined;
     isInvaildEmail: boolean | undefined;
+    isInconPassword: boolean | undefined;
 }
 
 const Container = styled.div<ContainerProps>(props => ({
@@ -58,15 +59,15 @@ text-align: left;
 
 
 :hover {
-    border: ${(props) => (props.isExistedEmail || props.isExistedUsername || props.isInvaildEmail) ? '1px solid #F04D3E' : '1px solid #91C8FF'};
+    border: ${(props) => (props.isExistedEmail || props.isExistedUsername || props.isInvaildEmail || props.isInconPassword) ? '1px solid #F04D3E' : '1px solid #91C8FF'};
 }
 
 :focus  {
     outline: none;
-    border: ${(props) => (props.isExistedEmail || props.isExistedUsername || props.isInvaildEmail) ? '1px solid #F04D3E' : '1px solid #2E92FF'};
+    border: ${(props) => (props.isExistedEmail || props.isExistedUsername || props.isInvaildEmail || props.isInconPassword) ? '1px solid #F04D3E' : '1px solid #2E92FF'};
 }
 
-border: ${(props) =>( props.isExistedEmail || props.isExistedUsername || props.isInvaildEmail) ? '1px solid #F04D3E' : '1px solid #E6EAEF'};
+border: ${(props) =>( props.isExistedEmail || props.isExistedUsername || props.isInvaildEmail || props.isInconPassword) ? '1px solid #F04D3E' : '1px solid #E6EAEF'};
 `;
 
 const Error = styled.div`
@@ -100,23 +101,25 @@ interface props {
     isExistedEmail?: boolean;
     isExistedUsername?: boolean;
     isInvaildEmail?: boolean;
+    isInconPassword?: boolean;
     description?: string;
 }
 
-export default function InfoInput({value, onChangeInput, label, placeholder, isExistedEmail, isExistedUsername, isInvaildEmail, description}: props) {
+export default function InfoInput({value, onChangeInput, label, placeholder, isExistedEmail, isExistedUsername, isInvaildEmail, description, isInconPassword}: props) {
     
     return (
         <Container
         label={label}>
             <Label>{label}</Label>
             <Input
-            type={label === 'Password' ? 'password' : 'text'} 
+            type={label === 'Password' || label === "Confirm Password" ? 'password' : 'text'} 
             value={value}
             onChange={(e) => onChangeInput(e.target.value)}
             placeholder={placeholder}
             isExistedUsername={isExistedUsername}
             isExistedEmail={isExistedEmail}
-            isInvaildEmail={isInvaildEmail}/>
+            isInvaildEmail={isInvaildEmail}
+            isInconPassword={isInconPassword}/>
             {isExistedEmail && (
                 <Error>
                 Account with this email already exists.
@@ -130,6 +133,11 @@ export default function InfoInput({value, onChangeInput, label, placeholder, isE
             {isInvaildEmail && (
                 <Error>
                 Enter a valid email address.
+                </Error>
+            )}
+            {isInconPassword && (
+                <Error>
+                Passwords do not match
                 </Error>
             )}
             {description && (
