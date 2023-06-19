@@ -61,25 +61,28 @@ interface props {
     submitSignup: () => void;
     email: string;
     password: string;
+    passwordConfirm: string;
     username: string;
     role: string;
     onChangeEmail: (value: string) => void;
     onChangePassword: (value: string) => void;
+    onChangePasswordConfirm: (value: string) => void;
     onChangeUsername: (value: string) => void;
     onChangeRole: (value: string) => void;
     isExistedEmail: boolean;
     isExistedUsername: boolean;
     isInvaildEmail: boolean;
+    isInconPassword: boolean;
 }
 
-export default function SignupForm({submitSignup, email, password, username, role, onChangeEmail, onChangePassword, onChangeUsername, onChangeRole, isExistedEmail, isExistedUsername, isInvaildEmail}: props) {
-    const [isVaildForm, setIsVaildForm] = useState(false);
+export default function SignupForm({submitSignup, email, password, passwordConfirm, username, role, onChangeEmail, onChangePassword, onChangeUsername, onChangeRole, onChangePasswordConfirm, isExistedEmail, isExistedUsername, isInvaildEmail, isInconPassword}: props) {
+    const [isVaildForm, setIsVaildForm] = useState(false);;
 
     useEffect(() => {
-        if(email !== "" && password !== "" && username !== "" && role !== "") setIsVaildForm(true);
+        if(email !== "" && password !== "" && passwordConfirm !== "" && username !== "" && role !== "") setIsVaildForm(true);
         else setIsVaildForm(false);
 
-    }, [email, password, username, role])
+    }, [email, password, passwordConfirm ,username, role])
 
     return (
         <Container onSubmit={() => submitSignup()}>
@@ -102,9 +105,15 @@ export default function SignupForm({submitSignup, email, password, username, rol
             label={"Password"}
             placeholder={"Please enter Password"}/>
             <InfoInput
+            value={passwordConfirm}
+            onChangeInput={onChangePasswordConfirm}
+            label={"Confirm Password"}
+            placeholder={"Please enter Password again"}
+            isInconPassword={isInconPassword}/>
+            <InfoInput
             value={username}
             onChangeInput={onChangeUsername}
-            label={"Username"}
+            label={"User name"}
             placeholder={"Please enter your user name"}
             isExistedUsername={isExistedUsername}/>
             <InfoSelect
