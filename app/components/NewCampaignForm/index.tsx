@@ -1,10 +1,9 @@
 import styled from '@emotion/styled';
 
+import BasicInfoForm from './BasicInfoForm';
+
 const Container = styled.div`
-    width: 30vw;
-    position: fixed;
-    top: 64px;
-    right: 0px;
+    
     background-color: white;
     padding: 24px 16px;
 `
@@ -18,12 +17,23 @@ const Title = styled.div`
     text-align: left;
 `;
 
+const ProgressBar = styled.div`
+    border-radius: 8px;
+    width: 100%;
+    height: 4px;
+    margin-top: 24px;
+    background-color: #F1F4F7;
+`;
+
 export default function NewCamapignForm() {
     return (
         <Container>
             <Title>
             New Campaign
             </Title>
+            <ProgressBar/>
+            <BasicInfoForm/>
+            
 
         </Container>
     )

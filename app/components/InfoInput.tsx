@@ -14,7 +14,7 @@ interface InputProps {
 
 const Container = styled.div<ContainerProps>(props => ({
 position: 'relative',
-marginTop: props.label === 'Email' ? 32 : 24,
+marginTop: props.label === 'Email' ? 32 : props.label === 'Brand Name' ? 20 : 24,
 display: 'flex',
 flexDirection: 'column',
 width: props.label === 'First Name' || props.label === 'Last Name' ? '48.2%' : '100%'
@@ -94,8 +94,9 @@ color :#ACB8C8;
 `;
 
 interface props {
-    value: string;
-    onChangeInput: (value: string) => void;
+    type?: string;
+    value?: string;
+    onChangeInput?: (value: string) => void;
     label: string;
     placeholder?: string;
     isExistedEmail?: boolean;
@@ -105,16 +106,16 @@ interface props {
     description?: string;
 }
 
-export default function InfoInput({value, onChangeInput, label, placeholder, isExistedEmail, isExistedUsername, isInvaildEmail, description, isInconPassword}: props) {
+export default function InfoInput({type = "text", value, onChangeInput, label, placeholder, isExistedEmail, isExistedUsername, isInvaildEmail, description, isInconPassword}: props) {
     
     return (
         <Container
         label={label}>
             <Label>{label}</Label>
             <Input
-            type={label === 'Password' || label === "Confirm Password" ? 'password' : 'text'} 
+            type={type} 
             value={value}
-            onChange={(e) => onChangeInput(e.target.value)}
+            onChange={(e) => onChangeInput ? onChangeInput(e.target.value) : ""}
             placeholder={placeholder}
             isExistedUsername={isExistedUsername}
             isExistedEmail={isExistedEmail}

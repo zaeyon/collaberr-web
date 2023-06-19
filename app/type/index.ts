@@ -2,6 +2,7 @@ export interface signupType {
     username: string;
     email: string;
     password: string;
+    password_confirm: string;
     role: string;
 }
 

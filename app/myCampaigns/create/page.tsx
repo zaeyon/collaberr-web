@@ -5,14 +5,19 @@ import CampaignDetail from '@/app/components/CampaignDetail';
 import NewCamapignForm from '@/app/components/NewCampaignForm';
 
 const Container = styled.div`
-position: fixed;
-width: 100%;
-padding: 32px 24px;
 display: flex;
-background-color: #E6EAEF;
+flex-direction: row;
 `;
 
-const PreviewText = styled.span`
+const PreviewContainer = styled.div`
+padding: 32px 24px 37px 24px;
+display: flex;
+background-color: #E6EAEF;
+flex-direction: column;
+    
+`;
+
+const PreviewText = styled.div`
 font-family: 'Pretendard';
 font-size: 17px;
 font-weight: 600;
@@ -22,7 +27,7 @@ text-align: left;
 color: #8696AB;
 `;
 
-const PreviewContainer = styled.div`
+const PreviewInnerContainer = styled.div`
 overflow-y: scroll;
 height: 80vh;
 margin-top: 8px;
@@ -31,18 +36,25 @@ padding: 48px 16px;
 background-color: white;
 `;
 
+const FormContainer = styled.div`
+width: 100%;
+    
+`; 
+
 export default function Create() {
     return (
         <Container>
-            <div>
+            <PreviewContainer>
             <PreviewText>
                 Preview
             </PreviewText>
-            <PreviewContainer>
+            <PreviewInnerContainer>
             <CampaignDetail/>
+            </PreviewInnerContainer>
             </PreviewContainer>
-            </div>
+            <FormContainer>
             <NewCamapignForm/>
+            </FormContainer>
         </Container>
 
     )

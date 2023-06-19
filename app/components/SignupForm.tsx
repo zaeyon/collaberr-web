@@ -100,11 +100,13 @@ export default function SignupForm({submitSignup, email, password, passwordConfi
             label={"Email"}
             placeholder={"Please enter your Email"}/>
             <InfoInput
+            type={"password"}
             value={password}
             onChangeInput={onChangePassword}
             label={"Password"}
             placeholder={"Please enter Password"}/>
             <InfoInput
+            type={"password"}
             value={passwordConfirm}
             onChangeInput={onChangePasswordConfirm}
             label={"Confirm Password"}

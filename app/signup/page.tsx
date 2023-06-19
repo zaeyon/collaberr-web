@@ -56,6 +56,7 @@ export default function Signup() {
                 username,
                 email,
                 password,
+                password_confirm: passwordConfirm,
                 role: role === "Business" ? 'BUSINESS' : 'CREATOR',
             }
     
