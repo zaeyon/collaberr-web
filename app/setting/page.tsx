@@ -50,9 +50,15 @@ export default function Setting() {
     const logout = () => {
         localStorage.removeItem("access_token");
         localStorage.removeItem("refresh_token");
+        localStorage.removeItem("current_user");
+        localStorage.removeItem("account_id");
 
         setUser({
-            isLogin: false
+            isLogin: false,
+            email: null,
+            username: null,
+            firstName: null,
+            lastName: null,
         })
 
         router.push('/');
