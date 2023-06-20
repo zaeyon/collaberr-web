@@ -18,13 +18,16 @@ export default function TopBar({onClickHamburger}: props) {
     const [user, setUser] = useRecoilState(userState);
 
     useEffect(() => {
-      if(localStorage.getItem("access_token")) {
-        setUser({
-          isLogin: true
-        })
+      if(localStorage.getItem("current_user")) {
+        const currentUser = JSON.parse(localStorage.getItem("current_user") || '{}')
+        setUser(currentUser)
       } else {
         setUser({
-          isLogin: false
+          isLogin: false,
+          email: null,
+          username: null,
+          firstName: null,
+          lastName: null,
         })
       }
     }, [setUser])
@@ -63,7 +66,7 @@ export default function TopBar({onClickHamburger}: props) {
                 <Link
                 href={"/setting"}
                 className={styles.username}>
-                Username
+                {user.username}
                 </Link>
             )}
             {!user.isLogin && (

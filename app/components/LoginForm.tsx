@@ -102,6 +102,7 @@ export default function LoginForm({submitLogin, email, password, onChangeEmail, 
             label={"Email"}
             placeholder={"Please enter your Email"}/>
             <InfoInput
+            type={"password"}
             value={password}
             onChangeInput={onChangePassword}
             label={"Password"}

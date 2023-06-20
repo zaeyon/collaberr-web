@@ -9,7 +9,7 @@ import { POST_signup } from '../api/auth';
 
 
 const Container = styled.div`
-    
+padding-bottom: 50px;
 `;
  
 export default function Signup() {
