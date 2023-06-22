@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
-import { relative } from 'node:path/win32';
-import { MutableRefObject } from 'react';
+import Image from 'next/image';
+
+import icon_clip from '../assets/icons/icon_clip.png';
 
 interface ContainerProps {
     label: string
@@ -86,7 +87,7 @@ background-color: white;
 margin-top: 6px;
 padding: 14px 18px;
 border-radius: 8px;
-color: ${(props) => props.disabled ? '#D1D7DF' : '#35424C'};
+color: #35424C;
 font-family: 'Pretendard';
 font-size: 15px;
 font-weight: 400;
@@ -94,7 +95,22 @@ line-height: 24px;
 letter-spacing: -0.015em;
 text-align: left;
 cursor: ${(props) => props.disabled ? 'default' : 'pointer'};
+display: flex;
+align-items: center;
 `;
+
+const FileInputPlaceholder = styled.span`
+margin-left: 10px;
+color: #8696AB;
+font-family: 'Pretendard';
+font-size: 15px;
+font-weight: 400;
+line-height: 24px;
+letter-spacing: -0.015em;
+text-align: left;
+`;
+
+
 
 const Error = styled.div`
 position: absolute;
@@ -117,6 +133,10 @@ line-height: 24px;
 letter-spacing: -0.015em;
 text-align: left;
 color :#ACB8C8;
+`;
+
+const ClipIcon = styled(Image)`
+    
 `;
 
 interface props {
@@ -146,8 +166,16 @@ export default function InfoInput({inputRef, type = "text",accept = "", disabled
             <FileInputContainer
             onClick={() => clickFileInput ? clickFileInput() : ""}
             disabled={disabled}>
+                <ClipIcon
+                width={24}
+                height={24}
+                src={icon_clip}
+                alt={"icon_clip"}
+                />
                 {!value && (
-                    "Upload files"
+                    <FileInputPlaceholder>
+                    {placeholder}
+                    </FileInputPlaceholder>
                 )}
                 {value && (
                     value.name
