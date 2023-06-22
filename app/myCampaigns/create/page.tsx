@@ -1,7 +1,8 @@
 'use client';
-
+import {useState} from 'react';
 import styled from '@emotion/styled';
-import CampaignDetail from '@/app/components/CampaignDetail';
+
+import CampaignPreview from '@/app/components/CampaignPreview';
 import NewCamapignForm from '@/app/components/NewCampaignForm';
 
 const Container = styled.div`
@@ -9,52 +10,23 @@ display: flex;
 flex-direction: row;
 `;
 
-const PreviewContainer = styled.div`
-padding: 32px 24px 37px 24px;
-display: flex;
-background-color: #E6EAEF;
-flex-direction: column;
-    
-`;
-
-const PreviewText = styled.div`
-font-family: 'Pretendard';
-font-size: 17px;
-font-weight: 600;
-line-height: 27px;
-letter-spacing: -0.015em;
-text-align: left;
-color: #8696AB;
-`;
-
-const PreviewInnerContainer = styled.div`
-overflow-y: scroll;
-height: 80vh;
-margin-top: 8px;
-border-radius: 16px;
-padding: 48px 16px;
-background-color: white;
-`;
-
-const FormContainer = styled.div`
-width: 100%;
-    
-`; 
 
 export default function Create() {
+    const [brandName, setBrandName] = useState('');
+    const [title, setTitle] = useState('');
+    const [thumbnailImageFile, setThumbnailImageFile] = useState<any>();
+    const [category, setCategory] = useState("");
+    const [platform, setPlarform] = useState("");
+    const [date, setDate] = useState("");
+    const [description, setDescription] = useState("");
+    const [missionType, setMissionType] = useState("");
+    const [bid, setBid] = useState("");
+    const [files, setFiles] = useState<any>();
+    
     return (
         <Container>
-            <PreviewContainer>
-            <PreviewText>
-                Preview
-            </PreviewText>
-            <PreviewInnerContainer>
-            <CampaignDetail/>
-            </PreviewInnerContainer>
-            </PreviewContainer>
-            <FormContainer>
+            <CampaignPreview/>
             <NewCamapignForm/>
-            </FormContainer>
         </Container>
 
     )

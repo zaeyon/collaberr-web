@@ -2,10 +2,12 @@
 import {useState} from 'react';
 import { useRouter } from 'next/navigation';
 import styled from '@emotion/styled';
+import { useRecoilState } from 'recoil';
 
 import SignupForm from '../components/SignupForm';
 
 import { POST_signup } from '../api/auth';
+import {userState} from '../recoil/user';
 
 
 const Container = styled.div`
@@ -13,6 +15,7 @@ padding-bottom: 50px;
 `;
  
 export default function Signup() {
+    const [user, setUser] = useRecoilState(userState);
     const [email, setEmail] = useState<string>("");
     const [password, setPassword] = useState<string>("");
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
@@ -64,6 +67,16 @@ export default function Signup() {
             .then((res) => {
                 console.log("signup success", res)
                 alert('Sign up Success!');
+                const currentUser = {
+                    isLogin: true,
+                    email: res.data.email,
+                    username: res.data.username,
+                    firstName: res.data.first_name,
+                    lastName: res.data.last_name,
+                }
+
+                localStorage.setItem("current_user", JSON.stringify(currentUser));
+                setUser(currentUser)
                 router.push('/')
             })
             .catch((err) => {

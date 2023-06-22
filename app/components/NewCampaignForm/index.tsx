@@ -1,9 +1,10 @@
 import styled from '@emotion/styled';
 
 import BasicInfoForm from './BasicInfoForm';
+import FormButtonArea from './FormButtonArea';
 
 const Container = styled.div`
-    
+    width: 100%;
     background-color: white;
     padding: 24px 16px;
 `
@@ -33,6 +34,7 @@ export default function NewCamapignForm() {
             </Title>
             <ProgressBar/>
             <BasicInfoForm/>
+            <FormButtonArea/>
             
 
         </Container>

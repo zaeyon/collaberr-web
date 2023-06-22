@@ -1,0 +1,14 @@
+import { baseUrl } from ".";
+import axios from "axios";
+
+export const GET_youtubeAuth = (accessToken: string | null) => {
+    console.log("accessToken", accessToken);
+    const promise = axios.get(`http://127.0.0.1:8000/api/youtube/auth/`, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        }
+    });
+    const res = promise.then((res) => res);
+
+    return res;
+}
