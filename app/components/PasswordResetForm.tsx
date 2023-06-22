@@ -1,6 +1,6 @@
 'use client';
 
-import {useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from '@emotion/styled';
 import Link from 'next/link'
 
@@ -87,7 +87,7 @@ color: #D1D7DF;
 interface props {
     submitEmailVerify: () => void;
     email: string;
-    onChangeEmail: (value: string) => void;
+    onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function LoginForm({submitEmailVerify, email, onChangeEmail}: props) {
