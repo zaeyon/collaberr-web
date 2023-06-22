@@ -1,12 +1,13 @@
 'use client'
-import {useState} from 'react';
+import React, {useState} from 'react';
 import {useRouter} from 'next/navigation';
 import styled from '@emotion/styled';
 import {useSetRecoilState} from 'recoil';
 
 import LoginForm from '../components/LoginForm';
 import { loginType } from '../type';
-import { POST_login, GET_userInfo } from '../api/auth';
+import { POST_login } from '../api/auth';
+import { GET_userInfo } from '../api/user';
 import { userState } from '../recoil/user';
 
 const Container = styled.div`
@@ -18,12 +19,12 @@ export default function Login() {
     const setUser = useSetRecoilState(userState);
     const router = useRouter();
 
-    const onChangeEmail = (value: string) => {
-        setEmail(value)
+    const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value)
     }
 
-    const onChangePassword = (value: string) => {
-        setPassword(value);
+    const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setPassword(e.target.value);
     }
 
     const submitLogin = () => {

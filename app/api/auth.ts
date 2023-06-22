@@ -26,15 +26,3 @@ export const POST_login = ({email, password}: loginType) => {
 
     return res;
 }
-
-export const GET_userInfo = (accountId: string, accessToken: string) => {
-    const promise = axios.get(`${baseUrl}/api/accounts/${accountId}/`,{
-    headers: {
-        Authorization: `Bearer ${accessToken}`
-    }    
-    })
-
-    const res = promise.then((res) => res);
-
-    return res;
-}

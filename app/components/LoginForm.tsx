@@ -73,8 +73,8 @@ interface props {
     submitLogin: () => void;
     email: string;
     password: string;
-    onChangeEmail: (value: string) => void;
-    onChangePassword: (value: string) => void;
+    onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function LoginForm({submitLogin, email, password, onChangeEmail, onChangePassword}: props) {

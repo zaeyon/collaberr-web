@@ -25,24 +25,24 @@ export default function Signup() {
 
     const router = useRouter();
 
-    const onChangeEmail = (value: string) => {
-        setEmail(value);
+    const onChangeEmail = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value);
         if(isExistedEmail) setIsExistedEmail(false);
         if(isInvaildEmail) setisInvaildEmail(false);
     }
 
-    const onChangePassword = (value: string) => {
+    const onChangePassword = (e: React.ChangeEvent<HTMLInputElement>) => {
         if(isInconPassword) setIsInconPassword(false);
-        setPassword(value);
+        setPassword(e.target.value);
     }
 
-    const onChangePasswordConfirm = (value: string) => {
+    const onChangePasswordConfirm = (e: React.ChangeEvent<HTMLInputElement>) => {
         if(isInconPassword) setIsInconPassword(false);
-        setPasswordConfirm(value);
+        setPasswordConfirm(e.target.value);
     }
 
-    const onChangeUsername = (value: string) => {
-        setUserName(value);
+    const onChangeUsername = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setUserName(e.target.value);
         if(isExistedUsername) setIsExistedUsername(false);
     }
 

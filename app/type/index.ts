@@ -19,3 +19,10 @@ export interface campaignType {
     type: string;
     date: string;
 }
+
+export interface userType {
+    username?: string;
+    email?: string;
+    firstName?: string;
+    lastName?: string;
+}
