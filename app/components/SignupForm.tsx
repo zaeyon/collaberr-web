@@ -64,10 +64,10 @@ interface props {
     passwordConfirm: string;
     username: string;
     role: string;
-    onChangeEmail: (value: string) => void;
-    onChangePassword: (value: string) => void;
-    onChangePasswordConfirm: (value: string) => void;
-    onChangeUsername: (value: string) => void;
+    onChangeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChangePassword: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChangePasswordConfirm: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    onChangeUsername: (e: React.ChangeEvent<HTMLInputElement>) => void;
     onChangeRole: (value: string) => void;
     isExistedEmail: boolean;
     isExistedUsername: boolean;

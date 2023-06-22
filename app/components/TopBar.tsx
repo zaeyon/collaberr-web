@@ -24,10 +24,10 @@ export default function TopBar({onClickHamburger}: props) {
       } else {
         setUser({
           isLogin: false,
-          email: null,
-          username: null,
-          firstName: null,
-          lastName: null,
+          email: "",
+          username: "",
+          firstName: "",
+          lastName: "",
         })
       }
     }, [setUser])
