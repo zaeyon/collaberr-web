@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation"
 
 import Button from "../components/Button"
 import { GET_youtubeConfirm } from "../api/youtube";
+import { deleteCookie } from '../lib/cookie';
 
 export default function YoutubeConfirmTest() {
     const router = useRouter();
@@ -15,6 +16,7 @@ export default function YoutubeConfirmTest() {
         GET_youtubeConfirm(accessToken)
         .then((res) => {
             console.log("GET_youtubeConfirm success", res)
+            deleteCookie("credentials");
         })
         .catch((err) => {
             console.log("GET_youtubeConfirm err", err);
