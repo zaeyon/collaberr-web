@@ -9,17 +9,24 @@ const Container = styled.div`
     justify-content: space-between;  
 `;
 
-export default function FormButtonArea() {
+interface props {
+    changeProgress: (direction: string) => void;
+    curProgress: number
+}
+
+export default function FormButtonArea({changeProgress, curProgress}: props) {
 
     return (
         <Container>
             <Button
+            onClick={() => changeProgress("prev")}
             label={"Previous"}
             style={"tertiery"}
             size={"small"}
-            state={"disabled"}
+            state={curProgress > 1 ? "default" : "disabled"}
             />
             <Button
+            onClick={() => changeProgress("next")}
             label={"Next"}
             style={"tertiery"}
             size={"small"}

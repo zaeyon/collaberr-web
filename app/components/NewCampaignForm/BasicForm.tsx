@@ -15,11 +15,11 @@ const SectionTitle = styled.div`
     text-align: left;
 `
 
-export default function CampaignsInfoForm() {
+export default function BasicForm() {
     return (
         <Container>
             <SectionTitle>
-                Campaigns
+                Basics
             </SectionTitle>
             <InfoInput
             label={"Brand Name"}
