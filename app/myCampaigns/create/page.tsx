@@ -22,11 +22,20 @@ export default function Create() {
     const [missionType, setMissionType] = useState("");
     const [bid, setBid] = useState("");
     const [files, setFiles] = useState<any>();
+
+    const [curProgress, setCurProgress] = useState<number>(1);
+
+    const changeProgress = (direction: string) => {
+        if(direction === "next") setCurProgress((prev) => prev+1)
+        if(direction === "prev") setCurProgress((prev) => prev-1)
+    }
     
     return (
         <Container>
             <CampaignPreview/>
-            <NewCamapignForm/>
+            <NewCamapignForm
+            changeProgress={changeProgress}
+            curProgress={curProgress}/>
         </Container>
 
     )

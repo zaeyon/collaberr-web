@@ -1,6 +1,8 @@
 import styled from '@emotion/styled';
 
-import BasicInfoForm from './BasicInfoForm';
+import BasicForm from './BasicForm';
+import CampaignsForm from './CampaignsForm';
+import MissionsForm from './MissionsForm';
 import FormButtonArea from './FormButtonArea';
 
 const Container = styled.div`
@@ -26,17 +28,31 @@ const ProgressBar = styled.div`
     background-color: #F1F4F7;
 `;
 
-export default function NewCamapignForm() {
+interface props {
+    curProgress: number;
+    changeProgress: (direction: string) => void;
+
+}
+
+export default function NewCamapignForm({curProgress, changeProgress}: props) {
     return (
         <Container>
             <Title>
             New Campaign
             </Title>
             <ProgressBar/>
-            <BasicInfoForm/>
-            <FormButtonArea/>
-            
-
+            {curProgress === 1 && (
+                <BasicForm/>
+            )}
+            {curProgress === 2 && (
+                <CampaignsForm/>
+            )}
+            {curProgress === 3 && (
+                <MissionsForm/>
+            )}
+            <FormButtonArea
+            curProgress={curProgress}
+            changeProgress={changeProgress}/>
         </Container>
     )
 }

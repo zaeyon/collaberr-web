@@ -12,3 +12,16 @@ export const GET_youtubeAuth = (accessToken: string | null) => {
 
     return res;
 }
+
+export const GET_youtubeConfirm = (accessToken: string | null) => {
+    console.log("accessToken", accessToken);
+    const promise = axios.get(`${baseUrl}/api/youtube/confirm/`, {
+        headers: {
+            Authorization: `Bearer ${accessToken}`
+        }
+    });
+
+    const res = promise.then((res) => res);
+
+    return res;
+}
