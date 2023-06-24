@@ -9,7 +9,7 @@ interface ContainerProps {
 }
 
 const Container = styled.div<ContainerProps>(props => ({
-    marginTop: props.label === 'Email' ? 32 : 24,
+    marginTop: props.label === 'Email' ? 32 : props.label === 'Campaign Category' ? 20 : 24 ,
     display: 'flex',
     flexDirection: 'column',
 })
@@ -88,7 +88,7 @@ interface props {
     value: string;
     label: string;
     placeholder?: string;
-    options?: roleObj [];
+    options?: any [];
     onChangeSelect?: (value: string) => void;
 }
 
@@ -103,12 +103,12 @@ export default function InfoSelect({value, label, placeholder, options, onChange
         label={label}>
             <Label>{label}</Label>
             <SelectContainer>
-                {value === "" && (
+                {value === "default" && (
                     <SelectPlaceholder>{placeholder}</SelectPlaceholder>
                 )}
             <Select 
             ref={selectRef}
-            defaultValue={"default"}
+            value={value}
             onChange={(e) => onChangeSelect ? onChangeSelect(e.target.value) : ""}>
                 <option disabled hidden value={"default"}></option>
                 {options?.map((item) => <option key={item.id} value={item.value}>{item.value}</option>)}

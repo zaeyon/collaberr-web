@@ -1,18 +1,22 @@
-.main {
-    display: flex;
-    flex-direction: row;
-    
-}
 
 .mainInfoContainer {
     width: 44vw;
     display: flex; 
     flex-direction: column;
+    word-wrap: break-word;
+
 }
 
-.representativeImage {
+.thumbnailImageDiv {
     border-radius: 16px;
     background-color: #F1F4F7;
+    position: relative;
+    width: 100%;
+    height: 350px;
+}
+
+.thumbnailImage {
+    border-radius: 16px;
     object-fit: cover;
 }
 
@@ -33,7 +37,7 @@
     font-weight: 600;
     line-height: 38px;
     letter-spacing: -0.015em;
-    color: #242D35
+    color: #242D35;
 }
 
 .subItem  {

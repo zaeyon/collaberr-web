@@ -20,7 +20,7 @@ export default function Signup() {
     const [password, setPassword] = useState<string>("");
     const [passwordConfirm, setPasswordConfirm] = useState<string>("");
     const [username, setUserName] = useState<string>("");
-    const [role, setRole] = useState<string>("");
+    const [role, setRole] = useState<string>("default");
     const [isExistedEmail, setIsExistedEmail] = useState(false);
     const [isExistedUsername, setIsExistedUsername] = useState(false);
     const [isInvaildEmail, setisInvaildEmail] = useState(false);
@@ -67,17 +67,17 @@ export default function Signup() {
             .then((res) => {
                 console.log("signup success", res)
                 alert('Sign up Success!');
-                const currentUser = {
-                    isLogin: true,
-                    email: res.data.email,
-                    username: res.data.username,
-                    firstName: res.data.first_name,
-                    lastName: res.data.last_name,
-                }
+                // const currentUser = {
+                //     isLogin: true,
+                //     email: res.data.email,
+                //     username: res.data.username,
+                //     firstName: res.data.first_name,
+                //     lastName: res.data.last_name,
+                // }
 
-                localStorage.setItem("current_user", JSON.stringify(currentUser));
-                setUser(currentUser)
-                router.push('/')
+                // localStorage.setItem("current_user", JSON.stringify(currentUser));
+                // setUser(currentUser)
+                router.push('/login');
             })
             .catch((err) => {
                 console.log("signup failed", err); 

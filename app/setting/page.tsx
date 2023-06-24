@@ -8,6 +8,7 @@ import {userState} from '../recoil/user';
 import { PATCH_editProfile } from '../api/user';
 import SettingForm from "../components/SettingForm"
 import { userType } from '../type';
+import { deleteCookie } from '../lib/cookie';
 
 export default function Setting() {
     const [user, setUser] = useRecoilState(userState);
@@ -58,25 +59,8 @@ export default function Setting() {
         setEmail(e.target.value);
     }
 
-    const changeProfileImage = (e: React.ChangeEvent<HTMLInputElement>) => {
-        if(!e.target.files) {
-            return
-        }
-
-        if(e.target.files[0]) {
-            console.log("e.target.files", e.target.files);
-            setProfileImageFile(e.target.files[0]);
-            const file = e.target.files[0];
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-
-            return new Promise<void>((resolve) => {
-                reader.onload = () => {
-                    console.log("reader.result", reader.result);
-                    resolve();
-                }
-            })
-        }
+    const changeProfileImage = (file: any, src: any) => {
+        setProfileImageFile(file);
     }
 
     const changePhoneNumber = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -139,6 +123,10 @@ export default function Setting() {
         })
 
         router.push('/');
+
+        deleteCookie("csrftoken")
+
+
     }
 
 

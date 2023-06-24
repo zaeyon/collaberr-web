@@ -12,6 +12,7 @@ export default function Home() {
     GET_youtubeAuth(accessToken)
     .then((res) => {
       console.log("GET_youtubeAuth success", res)
+      window.location.href = res.data.authorization_url;
     })
     .catch((err) => {
       console.log("GET_youtube failed", err)

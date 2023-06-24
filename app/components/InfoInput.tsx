@@ -80,37 +80,6 @@ text-align: left;
 border: ${(props) =>( props.isExistedEmail || props.isExistedUsername || props.isInvaildEmail || props.isInconPassword) ? '1px solid #F04D3E' : '1px solid #E6EAEF'};
 `;
 
-const FileInputContainer = styled.div<FileInputProps>`
-position: relative;
-border: 1px solid #E6EAEF;
-background-color: white;
-margin-top: 6px;
-padding: 14px 18px;
-border-radius: 8px;
-color: #35424C;
-font-family: 'Pretendard';
-font-size: 15px;
-font-weight: 400;
-line-height: 24px;
-letter-spacing: -0.015em;
-text-align: left;
-cursor: ${(props) => props.disabled ? 'default' : 'pointer'};
-display: flex;
-align-items: center;
-`;
-
-const FileInputPlaceholder = styled.span`
-margin-left: 10px;
-color: #8696AB;
-font-family: 'Pretendard';
-font-size: 15px;
-font-weight: 400;
-line-height: 24px;
-letter-spacing: -0.015em;
-text-align: left;
-`;
-
-
 
 const Error = styled.div`
 position: absolute;
@@ -135,10 +104,6 @@ text-align: left;
 color :#ACB8C8;
 `;
 
-const ClipIcon = styled(Image)`
-    
-`;
-
 interface props {
     inputRef?: any;
     type?: string;
@@ -153,43 +118,14 @@ interface props {
     isInvaildEmail?: boolean;
     isInconPassword?: boolean;
     description?: string;
-    clickFileInput?: () => void;
 }
 
-export default function InfoInput({inputRef, type = "text",accept = "", disabled = false, value, onChangeInput, label, placeholder, isExistedEmail, isExistedUsername, isInvaildEmail, description, isInconPassword, clickFileInput}: props) {
+export default function InfoInput({ type = "text",accept = "", disabled = false, value, onChangeInput, label, placeholder, isExistedEmail, isExistedUsername, isInvaildEmail, description, isInconPassword}: props) {
     
     return (
         <Container
         label={label}>
             <Label>{label}</Label>
-            {type === "file" && (
-            <FileInputContainer
-            onClick={() => clickFileInput ? clickFileInput() : ""}
-            disabled={disabled}>
-                <ClipIcon
-                width={24}
-                height={24}
-                src={icon_clip}
-                alt={"icon_clip"}
-                />
-                {!value && (
-                    <FileInputPlaceholder>
-                    {placeholder}
-                    </FileInputPlaceholder>
-                )}
-                {value && (
-                    value.name
-                )}
-                <Input
-                ref={inputRef}
-                accept={accept}
-                disabled={disabled}
-                type={type} 
-                onChange={(e) => onChangeInput ? onChangeInput(e) : ""}
-                />
-            </FileInputContainer>
-            )}
-            {type !== "file" && (
             <Input
             accept={accept}
             disabled={disabled}
@@ -201,7 +137,6 @@ export default function InfoInput({inputRef, type = "text",accept = "", disabled
             isExistedEmail={isExistedEmail}
             isInvaildEmail={isInvaildEmail}
             isInconPassword={isInconPassword}/>
-            )}
             {isExistedEmail && (
                 <Error>
                 Account with this email already exists.

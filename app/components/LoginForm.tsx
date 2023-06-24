@@ -118,7 +118,7 @@ export default function LoginForm({submitLogin, email, password, onChangeEmail, 
                 <div>
                     <TextLink href={"/signup"}>I’m new</TextLink>
                     <Divider>|</Divider>
-                    <TextLink href={"/passwordReset"}>Lost password</TextLink>
+                    <TextLink href={"/passwordreset"}>Lost password</TextLink>
                 </div>
             </Footer>
         </Form>

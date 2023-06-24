@@ -60,7 +60,7 @@ export default function MyCampaignList({myCampaignsData}: props) {
                 style={"primary"}
                 label={"Create New"}
                 state={"default"}
-                onClick={() => router.push('/myCampaigns/create')}/>
+                onClick={() => router.push('/mycampaigns/create')}/>
             </Header>
             <TableContainer>
                 <TableColumn>

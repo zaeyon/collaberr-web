@@ -9,6 +9,7 @@ import { loginType } from '../type';
 import { POST_login } from '../api/auth';
 import { GET_userInfo } from '../api/user';
 import { userState } from '../recoil/user';
+import { getCookie } from '../lib/cookie';
 
 const Container = styled.div`
 `;
@@ -36,11 +37,10 @@ export default function Login() {
         POST_login(loginForm)
         .then((res) => {
             console.log("login success", res);
-            localStorage.setItem('access_token', res.data.access);
-            localStorage.setItem('refresh_token', res.data.refresh);
-            localStorage.setItem("account_id", res.data.account_id);
 
-            GET_userInfo(res.data.account_id, res.data.access)
+            const accountId = getCookie("account_id");
+
+            GET_userInfo(accountId)
             .then((res) => {
                 console.log("GET_userInfo success", res)
 
