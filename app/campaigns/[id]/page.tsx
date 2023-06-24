@@ -9,7 +9,10 @@ export default function Page({params}: {params: {id: number}}) {
     
     return (
         <main className={styles.main}>
-            <CampaignDetail/>
+            <CampaignDetail
+            brandName='Brand Name'
+            title='Campaign title'
+            thumbnailImageSrc={""}/>
             <JoinCampaign/>
         </main>
     )

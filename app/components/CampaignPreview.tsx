@@ -21,22 +21,34 @@ color: #8696AB;
 
 const PreviewInnerContainer = styled.div`
 overflow-y: scroll;
+overflow-x: hidden;
 height: 80vh;
 margin-top: 8px;
 border-radius: 16px;
 padding: 48px 16px;
 background-color: white;
+white-space: normal;
+
 `;
 
+interface props {
+    brandName: string;
+    title: string;
+    thumbnailImageSrc: string;
+}
 
-export default function CampaignPreview() {
+
+export default function CampaignPreview({brandName, title, thumbnailImageSrc}: props) {
     return (
             <Container>
             <PreviewText>
                 Preview
             </PreviewText>
             <PreviewInnerContainer>
-            <CampaignDetail/>
+            <CampaignDetail
+            brandName={brandName}
+            title={title}
+            thumbnailImageSrc={thumbnailImageSrc}/>
             </PreviewInnerContainer>
             </Container>
     )

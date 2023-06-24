@@ -21,7 +21,7 @@ export default function SideBar() {
             </div>
             <CategoryLinkItem
             label={"My Campaigns"}
-            href={"/myCampaigns"}
+            href={"/mycampaigns"}
             />
             <CategoryLinkItem
             label={"Dashboard"}

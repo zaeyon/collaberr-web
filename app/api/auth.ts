@@ -20,7 +20,7 @@ export const POST_login = ({email, password}: loginType) => {
     const promise = axios.post(`${baseUrl}/api/login/`, {
         email,
         password,
-    });
+    }, {withCredentials: true});
 
     const res = promise.then((res) => res);
 

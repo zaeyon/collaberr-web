@@ -2,11 +2,9 @@ import { baseUrl } from ".";
 import axios from 'axios';
 import { userType } from "../type";
 
-export const GET_userInfo = (accountId: string, accessToken: string) => {
-    const promise = axios.get(`${baseUrl}/api/accounts/${accountId}/`,{
-    headers: {
-        Authorization: `Bearer ${accessToken}`
-    }    
+export const GET_userInfo = (accountId: any) => {
+    const promise = axios.get(`${baseUrl}/api/accounts/${accountId}/`, {
+        withCredentials: true
     })
 
     const res = promise.then((res) => res);

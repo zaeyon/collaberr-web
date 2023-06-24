@@ -6,24 +6,32 @@ import icon_clip from '../assets/icons/icon_clip.png';
 
 import CampaignDetailIconItem from './CampaignDetailIconItem';
 
-export default function CampaignDetail() {
+interface props {
+    brandName: string;
+    title: string;
+    thumbnailImageSrc: any;
+}
+
+export default function CampaignDetail({brandName = "Brand Name", title, thumbnailImageSrc = ""}: props) {
     return (
-        <div className={styles.main}>
         <div className={styles.mainInfoContainer}>
+                <div
+                className={styles.thumbnailImageDiv}>
+                {thumbnailImageSrc !== "" &&
                 <Image
-                className={styles.representativeImage}
-                width={600}
-                height={350}
-                src={thumbnail}
-                alt={"campaign_thumbnail"}
-                />
+                className={styles.thumbnailImage}
+                fill={true}
+                src={thumbnailImageSrc}
+                alt={"campaign_thumbnail"}/>
+                }
+                </div>
                 <div
                 className={styles.brandName}>
-                    Brand Name
+                    {brandName ? brandName : "Brand Name"}
                 </div>
                 <div
                 className={styles.title}>
-                    This is the title of campaign This is the second Line    
+                    {title ? title : "Campaign Name" } 
                 </div>
                 <div
                 style={{marginTop: 16}}
@@ -86,7 +94,6 @@ export default function CampaignDetail() {
                         Path
                     </span>
                 </div>
-        </div>
         </div>
     )
 }

@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import {useState, useRef} from 'react';
 
 import InfoInput from './InfoInput';
+import FileInput from './FileInput';
 import InfoSelect from './InfoSelect';
 import Button from './Button';
 
@@ -37,7 +38,7 @@ interface props {
     changeFirstName: (e: React.ChangeEvent<HTMLInputElement>) => void;
     changeLastName: (e: React.ChangeEvent<HTMLInputElement>) => void;
     changeEmail: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    changeProfileImage: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    changeProfileImage: (file: any, src: any) => void;
     changePhoneNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
     changeCompanyName: (e: React.ChangeEvent<HTMLInputElement>) => void;
     logout: () => void;
@@ -101,15 +102,12 @@ export default function SettingForm({disabled, username, firstName, lastName, em
             label={"Email"}
             onChangeInput={changeEmail}
             />
-            <InfoInput
-            clickFileInput={clickProfileImageInput}
-            inputRef={profileImageInputRef}
+            <FileInput
+            changeFile={changeProfileImage}
             disabled={disabled}
             accept={"image/*"}
-            type={"file"}
             value={profileImageFile}
             label={"Profile image"}
-            onChangeInput={changeProfileImage}
             description={"Please upload PNG, JPEG files only"}
             />
             <Header>
