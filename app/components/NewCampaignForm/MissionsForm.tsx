@@ -1,6 +1,18 @@
 import styled from '@emotion/styled';
 
 import InfoInput from '../InfoInput';
+import InfoSelect from '../InfoSelect';
+import FileInput from '../FileInput';
+
+const MISSION_TYPE_DATA = [
+    {id: 1, value: "Youtube Video"},
+    {id: 2, value: "Youtube Shorts"},
+    {id: 3, value: "Post"},
+    {id: 4, value: "Story"},
+    {id: 5, value: "Reel"},
+    {id: 6, value: "IGTV"},
+    {id: 7, value: "Tiktok Video"}
+]
 
 
 const Container = styled.div`
@@ -16,25 +28,41 @@ const SectionTitle = styled.div`
     text-align: left;
 `
 
-export default function MissionsForm() {
+interface props {
+    missionType: string;
+    bid: number | undefined;
+    files: any;
+    changeMissionType: (value: string) => void;
+    changeBid: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    changeFiles: (value: string) => void;
+}
+
+export default function MissionsForm({missionType, bid, files, changeMissionType, changeBid, changeFiles}: props) {
     return (
         <Container>
             <SectionTitle>
                 Missions
             </SectionTitle>
-            <InfoInput
-            label={"Brand Name"}
-            placeholder={"Enter your brand name"}
+            <InfoSelect
+            value={missionType}
+            label={"Mission Type"}
+            onChangeSelect={changeMissionType}
+            placeholder={"Select mission type"}
+            options={MISSION_TYPE_DATA}
             />
             <InfoInput
-            label={"Campaign name"}
-            placeholder={"Enter your campaign name"}
+            value={bid}
+            onChangeInput={changeBid}
+            type={"number"}
+            label={"Campaign Bid"}
+            placeholder={"Select bidding amount"}
             />
-            <InfoInput
-            type={"file"}
-            label={"Thumbnail Image"}
-            placeholder={"Select image files from your device"}
-            description={"Only png, JPEG files are accepted"}
+            <FileInput
+            value={files}
+            label={"Additional Files"}
+            placeholder={"Select additional files from your device"}
+            description={"docx, pdf, png, jpeg files are accepted"}
+            changeFile={changeFiles}
             />
         </Container>
     )

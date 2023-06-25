@@ -5,6 +5,7 @@ import CampaignsForm from './CampaignsForm';
 import MissionsForm from './MissionsForm';
 import FormButtonArea from './FormButtonArea';
 import ProgressBar from './ProgressBar';
+import React from 'react';
 
 const Container = styled.div`
     width: 100%;
@@ -22,29 +23,35 @@ const Title = styled.div`
 `;
 
 interface props {
+    isInvaildForm: boolean;
     curProgress: number;
     brandName: string;
     title: string;
     thumbnailImageFile: any;
     category: string;
     platform: string;
-    date: string;
+    startDate: any;
+    endDate: any;
     description: string;
     missionType: string;
     bid: number | undefined;
     files: any;
     changeThumbnailImage: (file: any, url: any) => void;
     changeProgress: (direction: string) => void;
-    submitCampaignCreate: () => void;
+    clickRegisterCampaign: () => void;
     changeBrandName: (e: React.ChangeEvent<HTMLInputElement>) => void;
     changeTitle: (e: React.ChangeEvent<HTMLInputElement>) => void;
     changeCategory: (value: string) => void;
     changePlatform: (value: string) => void;
-    changeDate: (value: any) => void;
+    changeStartDate: (value: any) => void;
+    changeEndDate: (value: any) => void;
     changeDescription: (e: React.ChangeEvent<HTMLTextAreaElement>) => void; 
+    changeMissionType: (value: string) => void;
+    changeBid: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    changeFiles: (value: string) => void;
 }
 
-export default function NewCamapignForm({curProgress, changeProgress, submitCampaignCreate, brandName, title, thumbnailImageFile, category, platform, date, description, missionType, bid, files, changeThumbnailImage, changeBrandName, changeTitle, changeCategory, changePlatform, changeDate, changeDescription}: props) {
+export default function NewCamapignForm({curProgress, changeProgress, clickRegisterCampaign, brandName, title, thumbnailImageFile, category, platform, startDate, endDate, description, missionType, bid, files, changeThumbnailImage, changeBrandName, changeTitle, changeCategory, changePlatform, changeStartDate, changeEndDate, changeDescription, changeMissionType, changeBid, changeFiles, isInvaildForm}: props) {
 
     return (
         <Container>
@@ -67,21 +74,31 @@ export default function NewCamapignForm({curProgress, changeProgress, submitCamp
                 <CampaignsForm
                 category={category}
                 platform={platform}
-                date={date}
+                startDate={startDate}
+                endDate={endDate}
                 description={description}
                 changeCategory={changeCategory}
                 changePlatform={changePlatform}
-                changeDate={changeDate}
+                changeStartDate={changeStartDate}
+                changeEndDate={changeEndDate}
                 changeDescription={changeDescription}
                 />
             )}
             {curProgress === 3 && (
-                <MissionsForm/>
+                <MissionsForm
+                missionType={missionType}
+                bid={bid}
+                files={files}
+                changeMissionType={changeMissionType}
+                changeBid={changeBid}
+                changeFiles={changeFiles}
+                />
             )}
             <FormButtonArea
             curProgress={curProgress}
             changeProgress={changeProgress}
-            submitCampaignCreate={submitCampaignCreate}/>
+            clickRegisterCampaign={clickRegisterCampaign}
+            isInvaildForm={isInvaildForm}/>
         </Container>
     )
 }

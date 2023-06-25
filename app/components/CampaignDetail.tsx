@@ -10,9 +10,16 @@ interface props {
     brandName: string;
     title: string;
     thumbnailImageSrc: any;
+    platform: string;
+    shownStartDate: string;
+    shownEndDate: string;
+    description: string;
+    missionType: string;
+    bid: number | undefined;
+    files: any;
 }
 
-export default function CampaignDetail({brandName = "Brand Name", title, thumbnailImageSrc = ""}: props) {
+export default function CampaignDetail({brandName = "Brand Name", title, thumbnailImageSrc = "", platform, shownStartDate, shownEndDate, description, missionType, bid, files}: props) {
     return (
         <div className={styles.mainInfoContainer}>
                 <div
@@ -43,7 +50,12 @@ export default function CampaignDetail({brandName = "Brand Name", title, thumbna
                     </div>
                     <div 
                     className={styles.subValue}>
-                        2020-00-00 ~ 2023-00-00
+                        {shownStartDate && (
+                            <span>{shownStartDate + " ~ "}</span>
+                        )}
+                        {shownEndDate && (
+                            <span>{shownEndDate}</span>
+                        )}
                     </div>
                 </div>
                 <div
@@ -55,7 +67,7 @@ export default function CampaignDetail({brandName = "Brand Name", title, thumbna
                         Platform
                     </div>
                     <div className={styles.subValue}>
-                        Youtube
+                        {platform}
                     </div>
                 </div>
                 <div
@@ -64,19 +76,21 @@ export default function CampaignDetail({brandName = "Brand Name", title, thumbna
                 </div>
                 <div
                 className={styles.description}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc ligula libero, sagittis ac fermentum eu, varius eget eros. Duis malesuada nisi id fringilla aliquet. Integer molestie consectetur tellus, eget dapibus massa semper at. Ut vitae metus iaculis, sollicitudin lacus non, feugiat enim. Nam ornare sodales nunc et porttitor. Sed quis sapien in nulla sollicitudin tempor non non odio.
+                    {description ? description : "Campaign description"}
                 </div>
                 <div
                 className={styles.label}>
                 Mission
                 </div>
                 <CampaignDetailIconItem
+                value={missionType}
                 type={"mission"}/>
                 <div
                 className={styles.label}>
                 Rewards
                 </div>
                 <CampaignDetailIconItem
+                value={bid}
                 type={"rewards"}/>
                 <div
                 className={styles.label}>
@@ -91,7 +105,7 @@ export default function CampaignDetail({brandName = "Brand Name", title, thumbna
                     src={icon_clip}/>
                     <span
                     className={styles.filePath}>
-                        Path
+                        {files?.name}
                     </span>
                 </div>
         </div>

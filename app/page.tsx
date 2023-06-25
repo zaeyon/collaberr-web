@@ -6,17 +6,15 @@ import styles from './page.module.css'
 import { GET_youtubeAuth } from './api/youtube'
 
 export default function Home() {
-  
   const clickYoutube = () => {
-    const accessToken = localStorage.getItem('access_token');
-    GET_youtubeAuth(accessToken)
-    .then((res) => {
-      console.log("GET_youtubeAuth success", res)
-      window.location.href = res.data.authorization_url;
-    })
-    .catch((err) => {
-      console.log("GET_youtube failed", err)
-    })
+    GET_youtubeAuth()
+      .then((res) => {
+        console.log("GET_youtubeAuth success", res);
+        window.location.href = res.data.authorization_url;
+      })
+      .catch((err) => {
+        console.log("GET_youtube failed", err);
+      });
   }
 
   return (
@@ -30,4 +28,4 @@ export default function Home() {
       
     </main>
   )
-}
+} 

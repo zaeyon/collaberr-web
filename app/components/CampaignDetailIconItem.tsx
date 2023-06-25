@@ -5,10 +5,11 @@ import icon_bid from '../assets/icons/icon_bid.png';
 import icon_youtube from '../assets/icons/icon_youtube.png';
 
 interface props {
-    type: string
+    type: string;
+    value: string | number | undefined;
 }
 
-export default function CampaignDetailIconItem({type}: props) {
+export default function CampaignDetailIconItem({type, value}: props) {
     
     return (
         <div className={styles.container}>
@@ -19,7 +20,7 @@ export default function CampaignDetailIconItem({type}: props) {
             alt={"icon_type"}/>
             <div
             className={styles.value}>
-                value
+                {value}
             </div>
         </div>
     )
