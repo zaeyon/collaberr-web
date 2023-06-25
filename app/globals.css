@@ -11,8 +11,7 @@
 }
 
 body {
-  margin-top: 64px;
-  margin-left: 240px;
+  padding-top: 64px;
   background-color: white;
   display: flex;
 }
