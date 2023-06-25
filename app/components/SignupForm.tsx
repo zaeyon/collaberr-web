@@ -79,7 +79,7 @@ export default function SignupForm({submitSignup, email, password, passwordConfi
     const [isVaildForm, setIsVaildForm] = useState(false);;
 
     useEffect(() => {
-        if(email !== "" && password !== "" && passwordConfirm !== "" && username !== "" && role !== "") setIsVaildForm(true);
+        if(email !== "" && password !== "" && passwordConfirm !== "" && username !== "" && role !== "default") setIsVaildForm(true);
         else setIsVaildForm(false);
 
     }, [email, password, passwordConfirm ,username, role])

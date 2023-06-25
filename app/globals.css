@@ -70,6 +70,15 @@ letter-spacing: -0.015em;
 text-align: left;
 }
 
+input[type='number'] {
+  -moz-appearance:textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
 @font-face {
 	font-family: 'Pretendard';
 	font-weight: 45 920;

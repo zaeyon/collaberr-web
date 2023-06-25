@@ -182,11 +182,14 @@ interface props {
     label: string;
     placeholder?: string;
     description?: string;
+    startDate: any;
+    endDate: any;
+    changeStartDate: any;
+    changeEndDate: any;
 }
 
-export default function PeriodPicker({disabled = false, value , label, placeholder, description, }: props) {
-    const [startDate, setStartDate] = useState<any>(new Date());
-    const [endDate, setEndDate] = useState<any>(new Date());
+export default function PeriodPicker({disabled = false, value , label, placeholder, description, startDate, endDate, changeStartDate, changeEndDate}: props) {
+   
 
     // eslint-disable-next-line react/display-name
     const CustomDatePicker = forwardRef(({value, onClick}: any, ref) => (
@@ -209,8 +212,8 @@ export default function PeriodPicker({disabled = false, value , label, placehold
                 />
                 <DatePicker
                 dateFormat="yyyy-MM-dd"
-                selected={startDate}
-                onChange={(date) => setStartDate(date)}
+                selected={new Date(startDate)}
+                onChange={(date) => changeStartDate(date)}
                 customInput={<CustomDatePicker/>}
                 />
                 <DateDivider>
@@ -218,8 +221,8 @@ export default function PeriodPicker({disabled = false, value , label, placehold
                 </DateDivider>
                 <DatePicker
                 dateFormat="yyyy-MM-dd"
-                selected={endDate}
-                onChange={(date) => setEndDate(date)}
+                selected={new Date(endDate)}
+                onChange={(date) => changeEndDate(date)}
                 customInput={<CustomDatePicker/>}
                 />
             </DateSelectContainer>

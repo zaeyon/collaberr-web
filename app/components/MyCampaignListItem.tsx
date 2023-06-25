@@ -3,13 +3,13 @@ import Image from 'next/image';
 import classNames from 'classnames';
 
 import Button from './Button';
-import { campaignType } from '../type';
+import { campaignListType } from '../type/campaign';
 import icon_youtube from '../assets/icons/icon_youtube.png';
 import icon_instagram from '../assets/icons/icon_instagram.png';
 import icon_tiktok from '../assets/icons/icon_tiktok.png';
 
 interface props {
-    campaignItem: campaignType;
+    campaignItem: campaignListType;
 }
 
 export default function MyCampaignListItem({campaignItem}: props) {

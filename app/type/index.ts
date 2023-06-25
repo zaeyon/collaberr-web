@@ -11,14 +11,6 @@ export interface loginType {
     password: string;
 }
 
-export interface campaignType {
-    id: number;
-    state: string;
-    title: string;
-    platform: string;
-    type: string;
-    date: string;
-}
 
 export interface userType {
     username?: string;

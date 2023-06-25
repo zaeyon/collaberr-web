@@ -35,10 +35,17 @@ interface props {
     brandName: string;
     title: string;
     thumbnailImageSrc: string;
+    platform: string;
+    shownStartDate: string;
+    shownEndDate: string;
+    description: string;
+    missionType: string;
+    bid: number | undefined;
+    files: any;
 }
 
 
-export default function CampaignPreview({brandName, title, thumbnailImageSrc}: props) {
+export default function CampaignPreview({brandName, title, thumbnailImageSrc, platform, shownStartDate, shownEndDate, description, missionType, bid, files}: props) {
     return (
             <Container>
             <PreviewText>
@@ -46,9 +53,16 @@ export default function CampaignPreview({brandName, title, thumbnailImageSrc}: p
             </PreviewText>
             <PreviewInnerContainer>
             <CampaignDetail
+            description={description}
             brandName={brandName}
             title={title}
-            thumbnailImageSrc={thumbnailImageSrc}/>
+            thumbnailImageSrc={thumbnailImageSrc}
+            platform={platform}
+            shownStartDate={shownStartDate}
+            shownEndDate={shownEndDate}
+            missionType={missionType}
+            bid={bid}
+            files={files}/>
             </PreviewInnerContainer>
             </Container>
     )

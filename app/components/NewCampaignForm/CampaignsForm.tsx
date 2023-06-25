@@ -6,6 +6,20 @@ import RadioButton from '../RadioButton';
 import PeriodPicker from '../PeriodPicker';
 import InfoTextArea from '../InfoTextArea';
 
+const CATEGORY_DATA = [
+    {id: 1, value: 'Fashion'},
+    {id: 2, value: 'Beauty'},
+    {id: 3, value: 'Food'},
+    {id: 4, value: 'Travel'},
+    {id: 5, value: 'Beverages'},
+]
+
+const PLATFORM_DATA = [
+    'Instagram',
+    'Youtube',
+    'Tiktok'
+]
+
 const Container = styled.div`
     margin-top: 24px;
 `;
@@ -22,23 +36,25 @@ const SectionTitle = styled.div`
 interface props {
     category: string;
     platform: string;
-    date: string;
+    startDate: any;
+    endDate: any;
     description: string;
     changeCategory: (value: string) => void;
     changePlatform: (value: string) => void;
-    changeDate: (value: any) => void;
+    changeStartDate: (value: any) => void;
+    changeEndDate: (value: any) => void;
     changeDescription: (e: React.ChangeEvent<HTMLTextAreaElement>) => void; 
 }
 
 
-export default function CampaignsForm({category, platform, date, description, changeCategory, changePlatform, changeDate, changeDescription}: props) {
+export default function CampaignsForm({category, platform, startDate, endDate, description, changeCategory, changePlatform, changeStartDate, changeEndDate, changeDescription}: props) {
     return (
         <Container>
             <SectionTitle>
                 Campaigns
             </SectionTitle>
             <InfoSelect
-            options={[{id: 1, value: "clothes"}, {id: 2, value: "perfume"}]}
+            options={CATEGORY_DATA}
             onChangeSelect={changeCategory}
             value={category}
             label={"Campaign Category"}
@@ -47,10 +63,14 @@ export default function CampaignsForm({category, platform, date, description, ch
             <RadioButton
             selectOption={changePlatform}
             label={"Campaign Platform"}
-            options={["Youtube", "Instagram", "TikTok"]}
+            options={PLATFORM_DATA}
             value={platform}
             />
             <PeriodPicker
+            startDate={startDate}
+            endDate={endDate}
+            changeEndDate={changeEndDate}
+            changeStartDate={changeStartDate}
             label={"Campaign due date"}
             placeholder={"2023"}
             />

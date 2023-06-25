@@ -12,7 +12,14 @@ export default function Page({params}: {params: {id: number}}) {
             <CampaignDetail
             brandName='Brand Name'
             title='Campaign title'
-            thumbnailImageSrc={""}/>
+            thumbnailImageSrc={""}
+            platform={""}
+            shownStartDate={"2023-00-00"}
+            shownEndDate={"2023-00-00"}
+            description={""}
+            missionType={""}
+            bid={undefined}
+            files={""}/>
             <JoinCampaign/>
         </main>
     )

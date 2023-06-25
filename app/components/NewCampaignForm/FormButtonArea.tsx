@@ -12,10 +12,11 @@ const Container = styled.div`
 interface props {
     changeProgress: (direction: string) => void;
     curProgress: number;
-    submitCampaignCreate: () => void;
+    clickRegisterCampaign: () => void;
+    isInvaildForm: boolean;
 }
 
-export default function FormButtonArea({changeProgress, curProgress, submitCampaignCreate}: props) {
+export default function FormButtonArea({changeProgress, curProgress, clickRegisterCampaign, isInvaildForm}: props) {
 
     return (
         <Container>
@@ -37,11 +38,11 @@ export default function FormButtonArea({changeProgress, curProgress, submitCampa
             )}
             {curProgress === 3 && (
             <Button
-            onClick={() => submitCampaignCreate()}
+            onClick={() => clickRegisterCampaign()}
             label={"Register"}
             style={"primary"}
             size={"small"}
-            state={"default"}
+            state={isInvaildForm ? "disabled" : "default"}
             />
             )}
         </Container>

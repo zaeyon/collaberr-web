@@ -5,6 +5,7 @@ import {useSetRecoilState} from 'recoil';
 import { useRecoilState } from 'recoil';
 
 import {userState} from '../recoil/user';
+import { POST_logout } from '../api/auth';
 import { PATCH_editProfile } from '../api/user';
 import SettingForm from "../components/SettingForm"
 import { userType } from '../type';
@@ -124,7 +125,15 @@ export default function Setting() {
 
         router.push('/');
 
-        deleteCookie("csrftoken")
+        deleteCookie("csrftoken");
+
+        POST_logout()
+        .then((res) => {
+            console.log("POST_logout success", res);
+        })
+        .catch((err) => {
+            console.log("POST_logout fail", err);
+        })
 
 
     }

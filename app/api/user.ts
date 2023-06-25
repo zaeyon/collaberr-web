@@ -1,5 +1,4 @@
-import { baseUrl } from ".";
-import axios from 'axios';
+import axios, { baseUrl } from ".";
 import { userType } from "../type";
 
 export const GET_userInfo = (accountId: any) => {
