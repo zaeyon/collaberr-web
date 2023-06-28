@@ -16,10 +16,10 @@ export default function CampaignGrid({campaignArr}: props) {
             </span>
             <div
             className={styles.gridContainer}>
-            {campaignArr.map((campaign: any) => {
+            {campaignArr.map((campaign: any, index: number) => {
                 return (
                     <CampaignGridItem
-                    key={campaign.id}
+                    key={index}
                     campaign={campaign}/>
                 )
             })}

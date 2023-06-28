@@ -132,6 +132,8 @@ export default function SettingForm({disabled, username, firstName, lastName, em
             onChangeInput={changeCompanyName}
             />
             <InfoSelect
+            disabled={true}
+            options={[{id: 1, value: "Business"}, {id: 2, value: "Influence"}]}
             value={role}
             label={'Role'}
             />

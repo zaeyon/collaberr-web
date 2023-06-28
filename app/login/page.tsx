@@ -50,6 +50,7 @@ export default function Login() {
                     username: res.data.username,
                     firstName: res.data.first_name,
                     lastName: res.data.last_name,
+                    role: res.data.role,
                 }
 
                 localStorage.setItem("current_user", JSON.stringify(currentUser));

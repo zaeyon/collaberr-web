@@ -22,10 +22,10 @@ export default function MyCampaignListItem({campaignItem}: props) {
             </div>
             <div
             className={classNames("column", "state")}>
-                <span
+                {/* <span
                 className={classNames("chip", campaignItem.state)}>
                 {campaignItem.state.replace(/^[a-z]/, char => char.toUpperCase())}
-                </span>
+                </span> */}
             </div>
             <div
             className={classNames("column", "title")}>
@@ -33,21 +33,21 @@ export default function MyCampaignListItem({campaignItem}: props) {
             </div>
             <div
             className={classNames("column", "platform")}>
-                {campaignItem.platform === 'youtube' && (
+                {campaignItem.platform === 'Youtube' && (
                     <Image
                     width={24}
                     height={24}
                     alt={"icon_youtube"}
                     src={icon_youtube}/>
                 )}
-                {campaignItem.platform === 'instagram' && (
+                {campaignItem.platform === 'Instagram' && (
                     <Image
                     width={24}
                     height={24}
                     alt={"icon_instagram"}
                     src={icon_instagram}/>
                 )}
-                {campaignItem.platform === 'tiktok' && (
+                {campaignItem.platform === 'Tiktok' && (
                     <Image
                     width={24}
                     height={24}
@@ -61,7 +61,7 @@ export default function MyCampaignListItem({campaignItem}: props) {
             </div>            
             <div
             className={classNames("column", "date")}>
-                {campaignItem.date}
+                {campaignItem.start_date + " ~ " + campaignItem.end_date}
             </div>
             <div
             className={classNames("column", "options")}>

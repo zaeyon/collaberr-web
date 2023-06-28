@@ -1,15 +1,34 @@
-import styles from './page.module.scss';
+'use client'
 
+import {useEffect} from 'react';
+import styles from './page.module.scss';
+import { useRecoilState } from 'recoil';
+
+import { GET_showAllCampaigns } from '../api/campaign';
+import { allCampaignsState } from '../recoil/campaign'; 
 import CampaignGrid from '../components/CampaignGrid';
 
 export default function Campaigns() {
+    const [allCampaigns, setAllCampaigns] = useRecoilState(allCampaignsState);
+
+    useEffect(() => {
+        GET_showAllCampaigns()
+        .then((res) => {
+            console.log("GET_showAllCampaigns sucess", res);
+            setAllCampaigns(res.data);
+        })
+        .catch((err) => {
+            console.log("GET_showAllCampaign fail", err);
+        })
+    }, [])
+
     return (
         <main>
             <h1>
                 Campaign
             </h1>
             <CampaignGrid
-            campaignArr={CAMPAIGNS_DATA}/>
+            campaignArr={allCampaigns}/>
         </main>
     )
 }

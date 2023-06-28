@@ -90,9 +90,10 @@ interface props {
     placeholder?: string;
     options?: any [];
     onChangeSelect?: (value: string) => void;
+    disabled? : boolean;
 }
 
-export default function InfoSelect({value, label, placeholder, options, onChangeSelect}: props) {
+export default function InfoSelect({value, label, placeholder, options, onChangeSelect, disabled=false}: props) {
 
     const selectRef = useRef<HTMLSelectElement>(null);
 
@@ -107,6 +108,7 @@ export default function InfoSelect({value, label, placeholder, options, onChange
                     <SelectPlaceholder>{placeholder}</SelectPlaceholder>
                 )}
             <Select 
+            disabled={disabled}
             ref={selectRef}
             value={value}
             onChange={(e) => onChangeSelect ? onChangeSelect(e.target.value) : ""}>

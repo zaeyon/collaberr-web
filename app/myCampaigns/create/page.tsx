@@ -23,8 +23,8 @@ export default function Create() {
     const [thumbnailImageSrc, setThumbnailImageSrc] = useState<any>();
     const [category, setCategory] = useState("default");
     const [platform, setPlarform] = useState(""); 
-    const [startDate, setStartDate] = useState<any>(new Date());
-    const [endDate, setEndDate] = useState<any>(new Date());
+    const [startDate, setStartDate] = useState<any>();
+    const [endDate, setEndDate] = useState<any>();
     const [shownStartDate, setShownStartDate] = useState<string>("");
     const [shownEndDate, setShownEndDate] = useState<string>("");
     const [description, setDescription] = useState("");
