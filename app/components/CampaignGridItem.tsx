@@ -6,7 +6,6 @@ import Link from 'next/link';
 import Image from 'next/image'
 
 import icon_facebook from '../assets/icons/icon_facebook.png';
-import thumbnail from '../assets/campaign_thumbnail.jpeg';
 
 interface props {
     campaign: any
@@ -37,12 +36,14 @@ export default function GampaignGridItem({campaign}: props) {
             <motion.div
             className={styles.thumbnail}
             variants={thumbnailAni}>
+            {campaign.thumbnail && (
             <Image
             width={309}
             height={180}
             alt={"campaign_thumbnail"}
-            src={thumbnail}
+            src={campaign.thumbnail}
             className={styles.thumbnail}/>
+            )}
             </motion.div>
             <div
             className={styles.brandName}>

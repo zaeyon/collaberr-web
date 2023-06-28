@@ -8,5 +8,6 @@ export const userState = atom({
         username: "",
         lastName: "",
         firstName: "",
+        role: "",
     }
 })

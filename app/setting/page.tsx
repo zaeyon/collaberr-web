@@ -21,7 +21,7 @@ export default function Setting() {
     
     const [phoneNumber, setPhoneNumber] = useState('');
     const [companyName, setCompanyName] = useState('');
-    const [role, setRole] = useState('');
+    const [role, setRole] = useState(user.role === 'BUSINESS' ? 'Business' : 'influence');
     const [disabled, setDisabled] = useState(true);
 
     useEffect(() => {
@@ -38,6 +38,7 @@ export default function Setting() {
             username: "",
             firstName: "",
             lastName: "",
+            role: "",
           })
         }
       }, [])
@@ -93,6 +94,7 @@ export default function Setting() {
                 username: res.data.username,
                 firstName: res.data.first_name,
                 lastName: res.data.last_name,
+                role: res.data.role,
             }
 
             localStorage.setItem("current_user", JSON.stringify(currentUser));
@@ -121,6 +123,7 @@ export default function Setting() {
             username: "",
             firstName: "",
             lastName: "",
+            role: "",
         })
 
         router.push('/');

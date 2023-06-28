@@ -211,19 +211,21 @@ export default function PeriodPicker({disabled = false, value , label, placehold
                 alt={"icon_clip"}
                 />
                 <DatePicker
+                placeholderText='Start date'
+                selected={startDate}
                 dateFormat="yyyy-MM-dd"
-                selected={new Date(startDate)}
                 onChange={(date) => changeStartDate(date)}
-                customInput={<CustomDatePicker/>}
-                />
+                customInput={<CustomDatePicker placeholder={"Start date"}/>}
+                />            
                 <DateDivider>
                 {"~"}
                 </DateDivider>
                 <DatePicker
+                placeholderText='End date'
                 dateFormat="yyyy-MM-dd"
-                selected={new Date(endDate)}
+                selected={endDate}
                 onChange={(date) => changeEndDate(date)}
-                customInput={<CustomDatePicker/>}
+                customInput={<CustomDatePicker placeholder={"End date"}/>}
                 />
             </DateSelectContainer>
             {description && (

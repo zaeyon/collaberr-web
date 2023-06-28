@@ -28,6 +28,7 @@ export default function TopBar({onClickHamburger}: props) {
           username: "",
           firstName: "",
           lastName: "",
+          role: "",
         })
       }
     }, [setUser])

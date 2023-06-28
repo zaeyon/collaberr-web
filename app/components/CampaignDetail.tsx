@@ -83,7 +83,7 @@ export default function CampaignDetail({brandName = "Brand Name", title, thumbna
                 Mission
                 </div>
                 <CampaignDetailIconItem
-                value={missionType}
+                value={missionType !== "default" ? missionType : ""}
                 type={"mission"}/>
                 <div
                 className={styles.label}>

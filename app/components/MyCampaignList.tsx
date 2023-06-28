@@ -93,10 +93,10 @@ export default function MyCampaignList({myCampaignsData}: props) {
                     Options
                     </ColumnItem>
                 </TableColumn>
-                {myCampaignsData.map((campaignItem) => {
+                {myCampaignsData.map((campaignItem, index) => {
                     return (
                         <MyCampaignListItem
-                        key={campaignItem.id}
+                        key={index}
                         campaignItem={campaignItem}/>
                     )
                 })

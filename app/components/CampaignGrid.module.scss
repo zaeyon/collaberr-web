@@ -16,8 +16,8 @@
     margin-top: 8px;
     margin-bottom: 50px;
     display: grid;
-	grid-template-columns: repeat(3, 1fr);
+	grid-template-columns: repeat(auto-fill, minmax(309px, 300px));
+    justify-content: space-between;
     row-gap: 40px;
-    column-gap: 16px;
     
 }

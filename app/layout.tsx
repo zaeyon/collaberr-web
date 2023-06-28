@@ -23,7 +23,8 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body>
+      <body
+      style={isVisSideBar ? {paddingLeft: 240} : {paddingLeft: 0}}>
         <RecoilRoot>
         <TopBar
         onClickHamburger={onClickHamburger}/>

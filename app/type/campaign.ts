@@ -4,7 +4,8 @@ export interface campaignListType {
     title: string;
     platform: string;
     type: string;
-    date: string;
+    start_date: string;
+    end_date: string;
 }
 
 export interface campaignType {
