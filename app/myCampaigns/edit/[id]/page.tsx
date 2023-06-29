@@ -16,7 +16,7 @@ flex-direction: row;
 `;
 
 
-export default function Create() {
+export default function Page() {
     const [brandName, setBrandName] = useState('');
     const [title, setTitle] = useState('');
     const [thumbnailImageFile, setThumbnailImageFile] = useState<any>();
@@ -180,7 +180,7 @@ export default function Create() {
             bid={bid}
             files={files}/>
             <CamapignForm
-            type={"create"}
+            type={"edit"}
             brandName={brandName}
             title={title}
             thumbnailImageFile={thumbnailImageFile}

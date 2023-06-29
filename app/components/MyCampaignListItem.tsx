@@ -1,6 +1,7 @@
 import './MyCampaignListItem.scss'
 import Image from 'next/image';
 import classNames from 'classnames';
+import {useRouter} from 'next/navigation';
 
 import Button from './Button';
 import { campaignListType } from '../type/campaign';
@@ -13,6 +14,7 @@ interface props {
 }
 
 export default function MyCampaignListItem({campaignItem}: props) {
+    const router = useRouter();
     return (
         <div
         className={"container"}>
@@ -22,10 +24,10 @@ export default function MyCampaignListItem({campaignItem}: props) {
             </div>
             <div
             className={classNames("column", "state")}>
-                {/* <span
-                className={classNames("chip", campaignItem.state)}>
-                {campaignItem.state.replace(/^[a-z]/, char => char.toUpperCase())}
-                </span> */}
+                <span
+                className={classNames("chip", "published")}>
+                {"Published"}
+                </span> 
             </div>
             <div
             className={classNames("column", "title")}>
@@ -57,7 +59,7 @@ export default function MyCampaignListItem({campaignItem}: props) {
             </div>
             <div
             className={classNames("column", "type")}>
-                {campaignItem.type}
+                {campaignItem.mission_type}
             </div>            
             <div
             className={classNames("column", "date")}>
@@ -66,6 +68,7 @@ export default function MyCampaignListItem({campaignItem}: props) {
             <div
             className={classNames("column", "options")}>
                 <Button
+                onClick={() => router.push(`/mycampaigns/edit/${campaignItem.id}`)}
                 label={"Edit"}
                 style={"tertiery"}
                 size={"xsmall"}

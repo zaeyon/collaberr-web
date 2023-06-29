@@ -10,6 +10,7 @@ export default function Page({params}: {params: {id: number}}) {
     return (
         <main className={styles.main}>
             <CampaignDetail
+            category=''
             brandName='Brand Name'
             title='Campaign title'
             thumbnailImageSrc={""}

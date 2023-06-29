@@ -7,7 +7,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import icon_calendar from '../assets/icons/icon_calendar.png';
 
 interface ContainerProps {
-    label: string
+    label?: string
 }
 
 interface InputProps {
@@ -22,9 +22,16 @@ interface FileInputProps {
     disabled: boolean | undefined;
 }
 
+interface DateButtonProps {
+    readonly disabled: boolean;
+}
+
+interface IconProps {
+    readonly disabled: boolean;
+}
+
 const Container = styled.div<ContainerProps>(props => ({
 position: 'relative',
-marginTop: 24,
 display: 'flex',
 flexDirection: 'column',
 width: props.label === 'First Name' || props.label === 'Last Name' ? '48.2%' : '100%'
@@ -33,7 +40,8 @@ width: props.label === 'First Name' || props.label === 'Last Name' ? '48.2%' : '
 
 );
 
-const Label = styled.span`
+const Label = styled.div`
+margin-top: 24px;
 font-family: 'Pretendard';
 font-size: 15px;
 font-weight: 400;
@@ -41,46 +49,6 @@ line-height: 24px;
 letter-spacing: -0.015em;
 text-align: left;
 color: #35424C;
-`;
-
-const Input = styled.input<InputProps>`
-position: absolute;
-display: none;
-background-color: white;
-margin-top: 6px;
-padding: 14px 18px;
-border-radius: 8px;
-color: ${(props) => props.disabled ? '#D1D7DF' : '#35424C'};
-font-family: 'Pretendard';
-font-size: 15px;
-font-weight: 400;
-line-height: 24px;
-letter-spacing: -0.015em;
-text-align: left;
-
-
-
-::placeholder {
-    color: #8696AB;
-    font-family: 'Pretendard';
-    font-size: 15px;
-    font-weight: 400;
-    line-height: 24px;
-    letter-spacing: -0.015em;
-    text-align: left;
-}
-
-
-:hover {
-    border: ${(props) => props.disabled ? '1px solid #E6EAEF' : '1px solid #91C8FF'};
-}
-
-:focus  {
-    outline: none;
-    border: 1px solid #2E92FF;
-}
-
-border: 1px solid #E6EAEF;
 `;
 
 const DateSelectContainer = styled.div<FileInputProps>`
@@ -97,7 +65,7 @@ font-weight: 400;
 line-height: 24px;
 letter-spacing: -0.015em;
 text-align: left;
-cursor: ${(props) => props.disabled ? 'default' : 'pointer'};
+cursor: ${(props) => props.disabled ? 'default' : 'default'};
 display: flex;
 align-items: center;
 `;
@@ -150,19 +118,21 @@ text-align: left;
 color :#ACB8C8;
 `;
 
-const Icon = styled(Image)`
+const Icon = styled(Image)<IconProps>`
     margin-right: 10px;
+    opacity: ${(props) => props.disabled ? 0.4 : 1};
 `;
 
-const DateButton = styled.button`
+const DateButton = styled.button<DateButtonProps>`
 background-color: white;
 border: none;  
-color: var(--secondary-gray-gray-500, #8696AB);
+color:  ${(props) => props.disabled ? "#D1D7DF" : "#8696AB"};
 font-size: 15px;
 font-family: 'Pretendard';
 line-height: 160%;
 font-weight: 400;
 letter-spacing: -0.225px;
+cursor: ${(props) => props.disabled ? "default" : "pointer"};
 `;
 
 const DateDivider = styled.span`
@@ -177,56 +147,69 @@ letter-spacing: -0.225px;
 `;
 
 interface props {
+    type?: string;
     disabled?: boolean;
     value?: any;
-    label: string;
+    label?: string;
     placeholder?: string;
     description?: string;
     startDate: any;
-    endDate: any;
+    endDate?: any;
     changeStartDate: any;
-    changeEndDate: any;
+    changeEndDate?: any;
 }
 
-export default function PeriodPicker({disabled = false, value , label, placeholder, description, startDate, endDate, changeStartDate, changeEndDate}: props) {
+export default function PeriodPicker({type = "period", disabled = false, value , label, placeholder, description, startDate, endDate, changeStartDate, changeEndDate}: props) {
    
 
     // eslint-disable-next-line react/display-name
-    const CustomDatePicker = forwardRef(({value, onClick}: any, ref) => (
-        <DateButton className="example-custom-input" onClick={onClick}>
-            {value}
+    const CustomDatePicker = forwardRef(({value, onClick, placeholder}: any, ref) => (
+        <DateButton 
+        disabled={disabled}
+        className="example-custom-input"
+        onClick={onClick}>
+            {value ? value : placeholder}
         </DateButton>
     )); 
 
     return (
         <Container
         label={label}>
-            <Label>{label}</Label>
+            {label && (
+            <Label
+            style={label === "Creator recruit period" ? {marginTop: 20} : {marginTop: 24}}>{label}</Label>
+            )}
             <DateSelectContainer
             disabled={disabled}>
                 <Icon
+                disabled={disabled}
                 width={24}
                 height={24}
                 src={icon_calendar}
                 alt={"icon_clip"}
                 />
                 <DatePicker
-                placeholderText='Start date'
+                disabled={disabled}
+                placeholderText={placeholder ? placeholder : 'Start Date'}
                 selected={startDate}
                 dateFormat="yyyy-MM-dd"
                 onChange={(date) => changeStartDate(date)}
-                customInput={<CustomDatePicker placeholder={"Start date"}/>}
-                />            
+                customInput={<CustomDatePicker/>}
+                />
+                {type === "period" && (
                 <DateDivider>
                 {"~"}
                 </DateDivider>
+                )}
+                {type === "period" && (
                 <DatePicker
                 placeholderText='End date'
                 dateFormat="yyyy-MM-dd"
                 selected={endDate}
                 onChange={(date) => changeEndDate(date)}
-                customInput={<CustomDatePicker placeholder={"End date"}/>}
+                customInput={<CustomDatePicker/>}
                 />
+                )}
             </DateSelectContainer>
             {description && (
                 <Description>

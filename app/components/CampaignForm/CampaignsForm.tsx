@@ -36,18 +36,14 @@ const SectionTitle = styled.div`
 interface props {
     category: string;
     platform: string;
-    startDate: any;
-    endDate: any;
     description: string;
     changeCategory: (value: string) => void;
     changePlatform: (value: string) => void;
-    changeStartDate: (value: any) => void;
-    changeEndDate: (value: any) => void;
     changeDescription: (e: React.ChangeEvent<HTMLTextAreaElement>) => void; 
 }
 
 
-export default function CampaignsForm({category, platform, startDate, endDate, description, changeCategory, changePlatform, changeStartDate, changeEndDate, changeDescription}: props) {
+export default function CampaignsForm({category, platform, description, changeCategory, changePlatform, changeDescription}: props) {
     return (
         <Container>
             <SectionTitle>
@@ -66,18 +62,11 @@ export default function CampaignsForm({category, platform, startDate, endDate, d
             options={PLATFORM_DATA}
             value={platform}
             />
-            <PeriodPicker
-            startDate={startDate}
-            endDate={endDate}
-            changeEndDate={changeEndDate}
-            changeStartDate={changeStartDate}
-            label={"Campaign due date"}
-            placeholder={"2023"}
-            />
             <InfoTextArea
             label={"Campaign description"}
             value={description}
             onChangeInput={changeDescription}
+            placeholder={"Briefly introduce your campaign"}
             />
         </Container>
     )

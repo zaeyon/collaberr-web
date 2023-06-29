@@ -9,10 +9,9 @@ interface props {
 
 export default function CategoryLinkItem({label, href}: props) {
     const pathname = usePathname();
-    console.log("pathname", pathname);
     return (
         <Link
-        style={{color: pathname === href ? '#3183F6' : '#445462'}}
+        style={{color: "/"+pathname.split("/")[1] === href ? '#F25476' : '#445462'}}
         className={styles.container}
         href={href}>
             {label}

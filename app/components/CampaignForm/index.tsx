@@ -4,8 +4,10 @@ import BasicForm from './BasicForm';
 import CampaignsForm from './CampaignsForm';
 import MissionsForm from './MissionsForm';
 import FormButtonArea from './FormButtonArea';
+import DatesForm from './DatesForm';
 import ProgressBar from './ProgressBar';
 import React from 'react';
+import { start } from 'repl';
 
 const Container = styled.div`
     width: 100%;
@@ -23,6 +25,7 @@ const Title = styled.div`
 `;
 
 interface props {
+    type: string;
     isInvaildForm: boolean;
     curProgress: number;
     brandName: string;
@@ -36,6 +39,9 @@ interface props {
     missionType: string;
     bid: number | undefined;
     files: any;
+    recruitStartDate: any;
+    recruitEndDate: any;
+    period: string;
     changeThumbnailImage: (file: any, url: any) => void;
     changeProgress: (direction: string) => void;
     clickRegisterCampaign: () => void;
@@ -49,14 +55,18 @@ interface props {
     changeMissionType: (value: string) => void;
     changeBid: (e: React.ChangeEvent<HTMLInputElement>) => void;
     changeFiles: (value: string) => void;
+    changeRecruitStartDate: (value: any) => void;
+    changeRecruitEndDate: (value: any) => void;
+    changePeriod: (value: string) => void;
+    deleteFiles: (name: string) => void;
 }
 
-export default function NewCamapignForm({curProgress, changeProgress, clickRegisterCampaign, brandName, title, thumbnailImageFile, category, platform, startDate, endDate, description, missionType, bid, files, changeThumbnailImage, changeBrandName, changeTitle, changeCategory, changePlatform, changeStartDate, changeEndDate, changeDescription, changeMissionType, changeBid, changeFiles, isInvaildForm}: props) {
+export default function CamapignForm({type, curProgress, changeProgress, clickRegisterCampaign, brandName, title, thumbnailImageFile, category, platform, startDate, endDate, description, missionType, bid, files, changeThumbnailImage, changeBrandName, changeTitle, changeCategory, changePlatform, changeStartDate, changeEndDate, changeDescription, changeMissionType, changeBid, changeFiles, isInvaildForm, recruitStartDate, recruitEndDate, period, changeRecruitStartDate, changeRecruitEndDate, changePeriod, deleteFiles}: props) {
 
     return (
         <Container>
             <Title>
-            New Campaign
+            {type === "create" ? "New Campaign" : "Edit Campaign"}
             </Title>
             <ProgressBar
             curProgress={curProgress}/>
@@ -71,20 +81,29 @@ export default function NewCamapignForm({curProgress, changeProgress, clickRegis
                 />
             )}
             {curProgress === 2 && (
+                <DatesForm
+                recruitStartDate={recruitStartDate}
+                recruitEndDate={recruitEndDate}
+                startDate={startDate}
+                endDate={endDate}
+                period={period}
+                changeRecruitStartDate={changeRecruitStartDate}
+                changeRecruitEndDate={changeRecruitEndDate}
+                changeStartDate={changeStartDate}
+                changeEndDate={changeEndDate}
+                changePeriod={changePeriod}/>
+            )}
+            {curProgress === 3 && (
                 <CampaignsForm
                 category={category}
                 platform={platform}
-                startDate={startDate}
-                endDate={endDate}
                 description={description}
                 changeCategory={changeCategory}
                 changePlatform={changePlatform}
-                changeStartDate={changeStartDate}
-                changeEndDate={changeEndDate}
                 changeDescription={changeDescription}
                 />
             )}
-            {curProgress === 3 && (
+            {curProgress === 4 && (
                 <MissionsForm
                 missionType={missionType}
                 bid={bid}
@@ -92,6 +111,7 @@ export default function NewCamapignForm({curProgress, changeProgress, clickRegis
                 changeMissionType={changeMissionType}
                 changeBid={changeBid}
                 changeFiles={changeFiles}
+                deleteFiles={deleteFiles}
                 />
             )}
             <FormButtonArea
