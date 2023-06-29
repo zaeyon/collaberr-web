@@ -20,7 +20,7 @@ export default function GampaignGridItem({campaign}: props) {
 
     const titleAni = {
         initial: {color: '#242D35'}, 
-        animate: {color: '#3183F6'},
+        animate: {color: '#F25476'},
     }
 
     return (

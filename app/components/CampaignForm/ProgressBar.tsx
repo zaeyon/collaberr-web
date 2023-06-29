@@ -15,9 +15,9 @@ const Container = styled.div`
 
 const Progress = styled.div<ProgressProps>`
     border-radius: 8px;
-    width: ${(props) => props.curProgress === 1 ? "33.3%" : props.curProgress === 2 ? "66.6%" : props.curProgress === 3 ? "100%" : "0%"}; 
+    width: ${(props) => props.curProgress === 1 ? "25%" : props.curProgress === 2 ? "50%" : props.curProgress === 3 ? "75%" : props.curProgress === 4 ? "100%" : "0%"}; 
     height:4px;
-    background-color: #3183F6;  
+    background-color: #F25476;  
 `;
 
 interface props {

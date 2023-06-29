@@ -54,7 +54,7 @@ font-weight: 500;
 line-height: 24px;
 letter-spacing: -0.015em;
 text-align: left;
-background-color:${(props) => props.isVaildForm ? '#3183F6' : '#F1F4F7'};
+background-color:${(props) => props.isVaildForm ? '#F25476' : '#F1F4F7'};
 color:${(props) => props.isVaildForm ? '#F7F9FB' : '#242D35'};
 cursor: ${(props) => props.isVaildForm ? 'pointer' : 'default'};
 `;

@@ -11,6 +11,7 @@ interface props {
     title: string;
     thumbnailImageSrc: any;
     platform: string;
+    category: string;
     shownStartDate: string;
     shownEndDate: string;
     description: string;
@@ -19,7 +20,7 @@ interface props {
     files: any;
 }
 
-export default function CampaignDetail({brandName = "Brand Name", title, thumbnailImageSrc = "", platform, shownStartDate, shownEndDate, description, missionType, bid, files}: props) {
+export default function CampaignDetail({brandName = "Brand Name", title, category, thumbnailImageSrc = "", platform, shownStartDate, shownEndDate, description, missionType, bid, files}: props) {
     return (
         <div className={styles.mainInfoContainer}>
                 <div
@@ -56,6 +57,18 @@ export default function CampaignDetail({brandName = "Brand Name", title, thumbna
                         {shownEndDate && (
                             <span>{shownEndDate}</span>
                         )}
+                    </div>
+                </div>
+                <div
+                style={{marginTop: 10}}
+                className={styles.subItem}>
+                    <div 
+                    style={{width: 92}}
+                    className={styles.subLabel}>
+                        Category
+                    </div>
+                    <div className={styles.subValue}>
+                        {category !== "default" ? category : ""}
                     </div>
                 </div>
                 <div

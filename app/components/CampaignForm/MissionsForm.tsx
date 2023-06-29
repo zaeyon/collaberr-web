@@ -35,9 +35,10 @@ interface props {
     changeMissionType: (value: string) => void;
     changeBid: (e: React.ChangeEvent<HTMLInputElement>) => void;
     changeFiles: (value: string) => void;
+    deleteFiles: (name: string) => void;
 }
 
-export default function MissionsForm({missionType, bid, files, changeMissionType, changeBid, changeFiles}: props) {
+export default function MissionsForm({missionType, bid, files, changeMissionType, changeBid, changeFiles, deleteFiles}: props) {
     return (
         <Container>
             <SectionTitle>
@@ -58,11 +59,14 @@ export default function MissionsForm({missionType, bid, files, changeMissionType
             placeholder={"Select bidding amount"}
             />
             <FileInput
+            type={"many"}
             value={files}
             label={"Additional Files"}
             placeholder={"Select additional files from your device"}
             description={"docx, pdf, png, jpeg files are accepted"}
             changeFile={changeFiles}
+            accept={".docx, .pdf, image/*"}
+            deleteFiles={deleteFiles}
             />
         </Container>
     )

@@ -27,7 +27,7 @@ export default function FormButtonArea({changeProgress, curProgress, clickRegist
             size={"small"}
             state={curProgress > 1 ? "default" : "disabled"}
             />
-            {curProgress < 3 && (
+            {curProgress < 4 && (
             <Button
             onClick={() => changeProgress("next")}
             label={"Next"}
@@ -36,7 +36,7 @@ export default function FormButtonArea({changeProgress, curProgress, clickRegist
             state={"default"}
             />
             )}
-            {curProgress === 3 && (
+            {curProgress === 4 && (
             <Button
             onClick={() => clickRegisterCampaign()}
             label={"Register"}

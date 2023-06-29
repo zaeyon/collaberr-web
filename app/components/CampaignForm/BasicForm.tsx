@@ -49,6 +49,7 @@ export default function BasicForm({brandName, title, thumbnailImageFile, changeT
             label={"Thumbnail Image"}
             placeholder={"Select image files from your device"}
             description={"Only png, JPEG files are accepted"}
+            accept={"image/*"}
             />
         </Container>
     )

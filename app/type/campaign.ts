@@ -3,9 +3,10 @@ export interface campaignListType {
     state: string;
     title: string;
     platform: string;
-    type: string;
+    mission_type: string;
     start_date: string;
     end_date: string;
+    
 }
 
 export interface campaignType {

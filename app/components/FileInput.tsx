@@ -3,6 +3,7 @@ import styled from '@emotion/styled'
 import Image from 'next/image';
 
 import icon_clip from '../assets/icons/icon_clip.png';
+import icon_exit from '../assets/icons/icon_exit-small.png';
 
 interface ContainerProps {
     label: string
@@ -148,11 +149,26 @@ text-align: left;
 color :#ACB8C8;
 `;
 
-const ClipIcon = styled(Image)`
-    
+const Icon = styled(Image)` 
+`;
+
+const FileListDiv = styled.div`
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+`;
+
+const FileListItem = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--secondary-gray-gray-100, #F1F4F7);
+    padding: 6px 0px;
 `;
 
 interface props {
+    type?: string;
     accept?: string;
     disabled?: boolean;
     value?: any;
@@ -160,9 +176,10 @@ interface props {
     placeholder?: string;
     description?: string;
     changeFile: (file: any, src: any) => void;
+    deleteFiles?: (name: string) => void;
 }
 
-export default function FileInput({accept = "", disabled = false, value , label, placeholder, description, changeFile}: props) {
+export default function FileInput({type = "one", accept = "", disabled = false, value , label, placeholder, description, changeFile, deleteFiles}: props) {
 
     const inputRef = useRef<HTMLInputElement>(null);
 
@@ -197,18 +214,23 @@ export default function FileInput({accept = "", disabled = false, value , label,
             <FileInputContainer
             onClick={() => clickFileInput()}
             disabled={disabled}>
-                <ClipIcon
+                <Icon
                 width={24}
                 height={24}
                 src={icon_clip}
                 alt={"icon_clip"}
                 />
-                {!value && (
+                {type === "many" && (
                     <FileInputPlaceholder>
                     {placeholder}
                     </FileInputPlaceholder>
                 )}
-                {value && (
+                {!value && type === "one" && (
+                    <FileInputPlaceholder>
+                        {placeholder}
+                    </FileInputPlaceholder>
+                )}
+                {value && type === "one" && (
                     <FileNameSpan>
                     {value.name}
                     </FileNameSpan>
@@ -225,6 +247,25 @@ export default function FileInput({accept = "", disabled = false, value , label,
                 <Description>
                     {description}
                 </Description>
+            )}
+            {type === "many" && (
+                <FileListDiv>
+                {value.map((item: any, index: number) => {
+                    return (
+                        <FileListItem
+                        key={index}>
+                            {item.name}
+                            <Icon
+                            onClick={() => deleteFiles ? deleteFiles(item.name): ""}
+                            width={20}
+                            height={20}
+                            alt={"icon_exit"}
+                            src={icon_exit}
+                            />
+                        </FileListItem>
+                    )
+                })}
+                </FileListDiv>
             )}
         </Container>
     )
