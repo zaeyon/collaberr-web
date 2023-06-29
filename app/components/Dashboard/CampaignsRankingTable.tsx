@@ -1,9 +1,12 @@
 'use client';
-
 import styled from '@emotion/styled';
+import Image from 'next/image';
+import styles from './CampaignsRankingTable.module.scss';
 
 import Button from '../Button';
 import CampaignsRankingTableItem from './CampaignsRankingTableItem';
+import "../Tooltip.css";
+import icon_help_fill from '../../assets/icons/icon_help-fill.png';
 
 const Container = styled.div`
 width: 100%;
@@ -39,6 +42,11 @@ const ColumnSpan = styled.span`
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+`;
+
+const Icon = styled(Image)`
+    opacity: 0.6;
+    cursor: pointer;
 `;
 
 interface props {
@@ -81,6 +89,19 @@ export default function CampaignsRankingTable({campaignsRankingData}: props) {
                         <ColumnSpan>
                         반응률
                         </ColumnSpan>
+                        <span
+                        className={"tooltip"}>
+                            <Icon
+                            width={20}
+                            height={20}
+                            alt={"icon_help_fill"}
+                            src={icon_help_fill}/>
+                            <span
+                            style={{marginLeft: -154, width: 308}}
+                            className={"tooltiptext"}>
+                            반응률 = (좋아요 수 + 댓글 수 /전체 조회수)x100
+                            </span>
+                        </span>
                     </ColumnItem>
                     <ColumnItem
                     style={{flex: 1}}>
