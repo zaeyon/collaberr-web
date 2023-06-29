@@ -31,6 +31,7 @@ background-color: #F1F4F7;
 `;
 
 const ColumnItem = styled.div`
+min-width: 0px;
 display: flex;
 justify-content: center;
 padding-top: 8px;
@@ -41,6 +42,12 @@ font-weight: 400;
 line-height: 24px;
 letter-spacing: -0.015em;
 color :#35424C;
+`;
+
+const ColumnSpan = styled.span`
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;  
 `;
 
 interface props {
@@ -66,31 +73,45 @@ export default function MyCampaignList({myCampaignsData}: props) {
                 <TableColumn>
                     <ColumnItem
                     style={{flex: 1}}>
-                    ID
+                        <ColumnSpan>
+                        ID
+                        </ColumnSpan>
                     </ColumnItem>
                     <ColumnItem
                     style={{flex: 1}}>
-                    State
+                        <ColumnSpan>
+                        State
+                        </ColumnSpan>
                     </ColumnItem>
                     <ColumnItem
                     style={{flex: 3.3}}>
-                    Campaign
+                        <ColumnSpan>
+                        Campaign
+                        </ColumnSpan>
                     </ColumnItem>
                     <ColumnItem
                     style={{flex: 1}}>
-                    SNS
+                        <ColumnSpan>
+                        SNS
+                        </ColumnSpan>
                     </ColumnItem>
                     <ColumnItem
                     style={{flex: 1}}>
-                    Type
+                        <ColumnSpan>
+                        Type
+                        </ColumnSpan>
                     </ColumnItem>
                     <ColumnItem
                     style={{flex: 2.35}}>
-                    Date
+                        <ColumnSpan>
+                        Date
+                        </ColumnSpan>
                     </ColumnItem>
                     <ColumnItem
                     style={{flex: 1}}>
-                    Options
+                        <ColumnSpan>
+                        Options
+                        </ColumnSpan>
                     </ColumnItem>
                 </TableColumn>
                 {myCampaignsData.map((campaignItem, index) => {

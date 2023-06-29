@@ -13,6 +13,8 @@ const Container = styled.div`
     line-height: 160%;
     letter-spacing: -0.225px;
     overflow: hidden;
+    border-bottom: 1px solid var(--gray-gray-200, #E6EAEF);
+
 `;
 
 const ColumnDiv = styled.div`

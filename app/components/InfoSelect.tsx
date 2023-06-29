@@ -35,12 +35,12 @@ color: #35424C;
 font-family: 'Pretendard';
 
 :hover {
-    border: 1px solid #91C8FF;
+    border: 1px solid #ACB8C8;
 }
 
 :focus  {
     outline: none;
-    border: 1px solid #2E92FF;
+    border: 1px solid #536878;
 }
 
 -webkit-appearance:none; /* 크롬 화살표 없애기 */
