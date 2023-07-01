@@ -5,7 +5,7 @@ export const baseUrl = 'http://localhost:8000';
 
 const axiosInstance = axios.create();
 
-axiosInstance.defaults.headers.common['X-CSRFToken'] = getCookie('csrftoken');
+//axiosInstance.defaults.headers.common['X-CSRFToken'] = getCookie('csrftoken');
 
 axiosInstance.defaults.withCredentials = true;
 

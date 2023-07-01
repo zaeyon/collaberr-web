@@ -1,6 +1,10 @@
-.container {
-    display: none;
-    position: absolute;
+.tooltip {
+    position: relative;
+    display: inline-block;
+}
+
+.tooltip .tooltiptext {
+    visibility: hidden;
     border-radius: 8px;
     padding: 14px 12px;
     background-color: #35424CD9;
@@ -12,8 +16,10 @@
     font-weight: 400;
     line-height: 160%;
     letter-spacing: -0.225px;
+    position: absolute;
+    z-index: 1;
 }
 
-
-.icon_polygon {
+.tooltip:hover .tooltiptext {
+    visibility: visible;
 }

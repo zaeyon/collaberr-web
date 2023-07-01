@@ -1,22 +1,29 @@
 import Image from 'next/image';
-import styles from './Tooltip.module.scss';
-import icon_polygon from '../assets/icons/icon_polygon.png';
+import './Tooltip.css';
+import icon_help_fill from '../assets/icons/icon_help-fill.png';
+import icon_info from '../assets/icons/icon_info.png';
 
 interface props {
+    tooltipWidth: number;
     description: string;
+    iconType: string;
 }
 
-export default function Tooltip({description}: props) {
+export default function Tooltip({iconType, description, tooltipWidth}: props) {
     return (
-        <div
-        className={styles.container}>
-            {description}
+        <span
+        className={"tooltip"}>
             <Image
-            className={styles.icon_polygon}
-            width={16}
-            height={5.5}
-            alt={"icon_polygon"}
-            src={icon_polygon}/>
-        </div>
+            style={{opacity: 0.6}}
+            width={20}
+            height={20}
+            alt={"icon_help_fill"}
+            src={iconType === "help" ? icon_help_fill : iconType === "info" ? icon_info : ""}/>
+            <span
+            style={{marginLeft: -(tooltipWidth/2), width: tooltipWidth}}
+            className={"tooltiptext"}>
+            {description}
+            </span>
+        </span>
     )
 }

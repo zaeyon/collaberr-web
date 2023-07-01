@@ -32,3 +32,10 @@ export const POST_logout = () => {
 
     return res;
 }
+
+export const POST_refreshToken = () => {
+    const promise = axios.post(`${baseUrl}/api/token/refresh/`);
+    const res = promise.then((res) => res);
+
+    return res;
+}

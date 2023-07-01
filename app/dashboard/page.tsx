@@ -5,11 +5,11 @@ import styled from '@emotion/styled';
 import Scoreboard from '../components/Dashboard/Scoreboard';
 import CampaignsRankingTable from '../components/Dashboard/CampaignsRankingTable';
 
-const Container = styled.div`  
+const Container = styled.div`
+padding: 40px 0px;  
 `;
 
 const ScoreboardListDiv = styled.div`
-  padding: 40px 0px;
   display: flex;
   flex-direction: row;
   align-items: center;  

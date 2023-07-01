@@ -5,8 +5,8 @@ import styles from './CampaignsRankingTable.module.scss';
 
 import Button from '../Button';
 import CampaignsRankingTableItem from './CampaignsRankingTableItem';
-import "../Tooltip.css";
 import icon_help_fill from '../../assets/icons/icon_help-fill.png';
+import Tooltip from '../Tooltip';
 
 const Container = styled.div`
 width: 100%;
@@ -89,19 +89,10 @@ export default function CampaignsRankingTable({campaignsRankingData}: props) {
                         <ColumnSpan>
                         반응률
                         </ColumnSpan>
-                        <span
-                        className={"tooltip"}>
-                            <Icon
-                            width={20}
-                            height={20}
-                            alt={"icon_help_fill"}
-                            src={icon_help_fill}/>
-                            <span
-                            style={{marginLeft: -154, width: 308}}
-                            className={"tooltiptext"}>
-                            반응률 = (좋아요 수 + 댓글 수 /전체 조회수)x100
-                            </span>
-                        </span>
+                        <Tooltip
+                        iconType={"help"}
+                        tooltipWidth={308}
+                        description='반응률 = (좋아요 수 + 댓글 수 /전체 조회수)x100'/>
                     </ColumnItem>
                     <ColumnItem
                     style={{flex: 1}}>

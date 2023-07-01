@@ -2,7 +2,9 @@
 
 import {useRouter} from 'next/navigation'
 import styled from '@emotion/styled';
+import {useRecoilValue} from 'recoil';
 
+import { myCampaignsState } from '../recoil/campaign';
 import Button from './Button';
 import MyCampaignListItem from './MyCampaignListItem';
 
@@ -50,11 +52,8 @@ const ColumnSpan = styled.span`
     text-overflow: ellipsis;  
 `;
 
-interface props {
-    myCampaignsData: any [];
-}
-
-export default function MyCampaignList({myCampaignsData}: props) {
+export default function MyCampaignList() {
+    const myCampaigns = useRecoilValue(myCampaignsState)
 
     const router = useRouter(); 
 
@@ -114,7 +113,7 @@ export default function MyCampaignList({myCampaignsData}: props) {
                         </ColumnSpan>
                     </ColumnItem>
                 </TableColumn>
-                {myCampaignsData.map((campaignItem, index) => {
+                {myCampaigns.map((campaignItem: any, index) => {
                     return (
                         <MyCampaignListItem
                         key={index}

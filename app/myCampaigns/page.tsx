@@ -1,11 +1,15 @@
 'use client';
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
+import {headers} from 'next/headers'
 import styles from './page.module.scss';
 import { useRecoilState } from 'recoil';
 
+import { baseUrl } from '../api';
 import MyCampaignList from '../components/MyCampaignList';
 import { GET_showMyCampaigns } from '../api/campaign';
 import { myCampaignsState } from '../recoil/campaign';
+
+
 
 export default function MyCampaigns() {
     const [myCampaigns, setMyCampaigns] = useRecoilState(myCampaignsState);
@@ -13,22 +17,20 @@ export default function MyCampaigns() {
     useEffect(() => {
         GET_showMyCampaigns()
         .then((res) => {
-            console.log("GET_showMyCampaigns success", res);
+            console.log("GET_showMyCampaigns success", res); 
             setMyCampaigns(res.data);
         })
         .catch((err) => {
-            console.log("GET_showMyCampaigns fail", err);
+            console.log("GET_showMyCampaign err", err);
         })
 
     }, [])
-
-
+    
     return (
         <main>
             <h1>My Campaigns</h1>
             <div className={styles.description}>Manage your campaigns.</div>
-            <MyCampaignList
-            myCampaignsData={myCampaigns}/>
+            <MyCampaignList/>
         </main>
     )
 }

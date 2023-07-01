@@ -14,7 +14,7 @@ interface props {
 export default function GampaignGridItem({campaign}: props) {
 
     const thumbnailAni = {
-        initial: {boxShadow: 'none',},
+        initial: {boxShadow: "0px 0px 0px 0px",},
         animate: {boxShadow: '0px 8px 16px 0px #242D351A', transform: 'translateY(-5px)'}
     }
 

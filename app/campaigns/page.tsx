@@ -1,6 +1,5 @@
 'use client'
-
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import styles from './page.module.scss';
 import { useRecoilState } from 'recoil';
 
@@ -15,7 +14,7 @@ export default function Campaigns() {
         GET_showAllCampaigns()
         .then((res) => {
             console.log("GET_showAllCampaigns sucess", res);
-            setAllCampaigns(res.data);
+            setAllCampaigns(res?.data);
         })
         .catch((err) => {
             console.log("GET_showAllCampaign fail", err);

@@ -99,6 +99,11 @@ text-align: left;
 cursor: ${(props) => props.disabled ? 'default' : 'pointer'};
 display: flex;
 align-items: center;
+
+:hover {
+    border: 1px solid #ACB8C8;
+}
+
 `;
 
 const FileInputPlaceholder = styled.span`

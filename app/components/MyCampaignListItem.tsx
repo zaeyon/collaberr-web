@@ -77,7 +77,9 @@ export default function MyCampaignListItem({campaignItem}: props) {
             <div
             className={classNames("column", "options")}>
                 <Button
-                onClick={() => router.push(`/mycampaigns/edit/${campaignItem.id}`)}
+                onClick={() => {
+                    router.push(`/mycampaigns/edit?id=${campaignItem.id}`)}
+            }
                 label={"Edit"}
                 style={"tertiery"}
                 size={"xsmall"}

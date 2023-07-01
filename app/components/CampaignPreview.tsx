@@ -2,14 +2,18 @@ import styled from '@emotion/styled';
 import CampaignDetail from '@/app/components/CampaignDetail';
 
 const Container = styled.div`
-padding: 32px 24px 37px 24px;
+position: fixed;
+right: 400px;
+left: 240px;
 display: flex;
-background-color: #E6EAEF;
 flex-direction: column;
-    
+align-items: center;
+padding-top: 32px;
+
 `;
 
 const PreviewText = styled.div`
+width: 90%;
 font-family: 'Pretendard';
 font-size: 17px;
 font-weight: 600;
@@ -22,10 +26,11 @@ color: #8696AB;
 const PreviewInnerContainer = styled.div`
 overflow-y: scroll;
 overflow-x: hidden;
-height: 80vh;
+height: 79vh;
+width: 90%;
 margin-top: 8px;
+padding: 48px 16px 30px 16px;
 border-radius: 16px;
-padding: 48px 16px;
 background-color: white;
 white-space: normal;
 
