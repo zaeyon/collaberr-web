@@ -63,12 +63,12 @@ resize: none;
 
 
 :hover {
-    border: ${(props) => props.disabled ? '1px solid #E6EAEF' : '1px solid #91C8FF'};
+    border: ${(props) => props.disabled ? '1px solid #E6EAEF' : '1px solid #ACB8C8'};
 }
 
 :focus  {
     outline: none;
-    border: 1px solid #2E92FF;
+    border: 1px solid #536878;
 }
 
 border: 1px solid #E6EAEF;

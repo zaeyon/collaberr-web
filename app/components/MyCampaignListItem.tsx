@@ -31,7 +31,10 @@ export default function MyCampaignListItem({campaignItem}: props) {
             </div>
             <div
             className={classNames("column", "title")}>
+                <span
+                className={"column_value"}>
                 {campaignItem.title}
+                </span>
             </div>
             <div
             className={classNames("column", "platform")}>
@@ -59,16 +62,24 @@ export default function MyCampaignListItem({campaignItem}: props) {
             </div>
             <div
             className={classNames("column", "type")}>
+                <span
+                className='column_value'>
                 {campaignItem.mission_type}
+                </span>
             </div>            
             <div
             className={classNames("column", "date")}>
+                <span
+                className='column_value'>
                 {campaignItem.start_date + " ~ " + campaignItem.end_date}
+                </span>
             </div>
             <div
             className={classNames("column", "options")}>
                 <Button
-                onClick={() => router.push(`/mycampaigns/edit/${campaignItem.id}`)}
+                onClick={() => {
+                    router.push(`/mycampaigns/edit?id=${campaignItem.id}`)}
+            }
                 label={"Edit"}
                 style={"tertiery"}
                 size={"xsmall"}

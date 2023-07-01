@@ -1,5 +1,5 @@
 'use client';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/navigation';
 
@@ -11,9 +11,16 @@ import { POST_createCampaign } from '@/app/api/campaign';
 import { campaignType } from '@/app/type/campaign';
 
 const Container = styled.div`
+`;
+
+const CampaignCreateDiv = styled.div`
+background-color: #E6EAEF;
+position: fixed;
 display: flex;
 flex-direction: row;
-`;
+width: 100%;
+height: 100%;   
+`
 
 
 export default function Create() {
@@ -32,6 +39,7 @@ export default function Create() {
 
     const [recruitStartDate, setRecruitStartDate] = useState<any>();
     const [recruitEndDate, setRecruitEndDate] = useState<any>();
+
     const [startDate, setStartDate] = useState<any>();
     const [endDate, setEndDate] = useState<any>();
     const [shownStartDate, setShownStartDate] = useState<string>("");
@@ -41,6 +49,9 @@ export default function Create() {
     const [isVisModal, setIsVisModal] = useState<boolean>(false);
 
     const router = useRouter();
+
+    const shownRecruitStartDate = useRef("");
+    const shownRecruitEndDate = useRef("");
 
     useEffect(() => {
         if(brandName && title && thumbnailImageFile && category !== 'default' && platform && startDate && recruitStartDate && recruitEndDate && description && missionType !== "default" && bid) {
@@ -76,6 +87,8 @@ export default function Create() {
             platform,
             start_date: shownStartDate,
             end_date: shownEndDate,
+            recruit_start_date: shownRecruitStartDate.current,
+            recruit_end_date: shownRecruitEndDate.current,
             description,
             mission_type: missionType,
             reward: bid,
@@ -154,19 +167,45 @@ export default function Create() {
 
     const changeRecruitStartDate = (value: any) => {
         setRecruitStartDate(value);
+        shownRecruitStartDate.current = getFormattedDate(value);
     }
 
     const changeRecruitEndDate = (value: any) => {
         console.log("changeRecruitEndDate", value);
         setRecruitEndDate(value);
+        shownRecruitEndDate.current = getFormattedDate(value);
     }
 
     const changePeriod = (value: string) => {
         setPeriod(value);
+        let startDateArr = shownStartDate.split("-");
+        if(value === "3 months") {
+            let tmpMonth = (Number(startDateArr[1]) + 3);
+            if(tmpMonth <= 12) {
+                const tmpMonthStr = tmpMonth < 10 ? "0" + tmpMonth : tmpMonth;
+                setShownEndDate(startDateArr[0] + "-" + tmpMonthStr + "-" + startDateArr[2]);
+            } else {
+                const year = Number(startDateArr[0]) + 1;
+                const month = Number(startDateArr[1])+3 - 12;
+                setShownEndDate(year + "-" + "0" + month + "-" + startDateArr[2]);
+            }
+        } if(value === "6 months") {
+            let tmpMonth = (Number(startDateArr[1]) + 6);
+            if(tmpMonth <= 12) {
+                const tmpMonthStr = tmpMonth < 10 ? "0" + tmpMonth : tmpMonth;
+                setShownEndDate(startDateArr[0] + "-" + tmpMonthStr + "-" + startDateArr[2]);
+            } else {
+                const year = Number(startDateArr[0]) + 1;
+                const month = Number(startDateArr[1])+6 - 12;
+                setShownEndDate(year + "-" + "0" + month + "-" + startDateArr[2]);
+            }
+        }
+        
     }
     
     return (
         <Container>
+            <CampaignCreateDiv>
             <CampaignPreview
             brandName={brandName}
             title={title}
@@ -214,6 +253,7 @@ export default function Create() {
             changeRecruitEndDate={changeRecruitEndDate}
             changePeriod={changePeriod}
             deleteFiles={deleteFiles}/>
+            </CampaignCreateDiv>
             {isVisModal && (
                 <ConfirmModal
                 submitCampaignCreate={submitCampaignCreate}

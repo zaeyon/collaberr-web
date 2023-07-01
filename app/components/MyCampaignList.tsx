@@ -2,7 +2,9 @@
 
 import {useRouter} from 'next/navigation'
 import styled from '@emotion/styled';
+import {useRecoilValue} from 'recoil';
 
+import { myCampaignsState } from '../recoil/campaign';
 import Button from './Button';
 import MyCampaignListItem from './MyCampaignListItem';
 
@@ -31,6 +33,7 @@ background-color: #F1F4F7;
 `;
 
 const ColumnItem = styled.div`
+min-width: 0px;
 display: flex;
 justify-content: center;
 padding-top: 8px;
@@ -43,11 +46,14 @@ letter-spacing: -0.015em;
 color :#35424C;
 `;
 
-interface props {
-    myCampaignsData: any [];
-}
+const ColumnSpan = styled.span`
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;  
+`;
 
-export default function MyCampaignList({myCampaignsData}: props) {
+export default function MyCampaignList() {
+    const myCampaigns = useRecoilValue(myCampaignsState)
 
     const router = useRouter(); 
 
@@ -66,34 +72,48 @@ export default function MyCampaignList({myCampaignsData}: props) {
                 <TableColumn>
                     <ColumnItem
                     style={{flex: 1}}>
-                    ID
+                        <ColumnSpan>
+                        ID
+                        </ColumnSpan>
                     </ColumnItem>
                     <ColumnItem
                     style={{flex: 1}}>
-                    State
+                        <ColumnSpan>
+                        State
+                        </ColumnSpan>
                     </ColumnItem>
                     <ColumnItem
                     style={{flex: 3.3}}>
-                    Campaign
+                        <ColumnSpan>
+                        Campaign
+                        </ColumnSpan>
                     </ColumnItem>
                     <ColumnItem
                     style={{flex: 1}}>
-                    SNS
+                        <ColumnSpan>
+                        SNS
+                        </ColumnSpan>
                     </ColumnItem>
                     <ColumnItem
                     style={{flex: 1}}>
-                    Type
+                        <ColumnSpan>
+                        Type
+                        </ColumnSpan>
                     </ColumnItem>
                     <ColumnItem
                     style={{flex: 2.35}}>
-                    Date
+                        <ColumnSpan>
+                        Date
+                        </ColumnSpan>
                     </ColumnItem>
                     <ColumnItem
                     style={{flex: 1}}>
-                    Options
+                        <ColumnSpan>
+                        Options
+                        </ColumnSpan>
                     </ColumnItem>
                 </TableColumn>
-                {myCampaignsData.map((campaignItem, index) => {
+                {myCampaigns.map((campaignItem: any, index) => {
                     return (
                         <MyCampaignListItem
                         key={index}

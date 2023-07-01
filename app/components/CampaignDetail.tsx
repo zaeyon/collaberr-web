@@ -29,7 +29,7 @@ export default function CampaignDetail({brandName = "Brand Name", title, categor
                 <Image
                 className={styles.thumbnailImage}
                 fill={true}
-                src={thumbnailImageSrc}
+                src={thumbnail}
                 alt={"campaign_thumbnail"}/>
                 }
                 </div>
@@ -103,7 +103,7 @@ export default function CampaignDetail({brandName = "Brand Name", title, categor
                 Rewards
                 </div>
                 <CampaignDetailIconItem
-                value={bid}
+                value={"$ " + bid}
                 type={"rewards"}/>
                 <div
                 className={styles.label}>
@@ -118,7 +118,7 @@ export default function CampaignDetail({brandName = "Brand Name", title, categor
                     src={icon_clip}/>
                     <span
                     className={styles.filePath}>
-                        {files?.name}
+                        {""}
                     </span>
                 </div>
         </div>

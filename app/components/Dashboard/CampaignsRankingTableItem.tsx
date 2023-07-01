@@ -13,6 +13,9 @@ const Container = styled.div`
     line-height: 160%;
     letter-spacing: -0.225px;
     overflow: hidden;
+    border-bottom: 1px solid var(--gray-gray-200, #E6EAEF);
+    cursor: default;
+    user-select: auto;
 `;
 
 const ColumnDiv = styled.div`
@@ -49,19 +52,19 @@ export default function CampaignsRankingTableItem({campaignItem}: props) {
                 </ColumnSpan>
             </ColumnDiv>
             <ColumnDiv
-            style={{flex: 2.2}}>
+            style={{flex: 2.2, userSelect: "none"}}>
                 <ColumnSpan>
                 {campaignItem.date}
                 </ColumnSpan>
             </ColumnDiv>
             <ColumnDiv
-            style={{flex: 1.1}}>
+            style={{flex: 1.1, userSelect: "none"}}>
                 <ColumnSpan>
                 {campaignItem.recruits}
                 </ColumnSpan>
             </ColumnDiv>
             <ColumnDiv
-            style={{flex: 1.1}}>
+            style={{flex: 1.1, userSelect: "none"}}>
                 <ColumnSpan>
                 {campaignItem.reaction_rate}
                 </ColumnSpan>

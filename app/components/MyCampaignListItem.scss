@@ -18,9 +18,12 @@
 }
 
 .column {
+    min-width: 0px;
     display: flex;
     align-items: center;
     justify-content: center;
+
+    
 
     &.id {
         flex: 1;
@@ -49,6 +52,13 @@
     &.options {
         flex: 1;
     }
+}
+
+.column_value {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
 }
 
 .chip {

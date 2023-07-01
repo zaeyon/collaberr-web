@@ -1,6 +1,11 @@
 import styles from './JoinCampaign.module.scss';
+import {campaignType} from '@/app/type/campaign';
 
-export default function JoinCampaign() {
+interface props {
+    campaignItem: campaignType;
+}
+
+export default function JoinCampaign({campaignItem}: props) {
     return (
         <div
         className={styles.joinContainer}>
@@ -8,42 +13,42 @@ export default function JoinCampaign() {
             className={styles.summaryInfoContainer}>
                 <div
                 className={styles.summaryTitle}>
-                    This is the title of campaign This is the second Line
+                    {campaignItem.title}
                 </div>
                 <div
                 style={{marginTop: 24}}
                 className={styles.subItem}>
                     <div 
-                    style={{width: 80}}
+                    style={{width: 90}}
                     className={styles.subLabel}>
-                        Date
+                        Recruit date
                     </div>
                     <div className={styles.subValue}>
-                    2023-00-00 - 2023-00-00
+                    {campaignItem.recruit_start_date + " - " + campaignItem.recruit_end_date}
                     </div>
                 </div>
                 <div
                 style={{marginTop: 8}}
                 className={styles.subItem}>
                     <div 
-                    style={{width: 80}}
+                    style={{width: 90}}
                     className={styles.subLabel}>
                         Platform
                     </div>
                     <div className={styles.subValue}>
-                    Platform Name
+                    {campaignItem.platform}
                     </div>
                 </div>
                 <div
                 style={{marginTop: 8}}
                 className={styles.subItem}>
                     <div 
-                    style={{width: 80}}
+                    style={{width: 90}}
                     className={styles.subLabel}>
                         Bid
                     </div>
                     <div className={styles.subValue}>
-                    Bid Amount
+                    {"$ " + campaignItem.reward}
                     </div>
                 </div>
             </div>

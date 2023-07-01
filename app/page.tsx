@@ -6,6 +6,9 @@ import styles from './page.module.scss'
 import { GET_youtubeAuth } from './api/youtube'
 
 export default function Home() {
+
+
+
   const clickYoutube = () => {
     GET_youtubeAuth()
       .then((res) => {

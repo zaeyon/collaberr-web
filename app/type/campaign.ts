@@ -17,6 +17,8 @@ export interface campaignType {
     platform: string;
     start_date: any;
     end_date: any;
+    recruit_start_date: any;
+    recruit_end_date: any;
     description: string;
     mission_type: string;
     reward: number | undefined;

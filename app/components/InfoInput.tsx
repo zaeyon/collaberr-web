@@ -69,15 +69,15 @@ text-align: left;
 
 
 :hover {
-    border: ${(props) => (props.isExistedEmail || props.isExistedUsername || props.isInvaildEmail || props.isInconPassword) ? '1px solid #F04D3E' : props.disabled ? '1px solid #E6EAEF' : '1px solid #91C8FF'};
+    border: ${(props) => (props.isExistedEmail || props.isExistedUsername || props.isInvaildEmail || props.isInconPassword) ? '1px solid #EE204E' : props.disabled ? '1px solid #E6EAEF' : '1px solid #ACB8C8'};
 }
 
 :focus  {
     outline: none;
-    border: ${(props) => (props.isExistedEmail || props.isExistedUsername || props.isInvaildEmail || props.isInconPassword) ? '1px solid #F04D3E' : '1px solid #2E92FF'};
+    border: ${(props) => (props.isExistedEmail || props.isExistedUsername || props.isInvaildEmail || props.isInconPassword) ? '1px solid #EE204E' : '1px solid #536878'};
 }
 
-border: ${(props) =>( props.isExistedEmail || props.isExistedUsername || props.isInvaildEmail || props.isInconPassword) ? '1px solid #F04D3E' : '1px solid #E6EAEF'};
+border: ${(props) =>( props.isExistedEmail || props.isExistedUsername || props.isInvaildEmail || props.isInconPassword) ? '1px solid #EE204E' : '1px solid #E6EAEF'};
 `;
 
 

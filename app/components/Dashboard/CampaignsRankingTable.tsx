@@ -1,9 +1,12 @@
 'use client';
-
 import styled from '@emotion/styled';
+import Image from 'next/image';
+import styles from './CampaignsRankingTable.module.scss';
 
 import Button from '../Button';
 import CampaignsRankingTableItem from './CampaignsRankingTableItem';
+import icon_help_fill from '../../assets/icons/icon_help-fill.png';
+import Tooltip from '../Tooltip';
 
 const Container = styled.div`
 width: 100%;
@@ -22,6 +25,7 @@ background-color: #F1F4F7;
 `;
 
 const ColumnItem = styled.div`
+min-width: 0px;
 display: flex;
 justify-content: center;
 align-items: center;
@@ -32,6 +36,17 @@ font-weight: 400;
 line-height: 24px;
 letter-spacing: -0.015em;
 color :#35424C;
+`;
+
+const ColumnSpan = styled.span`
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+`;
+
+const Icon = styled(Image)`
+    opacity: 0.6;
+    cursor: pointer;
 `;
 
 interface props {
@@ -47,27 +62,43 @@ export default function CampaignsRankingTable({campaignsRankingData}: props) {
                 <TableColumn>
                     <ColumnItem
                     style={{flex: 1}}>
-                    순위
+                        <ColumnSpan>
+                        순위
+                        </ColumnSpan>
                     </ColumnItem>
                     <ColumnItem
                     style={{flex: 4.2, justifyContent: 'flex-start'}}>
-                    Campaign
+                        <ColumnSpan>
+                        Campaign
+                        </ColumnSpan>
                     </ColumnItem>
                     <ColumnItem
                     style={{flex: 2.2}}>
-                    기간
+                        <ColumnSpan>
+                        기간
+                        </ColumnSpan>
                     </ColumnItem>
                     <ColumnItem
                     style={{flex: 1.1}}>
-                    모집 인원
+                        <ColumnSpan>
+                        모집 인원
+                        </ColumnSpan>
                     </ColumnItem>
                     <ColumnItem
                     style={{flex: 1.1}}>
-                    반응률
+                        <ColumnSpan>
+                        반응률
+                        </ColumnSpan>
+                        <Tooltip
+                        iconType={"help"}
+                        tooltipWidth={308}
+                        description='반응률 = (좋아요 수 + 댓글 수 /전체 조회수)x100'/>
                     </ColumnItem>
                     <ColumnItem
                     style={{flex: 1}}>
-                    상세분석
+                        <ColumnSpan>
+                        상세분석
+                        </ColumnSpan>
                     </ColumnItem>
                 </TableColumn>
                 {campaignsRankingData.map((campaignItem, index) => {

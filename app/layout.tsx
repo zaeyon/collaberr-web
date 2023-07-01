@@ -7,6 +7,7 @@ import './globals.css'
 import { userState } from './recoil/user';
 import TopBar from './components/TopBar'
 import SideBar from './components/SideBar';
+import { POST_refreshToken } from './api/auth'
 
 
 export default function RootLayout({
@@ -15,6 +16,16 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   const [isVisSideBar, setIsVisSideBar] = useState(true);
+
+  setInterval(() => {
+    POST_refreshToken()
+    .then((res) => {
+      console.log("POST_refreshToken success", res);
+    })
+    .catch((err) => {
+      console.log("POST_refreshToken err", err);
+    })
+  }, 240000)
 
 
   const onClickHamburger = () => {

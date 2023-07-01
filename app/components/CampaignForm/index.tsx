@@ -10,10 +10,18 @@ import React from 'react';
 import { start } from 'repl';
 
 const Container = styled.div`
-    width: 100%;
+    right: 0;
+    height: 100%;
+    width: 400px;
+    position: fixed;
     background-color: white;
-    padding: 24px 16px;
+    padding: 24px 16px 24px 16px;
 `
+
+const Form = styled.div`
+    width: 100%;
+    
+`;
 
 const Title = styled.div`
     font-family: 'Pretendard';
@@ -65,6 +73,7 @@ export default function CamapignForm({type, curProgress, changeProgress, clickRe
 
     return (
         <Container>
+            <Form>
             <Title>
             {type === "create" ? "New Campaign" : "Edit Campaign"}
             </Title>
@@ -119,6 +128,7 @@ export default function CamapignForm({type, curProgress, changeProgress, clickRe
             changeProgress={changeProgress}
             clickRegisterCampaign={clickRegisterCampaign}
             isInvaildForm={isInvaildForm}/>
+            </Form>
         </Container>
     )
 }

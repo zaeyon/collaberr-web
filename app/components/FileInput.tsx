@@ -71,12 +71,12 @@ text-align: left;
 
 
 :hover {
-    border: ${(props) => props.disabled ? '1px solid #E6EAEF' : '1px solid #91C8FF'};
+    border: ${(props) => props.disabled ? '1px solid #E6EAEF' : '1px solid #ACB8C8'};
 }
 
 :focus  {
     outline: none;
-    border: 1px solid #2E92FF;
+    border: 1px solid #536878;
 }
 
 border: 1px solid #E6EAEF;
@@ -99,6 +99,11 @@ text-align: left;
 cursor: ${(props) => props.disabled ? 'default' : 'pointer'};
 display: flex;
 align-items: center;
+
+:hover {
+    border: 1px solid #ACB8C8;
+}
+
 `;
 
 const FileInputPlaceholder = styled.span`

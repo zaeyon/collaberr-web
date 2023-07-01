@@ -1,14 +1,16 @@
 'use client';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import styled from '@emotion/styled';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { useRecoilState } from 'recoil';
 
 import CampaignPreview from '@/app/components/CampaignPreview';
 import CamapignForm from '@/app/components/CampaignForm';
 import ConfirmModal from '@/app/components/ConfirmModal';
 import { getFormattedDate } from '@/app/lib/date';
-import { POST_createCampaign } from '@/app/api/campaign';
+import { PATCH_editCampaign } from '@/app/api/campaign';
 import { campaignType } from '@/app/type/campaign';
+import { myCampaignsState } from '@/app/recoil/campaign';
 
 const Container = styled.div`
 display: flex;
@@ -16,31 +18,70 @@ flex-direction: row;
 `;
 
 
-export default function Page() {
-    const [brandName, setBrandName] = useState('');
-    const [title, setTitle] = useState('');
+export default function Edit() {
+    const [myCampaigns, setMyCampaigns] = useRecoilState(myCampaignsState);
+    const searchParams = useSearchParams();
+    const id = Number(searchParams.get('id'));
+    const index = myCampaigns.findIndex((item: any) => item.id === id);
+
+    console.log("index", index);
+    console.log("myCampaigns", myCampaigns);
+
+    const [brandName, setBrandName] = useState(myCampaigns?.[index]?.brand_name);
+    const [title, setTitle] = useState(myCampaigns[index]?.title);
     const [thumbnailImageFile, setThumbnailImageFile] = useState<any>();
     const [thumbnailImageSrc, setThumbnailImageSrc] = useState<any>();
-    const [category, setCategory] = useState("default");
-    const [platform, setPlarform] = useState(""); 
-    const [description, setDescription] = useState("");
-    const [missionType, setMissionType] = useState("default");
-    const [bid, setBid] = useState<number>();
+    const [category, setCategory] = useState(myCampaigns[index]?.category);
+    const [platform, setPlarform] = useState(myCampaigns[index]?.platform); 
+    const [description, setDescription] = useState(myCampaigns[index]?.description);
+    const [missionType, setMissionType] = useState(myCampaigns[index]?.mission_type);
+    const [bid, setBid] = useState<any>(Number(myCampaigns[index]?.reward));
     const [files, setFiles] = useState<any>([]);
     const [curProgress, setCurProgress] = useState<number>(1);
     const [isInvaildForm, setInvaildForm] = useState<boolean>(true);
 
-    const [recruitStartDate, setRecruitStartDate] = useState<any>();
-    const [recruitEndDate, setRecruitEndDate] = useState<any>();
-    const [startDate, setStartDate] = useState<any>();
-    const [endDate, setEndDate] = useState<any>();
-    const [shownStartDate, setShownStartDate] = useState<string>("");
-    const [shownEndDate, setShownEndDate] = useState<string>("");
+    const [recruitStartDate, setRecruitStartDate] = useState<any>(new Date(myCampaigns[index]?.recruit_start_date));
+    const [recruitEndDate, setRecruitEndDate] = useState<any>(new Date(myCampaigns[index]?.recruit_end_date));
+
+    const [startDate, setStartDate] = useState<any>(new Date(myCampaigns[index]?.start_date));
+    const [endDate, setEndDate] = useState<any>(new Date(myCampaigns[index]?.end_date));
+    const [shownStartDate, setShownStartDate] = useState<string>(myCampaigns[index]?.start_date);
+    const [shownEndDate, setShownEndDate] = useState<string>(myCampaigns[index]?.end_date);
     const [period, setPeriod] = useState("");
 
     const [isVisModal, setIsVisModal] = useState<boolean>(false);
 
     const router = useRouter();
+
+    const shownRecruitStartDate = useRef("");
+    const shownRecruitEndDate = useRef("");
+
+    useEffect(() => {
+        const startDateArr = myCampaigns[index]?.start_date.split("-");
+        const endDateArr = myCampaigns[index]?.end_date.split("-");
+
+        if(startDateArr?.[2] !== endDateArr?.[2]) {
+            setPeriod("Custom");
+        } else {
+            if(endDateArr?.[0] > startDateArr?.[0]) {
+                if(Number(endDateArr?.[1]) + 12 - Number(startDateArr?.[1]) === 3) {
+                    setPeriod("3 months")
+                } else if(Number(endDateArr?.[1]) + 12 - Number(startDateArr?.[1]) === 6) {
+                    setPeriod("6 months")
+                } else {
+                    setPeriod("Custom");
+                }
+            } else if(endDateArr?.[0] === startDateArr?.[0]) {
+                if(Number(endDateArr?.[1]) - Number(startDateArr?.[1]) === 3) {
+                    setPeriod("3 months")
+                } else if(Number(endDateArr?.[1]) - Number(startDateArr?.[1]) === 6) {
+                    setPeriod("6 months");
+                } else {
+                    setPeriod("Custom");
+                }
+            }
+        }
+    }, [])
 
     useEffect(() => {
         if(brandName && title && thumbnailImageFile && category !== 'default' && platform && startDate && recruitStartDate && recruitEndDate && description && missionType !== "default" && bid) {
@@ -76,15 +117,18 @@ export default function Page() {
             platform,
             start_date: shownStartDate,
             end_date: shownEndDate,
+            recruit_start_date: shownRecruitStartDate.current,
+            recruit_end_date: shownRecruitEndDate.current,
             description,
             mission_type: missionType,
             reward: bid,
             additional_files: null,
         }
 
-        POST_createCampaign(newCampaign)
+        PATCH_editCampaign(id, newCampaign)
         .then((res) => {
-            console.log("POST_createCampaign success", res)
+            console.log("PATCH_editCampaign success", res);
+            
             router.push('/mycampaigns');
         })
         .catch((err) => {
@@ -154,15 +198,40 @@ export default function Page() {
 
     const changeRecruitStartDate = (value: any) => {
         setRecruitStartDate(value);
+        shownRecruitStartDate.current = getFormattedDate(value);
     }
 
     const changeRecruitEndDate = (value: any) => {
         console.log("changeRecruitEndDate", value);
         setRecruitEndDate(value);
+        shownRecruitEndDate.current = getFormattedDate(value);
     }
 
     const changePeriod = (value: string) => {
         setPeriod(value);
+        let startDateArr = shownStartDate.split("-");
+        if(value === "3 months") {
+            let tmpMonth = (Number(startDateArr[1]) + 3);
+            if(tmpMonth <= 12) {
+                const tmpMonthStr = tmpMonth < 10 ? "0" + tmpMonth : tmpMonth;
+                setShownEndDate(startDateArr[0] + "-" + tmpMonthStr + "-" + startDateArr[2]);
+            } else {
+                const year = Number(startDateArr[0]) + 1;
+                const month = Number(startDateArr[1])+3 - 12;
+                setShownEndDate(year + "-" + "0" + month + "-" + startDateArr[2]);
+            }
+        } if(value === "6 months") {
+            let tmpMonth = (Number(startDateArr[1]) + 6);
+            if(tmpMonth <= 12) {
+                const tmpMonthStr = tmpMonth < 10 ? "0" + tmpMonth : tmpMonth;
+                setShownEndDate(startDateArr[0] + "-" + tmpMonthStr + "-" + startDateArr[2]);
+            } else {
+                const year = Number(startDateArr[0]) + 1;
+                const month = Number(startDateArr[1])+6 - 12;
+                setShownEndDate(year + "-" + "0" + month + "-" + startDateArr[2]);
+            }
+        }
+        
     }
     
     return (
