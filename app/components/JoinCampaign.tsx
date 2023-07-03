@@ -24,7 +24,7 @@ export default function JoinCampaign({campaignItem}: props) {
                         Recruit date
                     </div>
                     <div className={styles.subValue}>
-                    {campaignItem.recruit_start_date + " - " + campaignItem.recruit_end_date}
+                    {" ~ " + campaignItem.recruit_end_date}
                     </div>
                 </div>
                 <div

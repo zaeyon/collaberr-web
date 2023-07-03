@@ -54,12 +54,11 @@ export default function DatesForm({recruitStartDate, recruitEndDate, startDate, 
                 Dates
             </SectionTitle>
             <PeriodPicker
-            type={"period"}
-            startDate={recruitStartDate}
-            endDate={recruitEndDate}
-            changeStartDate={changeRecruitStartDate}
-            changeEndDate={changeRecruitEndDate}
-            label={"Creator recruit period"}
+            type={"day"}
+            startDate={recruitEndDate}
+            changeStartDate={changeRecruitEndDate}
+            label={"Creator recruit due date"}
+            placeholder={"Select end date"}
             />
             <PeriodPicker
             type={"day"}

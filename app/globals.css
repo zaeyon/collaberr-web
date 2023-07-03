@@ -49,6 +49,16 @@ h2 {
   color: #242D35;
 }
 
+h3 {
+  color: var(--gray-gray-900, #242D35);
+  font-size: 21px;  
+  font-family: "Pretendard";
+  font-style: normal;
+  font-weight: 600;
+  line-height: 160%;
+  letter-spacing: -0.315px;
+}
+
 @media (prefers-color-scheme: dark) {
   /* html {
     color-scheme: dark;

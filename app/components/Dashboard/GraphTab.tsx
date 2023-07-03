@@ -9,8 +9,6 @@ interface TabItemProps {
 }
 
 const Container = styled.div`
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
 `;
 
 const TabHeader = styled.div`
@@ -29,6 +27,7 @@ const TabItem = styled.div<TabItemProps>`
     border-top: 1px solid var(--gray-gray-200, #E6EAEF);
     border-bottom: ${(props) => props.isActive ? "none" : "1px solid var(--gray-gray-200, #E6EAEF)"};
     border-right: 1px solid var(--gray-gray-200, #E6EAEF);
+    cursor: pointer;
 
     :nth-of-type(1) {
         border-top-left-radius: 20px;
@@ -70,7 +69,11 @@ const TabValue = styled.div`
 `;
 
 const GraphDiv = styled.div`
-    padding: 30px 24px;
+    padding: 30px 24px 68px 24px;
+    background-color: white;
+    
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
     border-bottom: 1px solid var(--gray-gray-200, #E6EAEF);
     border-left: 1px solid var(--gray-gray-200, #E6EAEF);
     border-right: 1px solid var(--gray-gray-200, #E6EAEF);
