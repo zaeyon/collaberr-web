@@ -6,7 +6,7 @@ import ListTable from '@/app/components/ListTable';
 
 
 const Container = styled.div`
-    padding: 40px 0px;
+    padding: 40px 0px 120px 0px;
 `;
 
 export default function Overview() {

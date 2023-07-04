@@ -8,6 +8,7 @@
 }
 
 .tooltip .tooltiptext {
+    white-space: pre-wrap;
     visibility: hidden;
     border-radius: 8px;
     padding: 14px 12px;

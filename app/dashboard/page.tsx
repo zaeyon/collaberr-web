@@ -9,32 +9,15 @@ const Container = styled.div`
 padding: 40px 0px;  
 `;
 
-const ScoreboardListDiv = styled.div`
-  display: flex;
-  flex-direction: row;
-  align-items: center;  
-  gap: 20px;
-`;
 
 export default function Dashboard() {
     
 
     return (
         <Container>
-            <ScoreboardListDiv>
             <Scoreboard
-            label={"진행중인 캠페인"}
-            value={"4개"}/>
-            <Scoreboard
-            label={"전체 투자 비용"}
-            value={"$1,000"}/>
-            <Scoreboard
-            label={"전체 조회수"}
-            value={"233,000회"}/>
-            <Scoreboard
-            label={"전체 참여수"}
-            value={"1,421회"}/>
-            </ScoreboardListDiv>
+            data={SCOREBOARD_DATA}
+            />
             <ListTable
             tableMarginTop={40}
             headerColumns={CAMPAIGN_RAKING_TABLE_HEADER}
@@ -42,6 +25,25 @@ export default function Dashboard() {
         </Container>
     )
 }
+
+const SCOREBOARD_DATA = [
+    {
+        label: "진행중인 캠페인",
+        value: "6개"
+    },
+    {
+        label: "전체 투자 비용",
+        value: "$1,000"
+    },
+    {
+        label: "전체 조회수",
+        value: "223,000회"
+    },
+    {
+        label: "전체 참여수",
+        value: "150,001회"
+    }
+]
 
 const CAMPAIGN_RAKING_TABLE_HEADER = [
     {
