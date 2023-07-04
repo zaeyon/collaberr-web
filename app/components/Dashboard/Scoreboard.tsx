@@ -1,23 +1,46 @@
 import styles from './Scoreboard.module.scss';
 
+import Tooltip from '../Tooltip';
+
 interface props {
-    label: string;
-    value: string;
+    data: any [];
 }
 
-export default function Scoreboard({label, value}: props) {
+export default function Scoreboard({data}: props) {
     return (
         <div
         className={styles.container}>
+        {data.map((item, index) => {
+            return (
             <div
-            className={styles.label}>
-                {label}
+            key={index}
+            className={styles.scoreboardItem}>
+                <div
+                className={styles.label}>
+                    {item.label}
+                    {item.description && (
+                        <Tooltip
+                        iconType={"info"}
+                        description={item.description}
+                        tooltipWidth={item.tooltipWidth}
+                        />
+                    )}
+                </div>
+                <div
+                className={styles.value}>
+                    {item.value}
+                </div>
+                {item.change && (
+                <div
+                style={{color: item.change === "increase" ? "#3AB09E" : "#3183F6"}}
+                className={styles.change}>
+                    {item.changeDescription}
+                </div>
+                )}
             </div>
-            <div
-            className={styles.value}>
-                {value}
-            </div>
+            )
+        })
+        }
         </div>
-
     )
 }

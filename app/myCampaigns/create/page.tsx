@@ -54,7 +54,7 @@ export default function Create() {
     const shownRecruitEndDate = useRef("");
 
     useEffect(() => {
-        if(brandName && title && thumbnailImageFile && category !== 'default' && platform && startDate && recruitStartDate && recruitEndDate && description && missionType !== "default" && bid) {
+        if(brandName && title && thumbnailImageFile && category !== 'default' && platform && startDate  && recruitEndDate && description && missionType !== "default" && bid) {
             if(period && period !== "Custom") {
                 setInvaildForm(false);
             } else if(period === "Custom" && endDate) {
@@ -87,7 +87,7 @@ export default function Create() {
             platform,
             start_date: shownStartDate,
             end_date: shownEndDate,
-            recruit_start_date: shownRecruitStartDate.current,
+            recruit_start_date: "2000-11-11",
             recruit_end_date: shownRecruitEndDate.current,
             description,
             mission_type: missionType,
