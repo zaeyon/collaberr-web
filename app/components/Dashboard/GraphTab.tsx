@@ -12,12 +12,14 @@ const Container = styled.div`
 `;
 
 const TabHeader = styled.div`
+
     display: flex;
     flex-direction: row;
     align-items: center;
 `;
 
 const TabItem = styled.div<TabItemProps>`
+
     flex: 1;
     padding: 16px 24px 36px 24px;
     display: flex;
@@ -79,16 +81,30 @@ const GraphDiv = styled.div`
     border-right: 1px solid var(--gray-gray-200, #E6EAEF);
 `;
 
+const ChangeDescription = styled.div`
+    margin-top: 8px;
+    color: var(--teal-teal-600, #3AB09E);
+    text-align: center;
+    font-size: 13px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%;
+    letter-spacing: -0.195px;  
+`;
+
 interface props {
+    marginTop: number;
     tabs: any [];
     curTab: string;
     changeTab: (tab: string, data: number[]) => void;
     graphData: number[];
 }
 
-export default function GraphTab({tabs, curTab, changeTab, graphData}: props) {
+export default function GraphTab({tabs, curTab, changeTab, graphData, marginTop}: props) {
     return (
-        <Container>
+        <Container
+        style={{marginTop: marginTop}}>
             <TabHeader>
             {tabs.map((item: any, index: number) => {
                 return (
@@ -111,6 +127,12 @@ export default function GraphTab({tabs, curTab, changeTab, graphData}: props) {
                         <TabValue>
                             {item.value}
                         </TabValue>
+                        {item.change && (
+                        <ChangeDescription
+                        style={{color: item.change === "increase" ? "#3AB09E" : "#3183F6"}}>
+                            {item.changeDescription}
+                        </ChangeDescription>
+                        )}
                     </TabItem>
                 )
             })}

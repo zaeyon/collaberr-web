@@ -22,7 +22,16 @@ export default function Tooltip({iconType, description, tooltipWidth}: props) {
             <span
             style={{marginLeft: -(tooltipWidth/2), width: tooltipWidth}}
             className={"tooltiptext"}>
-            {description}
+
+            {description.split('\n').map((item, index) => {
+                return (
+                    <span
+                    key={index}>
+                    {item}<br/>
+                    </span>
+
+                )
+            })}
             </span>
         </span>
     )
