@@ -8,7 +8,8 @@ import {
     PointElement,
     LineElement,
     Title,
-    Tooltip
+    Tooltip,
+    ArcElement
   } from 'chart.js';
 import { redirect } from 'next/dist/server/api-utils';
 
@@ -19,6 +20,7 @@ import { redirect } from 'next/dist/server/api-utils';
     LineElement,
     Title,
     Tooltip,
+    ArcElement,
   );
 
   interface LegendMarkProps {
