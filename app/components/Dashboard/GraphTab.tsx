@@ -94,7 +94,7 @@ const ChangeDescription = styled.div`
 `;
 
 interface props {
-    marginTop: number;
+    marginTop?: number;
     tabs: any [];
     curTab: string;
     changeTab: (tab: string, data: number[]) => void;
