@@ -33,6 +33,7 @@ interface props {
     companyName: string;
     role: string;
     channelId: string;
+    channelUrl: string;
     submitEdit: () => void;
     clickEdit: () => void;
     changeUsername: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -43,14 +44,16 @@ interface props {
     changePhoneNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
     changeCompanyName: (e: React.ChangeEvent<HTMLInputElement>) => void;
     changeChannelId: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    changeChannelUrl: (e: React.ChangeEvent<HTMLInputElement>) => void;
     logout: () => void;
     confirmChannelId: () => void;
+    confirmChannelUrl: () => void;
     isAddiDisabled: boolean;
     clickAddiEdit: () => void;
     submitAddiEdit: () => void;
 }
 
-export default function SettingForm({disabled, username, firstName, lastName, email, profileImageFile, phoneNumber, companyName, role,submitEdit,clickEdit, changeUsername, changeFirstName, changeLastName, changeEmail, changeProfileImage, changePhoneNumber, changeCompanyName, logout, channelId, changeChannelId, confirmChannelId, isAddiDisabled, clickAddiEdit, submitAddiEdit}: props) {
+export default function SettingForm({disabled, username, firstName, lastName, email, profileImageFile, phoneNumber, companyName, role,submitEdit,clickEdit, changeUsername, changeFirstName, changeLastName, changeEmail, changeProfileImage, changePhoneNumber, changeCompanyName, logout, channelId, changeChannelId, confirmChannelId, isAddiDisabled, clickAddiEdit, submitAddiEdit, channelUrl, changeChannelUrl, confirmChannelUrl}: props) {
 
     const profileImageInputRef = useRef<HTMLInputElement>();
 
@@ -106,6 +109,14 @@ export default function SettingForm({disabled, username, firstName, lastName, em
             placeholder={"Enter your youtube channel url"}
             button={"Confirm"}
             clickButton={confirmChannelId}
+            />
+            <InfoInput
+            value={channelUrl}
+            label={"Channel Url"}
+            onChangeInput={changeChannelUrl}
+            placeholder={"Enter your youtube channel url"}
+            button={"Confirm"}
+            clickButton={confirmChannelUrl}
             />
             <InfoInput
             value={phoneNumber}

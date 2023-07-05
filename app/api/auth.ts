@@ -61,3 +61,13 @@ export const GET_youtubeConfirm = (accessToken: string | null) => {
   
     return res;
   }
+
+export const POST_youtubeChannel = (channelUrl: string) => {
+    const promise = axios.post(`${baseUrl}/api/youtube/channel/`, {
+        channel_url: channelUrl,
+    });
+  
+    const res = promise.then((res) => res);
+  
+    return res;
+  }

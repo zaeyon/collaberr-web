@@ -2,6 +2,11 @@
 import styled from '@emotion/styled';
 import {usePathname} from 'next/navigation';
 
+interface DropdownItemProps {
+    pathname: string;
+    label: string;
+}
+
 const Container = styled.div`
     top: 64px;
     right: 24px;
@@ -15,10 +20,12 @@ const Container = styled.div`
     gap: 4px;
 `;
 
-const DropdownItemDiv = styled.div`
+const DropdownItemDiv = styled.div<DropdownItemProps>`
     width: 149px;
     padding: 8px 10px;
     border-radius: 8px;
+
+    background-color: ${(props) => props.label === '계정 설정' && props.pathname === '/setting' ? '#F1F4F7' : '#FFFFFF'};
 
     :hover {
         border-radius: 8px;
@@ -39,7 +46,8 @@ export default function Dropdown({items}: props) {
             {items.map((item, index) => {
                 return (
                     <DropdownItemDiv
-                    style={{backgroundColor: (pathname === '/setting' && item.label === '계정 설정') ? '#F1F4F7' : '#ffffff'}}
+                    pathname={pathname}
+                    label={item.label}
                     onClick={() => item.onClick()}
                     key={index}>
                         <p

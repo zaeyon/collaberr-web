@@ -5,11 +5,12 @@ import {useSetRecoilState} from 'recoil';
 import { useRecoilState } from 'recoil';
 
 import {userState} from '../recoil/user';
-import { POST_logout, PATCH_youtubeAuth } from '../api/auth';
+import { POST_logout, PATCH_youtubeAuth, POST_youtubeChannel } from '../api/auth';
 import { PATCH_editProfile } from '../api/user';
 import SettingForm from "../components/SettingForm"
 import { userType } from '../type';
 import { deleteCookie } from '../lib/cookie';
+import axios from 'axios';
 
 export default function Setting() {
     const [user, setUser] = useRecoilState(userState);
@@ -23,6 +24,7 @@ export default function Setting() {
     const [companyName, setCompanyName] = useState('');
     const [role, setRole] = useState(user.role === 'BUSINESS' ? 'Business' : 'Creator');
     const [channelId, setChannelId] = useState("");
+    const [channelUrl, setChannelUrl] = useState("");
     const [disabled, setDisabled] = useState(true);
     const [isAddiDisabled, setIsAddiDisabled] = useState(true);
     
@@ -80,8 +82,46 @@ export default function Setting() {
         setChannelId(e.target.value);
     }
 
+    const changeChannelUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setChannelUrl(e.target.value);
+    }
+
     const confirmChannelId = () => {
-        PATCH_youtubeAuth(channelId)
+        // PATCH_youtubeAuth(channelId)
+        // .then((res) => {
+        //     console.log("PATCH_youtubeAuth success", res)
+        //     window.open(res.data.authorization_url, '_blank');
+        // })
+        // .catch((err) => {
+        //     console.log("PATCH_youtubeAuth err", err);
+        // })
+
+        // GET_youtubeChannel()
+        // .then((res) => {
+        //     console.log("GET_youtubeChannel success", res)
+        // })
+        // .catch((err) => {
+        //     console.log("GET_youtube fail", err)
+        // })
+    }
+
+    const confirmChannelUrl = async () => {
+        console.log("confirmChannelUrl ", channelUrl);
+
+
+        axios.post('http://localhost:8080/channel', {
+            channel_url: channelUrl
+        })
+        .then((res) => {
+            console.log("confirmChannelUrl success", res)
+        })
+        .catch((err) => {
+            console.log("confirmChannelUrl err", err)
+        })
+
+        //const channelId = html.match(/(?<=channelId(":"|"\scontent="))[^"]+/g)[0];
+        /*
+        PATCH_youtubeAuth(channelUrl)
         .then((res) => {
             console.log("PATCH_youtubeAuth success", res)
             window.open(res.data.authorization_url, '_blank');
@@ -89,6 +129,7 @@ export default function Setting() {
         .catch((err) => {
             console.log("PATCH_youtubeAuth err", err);
         })
+        */
     }
 
     const submitEdit = () => {
@@ -180,6 +221,8 @@ export default function Setting() {
             phoneNumber={phoneNumber}
             companyName={companyName}
             role={role}
+            channelUrl={channelUrl}
+            changeChannelUrl={changeChannelUrl}
             changeUsername={changeUsername}
             changeFirstName={changeFirstName}
             changeLastName={changeLastName}
@@ -191,6 +234,7 @@ export default function Setting() {
             logout={logout}
             channelId={channelId}
             confirmChannelId={confirmChannelId}
+            confirmChannelUrl={confirmChannelUrl}
             isAddiDisabled={isAddiDisabled}
             clickAddiEdit={clickAddiEdit}
             submitAddiEdit={submitAddiEdit}
