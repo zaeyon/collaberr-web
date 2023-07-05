@@ -11,7 +11,7 @@ import { myCampaignsState } from '../recoil/campaign';
 
 
 
-export default function Mycampaigns() {
+export default function MyCampaigns() {
     const [myCampaigns, setMyCampaigns] = useRecoilState(myCampaignsState);
 
     useEffect(() => {

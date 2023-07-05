@@ -84,6 +84,7 @@ export default function Setting() {
         PATCH_youtubeAuth(channelId)
         .then((res) => {
             console.log("PATCH_youtubeAuth success", res)
+            window.open(res.data.authorization_url, '_blank');
         })
         .catch((err) => {
             console.log("PATCH_youtubeAuth err", err);
@@ -138,8 +139,6 @@ export default function Setting() {
 
 
     const logout = () => {
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("refresh_token");
         localStorage.removeItem("current_user");
         localStorage.removeItem("account_id");
 
@@ -163,8 +162,6 @@ export default function Setting() {
         .catch((err) => {
             console.log("POST_logout fail", err);
         })
-
-
     }
 
 

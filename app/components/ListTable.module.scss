@@ -59,10 +59,9 @@
 }
 
 .dataItem {
-    padding: 0px 8px;
+    padding: 0px 0px;
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
 .dataColumn {
@@ -71,4 +70,8 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    &.proceeding {
+        background-color: #3AB09E;
+    }
 }

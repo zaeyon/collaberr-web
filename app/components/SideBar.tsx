@@ -17,6 +17,14 @@ export default function SideBar() {
             />
             <div
             className={styles.categoryClassification}>
+                Creator
+            </div>
+            <CategoryLinkItem
+            label={"Applied Campaigns"}
+            href={"/appliedcampaigns"}
+            />
+            <div
+            className={styles.categoryClassification}>
                 Business
             </div>
             <CategoryLinkItem

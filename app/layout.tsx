@@ -1,10 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import {RecoilRoot, useSetRecoilState} from 'recoil';
+import {RecoilRoot, useRecoilState} from 'recoil';
 import './globals.css'
 
-import { userState } from './recoil/user';
+import { userState, isVisDropdownState } from './recoil/user';
 import TopBar from './components/TopBar'
 import SideBar from './components/SideBar';
 import { POST_refreshToken } from './api/auth'
@@ -32,19 +32,20 @@ export default function RootLayout({
     setIsVisSideBar(!isVisSideBar);
   }
 
+
   return (
     <html lang="en">
+      <RecoilRoot>
       <body
       style={isVisSideBar ? {paddingLeft: 240} : {paddingLeft: 0}}>
-        <RecoilRoot>
         <TopBar
         onClickHamburger={onClickHamburger}/>
         {isVisSideBar && (
         <SideBar/>
         )}
         {children}
-        </RecoilRoot>
       </body>
+      </RecoilRoot>
     </html>
   )
 }

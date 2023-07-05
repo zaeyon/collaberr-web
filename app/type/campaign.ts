@@ -10,6 +10,7 @@ export interface campaignListType {
 }
 
 export interface campaignType {
+    id: number;
     brand_name: string;
     title: string;
     thumbnail: any;

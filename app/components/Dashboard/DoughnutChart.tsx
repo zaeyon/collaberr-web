@@ -128,8 +128,8 @@ export default function DoughnutChart({data, title}: props) {
                     <p>
                         {data.labels[data.datasets[0].data.findIndex((item: number) => item === Math.max(...data.datasets[0].data))]}
                     </p>
-                    <h3>{Math.max(...data.datasets[0].data)}
-                    </h3>
+                    <h2>{Math.max(...data.datasets[0].data)}
+                    </h2>
                 </MajorLegendDiv>
             </ChartDiv>
         </Container>

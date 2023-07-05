@@ -2,9 +2,12 @@
 import styled from '@emotion/styled';
 import styles from './ListTable.module.scss';
 import Link from 'next/link';
+import classNames from 'classnames/bind';
 
 import Button from './Button';
 import Tooltip from './Tooltip';
+
+const cx = classNames.bind(styles);
 
 const Container = styled.div`
 width: 100%;
@@ -12,35 +15,6 @@ display: flex;
 flex-direction: column;
 `;
 
-const TableContainer = styled.div`
-margin-top: 14px;
-`;
-
-const TableColumn = styled.div`
-display: flex;
-flex-direction: row;
-background-color: #F1F4F7;
-`;
-
-const ColumnItem = styled.div`
-min-width: 0px;
-display: flex;
-justify-content: center;
-padding-top: 8px;
-padding-bottom: 8px;
-font-family: 'Pretendard';
-font-size: 15px;
-font-weight: 400;
-line-height: 24px;
-letter-spacing: -0.015em;
-color :#35424C;
-`;
-
-const ColumnSpan = styled.span`
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;  
-`;
 
 interface props {
     title?: string;
@@ -56,9 +30,9 @@ export default function ListTable({title, subTitle, marginTop, tableMarginTop, h
         <Container
         style={{marginTop: marginTop}}>
             {title && (
-                <h3>
+                <h2>
                     {title}
-                </h3>
+                </h2>
             )}
             {subTitle && (
                 <div
@@ -98,7 +72,7 @@ export default function ListTable({title, subTitle, marginTop, tableMarginTop, h
                     className={styles.dataRow}
                     key={index}>
                         {keyValueArr.map((item: any, index) => {
-                                if(item[0] === "name") {
+                                if(item[0] === "name" || item[0] === "title") {
                                     return (
                                         <div
                                         className={styles.dataItem}
@@ -113,10 +87,11 @@ export default function ListTable({title, subTitle, marginTop, tableMarginTop, h
                                 } else if(item[0] === "content") {
                                     return (
                                         <div
-                                        style={{textAlign: "center", width: `${headerColumns[index].width}%`}}
+                                        style={{justifyContent: "center", width: `${headerColumns[index].width}%`}}
                                         className={styles.dataItem}
                                         key={index}>
                                                 <span
+                                                style={{marginLeft: 5}}
                                                 className={styles.dataColumn}>
                                                 <Link
                                                 href={item[1]}
@@ -130,14 +105,26 @@ export default function ListTable({title, subTitle, marginTop, tableMarginTop, h
                                                 </span>
                                         </div>
                                     )
-                                } else  {
+                                } else if(item[0] === 'state')  {
                                     return (
                                         <div
-                                        style={{textAlign:"center", width: `${headerColumns[index].width}%`}}
+                                        style={{justifyContent:"center", width: `${headerColumns?.[index]?.width}%`}}
                                         className={styles.dataItem}
                                         key={index}>
                                             <span
-                                            className={styles.dataColumn}>
+                                            className={cx('dataColumn', item[1])}>
+                                            {item[1] === 'proceeding' ? "진행중" : ""}
+                                            </span>
+                                        </div>
+                                    )
+                                } else  {
+                                    return (
+                                        <div
+                                        style={{justifyContent:"center", width: `${headerColumns?.[index]?.width}%`}}
+                                        className={styles.dataItem}
+                                        key={index}>
+                                            <span
+                                            className={cx('dataColumn')}>
                                             {item[1]}
                                             </span>
                                         </div>
