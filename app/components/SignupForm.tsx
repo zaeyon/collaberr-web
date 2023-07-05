@@ -123,7 +123,7 @@ export default function SignupForm({submitSignup, email, password, passwordConfi
             onChangeSelect={onChangeRole}
             label={"Role"}
             placeholder={"Please select your Role"}
-            options={[{id: 1, value: "Business"}, {id: 2, value: "Influence"}]}/>
+            options={[{id: 1, value: "Business"}, {id: 2, value: "Creator"}]}/>
             <Footer>
                 <Button
                 label={"Sign up"}

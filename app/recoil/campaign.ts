@@ -47,7 +47,7 @@ export const myCampaignsTableListState = selector({
                 platform: item.platform,
                 mission_type: item.mission_type,
                 date: item.start_date + " - " + item.end_date,
-                content: `${window.location.origin}/campaigns/${item.id}`,
+                content: typeof window !== 'undefined' ?`${window.location.origin}/campaigns/${item.id}` : "",
             }
         })
     }

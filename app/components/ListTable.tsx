@@ -1,4 +1,5 @@
 'use client';
+import Image from 'next/image';
 import styled from '@emotion/styled';
 import styles from './ListTable.module.scss';
 import Link from 'next/link';
@@ -6,6 +7,10 @@ import classNames from 'classnames/bind';
 
 import Button from './Button';
 import Tooltip from './Tooltip';
+
+import icon_youtube from '@/app/assets/icons/icon_youtube.png';
+import icon_instagram from '@/app/assets/icons/icon_instagram.png';
+import icon_tiktok from '@/app/assets/icons/icon_tiktok.png';
 
 const cx = classNames.bind(styles);
 
@@ -112,12 +117,31 @@ export default function ListTable({title, subTitle, marginTop, tableMarginTop, h
                                         className={styles.dataItem}
                                         key={index}>
                                             <span
-                                            className={cx('dataColumn', item[1])}>
-                                            {item[1] === 'proceeding' ? "진행중" : ""}
+                                            className={cx('stateBadge', item[1])}>
+                                            {item[1] === 'proceeding' && "진행중"}
+                                            {item[1] === 'recruitment_complete' && '모집완료'}
+                                            {item[1] === 'recruiting' && '모집중'}
+                                            {item[1] === 'writing' && '작성중'}
+                                            {item[1] === 'progress_complete' && '진행완료'}
                                             </span>
                                         </div>
                                     )
-                                } else  {
+                                } else if(item[0] === 'platform')  {
+                                    return (
+                                        <div
+                                        style={{justifyContent:"center", width: `${headerColumns?.[index]?.width}%`}}
+                                        className={styles.dataItem}
+                                        key={index}>
+                                            <Image
+                                            width={20}
+                                            height={20}
+                                            src={
+                                                item[1] === 'Youtube' ? icon_youtube : item[1] === 'Instagram' ? icon_instagram : item[1] === 'Tiktok' ? icon_tiktok : icon_youtube
+                                            }
+                                            alt={"icon_platform"}/>
+                                        </div>
+                                    )
+                                } else {
                                     return (
                                         <div
                                         style={{justifyContent:"center", width: `${headerColumns?.[index]?.width}%`}}

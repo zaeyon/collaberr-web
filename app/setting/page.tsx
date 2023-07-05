@@ -21,7 +21,7 @@ export default function Setting() {
     
     const [phoneNumber, setPhoneNumber] = useState('');
     const [companyName, setCompanyName] = useState('');
-    const [role, setRole] = useState(user.role === 'BUSINESS' ? 'Business' : 'influence');
+    const [role, setRole] = useState(user.role === 'BUSINESS' ? 'Business' : 'Creator');
     const [channelId, setChannelId] = useState("");
     const [disabled, setDisabled] = useState(true);
     const [isAddiDisabled, setIsAddiDisabled] = useState(true);

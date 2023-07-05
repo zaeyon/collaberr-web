@@ -63,25 +63,9 @@ export default function SettingForm({disabled, username, firstName, lastName, em
         <Container>
             <Header>
             <h2>Basic Information</h2>
-            {!disabled && (
-                <Button
-                onClick={submitEdit}
-                label="Save"
-                size="xsmall"
-                style="primary"
-                state="default"/>
-            )}
-            {disabled && (
-                <Button
-                onClick={clickEdit}
-                label="Edit"
-                size="xsmall"
-                style="tertiery"
-                state="default"/>
-            )}
+          
             </Header>
             <InfoInput
-            disabled={disabled}
             value={username}
             label={"User name"}
             onChangeInput={changeUsername}
@@ -89,13 +73,11 @@ export default function SettingForm({disabled, username, firstName, lastName, em
             <div
             style={{display: 'flex', justifyContent: 'space-between'}}>
             <InfoInput
-            disabled={disabled}
             value={firstName}
             label={"First Name"}
             onChangeInput={changeFirstName}
             />
             <InfoInput
-            disabled={disabled}
             value={lastName}
             label={"Last Name"}
             onChangeInput={changeLastName}
@@ -109,7 +91,6 @@ export default function SettingForm({disabled, username, firstName, lastName, em
             />
             <FileInput
             changeFile={changeProfileImage}
-            disabled={disabled}
             accept={"image/*"}
             value={profileImageFile}
             label={"Profile image"}
@@ -117,26 +98,8 @@ export default function SettingForm({disabled, username, firstName, lastName, em
             />
             <Header>
             <h2>Additional Information</h2>
-            {isAddiDisabled && (
-            <Button
-            onClick={clickAddiEdit}
-            label="Edit"
-            size="xsmall"
-            style="tertiery"
-            state="default"
-            />
-            )}
-            {!isAddiDisabled && (
-                <Button
-                onClick={submitAddiEdit}
-                label="Save"
-                size="xsmall"
-                style="primary"
-                state="default"/>
-            )}
             </Header>
             <InfoInput
-            disabled={isAddiDisabled}
             value={channelId}
             label={"Channel Information"}
             onChangeInput={changeChannelId}
@@ -145,30 +108,28 @@ export default function SettingForm({disabled, username, firstName, lastName, em
             clickButton={confirmChannelId}
             />
             <InfoInput
-            disabled={isAddiDisabled}
             value={phoneNumber}
             label={"Phone number"}
             onChangeInput={changePhoneNumber}
             />
             <InfoInput
-            disabled={isAddiDisabled}
             value={companyName}
             label={"Company name"}
             onChangeInput={changeCompanyName}
             />
             <InfoSelect
             disabled={true}
-            options={[{id: 1, value: "Business"}, {id: 2, value: "Influence"}]}
+            options={[{id: 1, value: "Business"}, {id: 2, value: "Creator"}]}
             value={role}
             label={'Role'}
             />
             <Footer>
                 <Button
-                label="Log out"
-                style="danger"
+                label="Save"
+                style="primary"
                 size="medium"
                 state="default"
-                onClick={logout}
+                onClick={submitEdit}
                 />
             </Footer>
         </Container>

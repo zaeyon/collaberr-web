@@ -1,6 +1,6 @@
 'use client';
-
 import {useRouter} from 'next/navigation'
+import dynamic from 'next/dynamic';
 import styled from '@emotion/styled';
 import {useRecoilValue} from 'recoil';
 
@@ -8,6 +8,10 @@ import { myCampaignsState, myCampaignsTableListState } from '../recoil/campaign'
 import Button from './Button';
 import MyCampaignListItem from './MyCampaignListItem';
 import ListTable from './ListTable';
+
+const DynamicListTable = dynamic(() => import('./ListTable'), {
+    ssr: false,
+})
 
 const Container = styled.div`
 width: 100%;
@@ -69,65 +73,10 @@ export default function MyCampaignList() {
                 state={"default"}
                 onClick={() => router.push('/mycampaigns/create')}/>
             </Header>
-            <TableContainer>
-                <ListTable
-                data={myCampaigns}
-                tableMarginTop={14}
-                headerColumns={MY_CAMPAIGNS_TABLE_HEADER}/>
-                {/* <TableColumn>
-                    <ColumnItem
-                    style={{flex: 1}}>
-                        <ColumnSpan>
-                        ID
-                        </ColumnSpan>
-                    </ColumnItem>
-                    <ColumnItem
-                    style={{flex: 1}}>
-                        <ColumnSpan>
-                        State
-                        </ColumnSpan>
-                    </ColumnItem>
-                    <ColumnItem
-                    style={{flex: 3.3}}>
-                        <ColumnSpan>
-                        Campaign
-                        </ColumnSpan>
-                    </ColumnItem>
-                    <ColumnItem
-                    style={{flex: 1}}>
-                        <ColumnSpan>
-                        SNS
-                        </ColumnSpan>
-                    </ColumnItem>
-                    <ColumnItem
-                    style={{flex: 1}}>
-                        <ColumnSpan>
-                        Type
-                        </ColumnSpan>
-                    </ColumnItem>
-                    <ColumnItem
-                    style={{flex: 2.35}}>
-                        <ColumnSpan>
-                        Date
-                        </ColumnSpan>
-                    </ColumnItem>
-                    <ColumnItem
-                    style={{flex: 1}}>
-                        <ColumnSpan>
-                        Options
-                        </ColumnSpan>
-                    </ColumnItem>
-                </TableColumn>
-                {myCampaigns.map((campaignItem: any, index) => {
-                    return (
-                        <MyCampaignListItem
-                        key={index}
-                        campaignItem={campaignItem}/>
-                    )
-                })
-                } */}
-            </TableContainer>
-
+            <DynamicListTable
+            data={myCampaigns}
+            tableMarginTop={14}
+            headerColumns={MY_CAMPAIGNS_TABLE_HEADER}/>
         </Container>
     )
 }
