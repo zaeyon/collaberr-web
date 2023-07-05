@@ -39,3 +39,25 @@ export const POST_refreshToken = () => {
 
     return res;
 }
+
+export const PATCH_youtubeAuth = (channelId: string) => {
+    console.log("PATCH_youtubeAuth channelId", channelId);
+    const promise =  axios.patch(`${baseUrl}/api/youtube/auth/`, {
+        channel_name: "test",
+        channel_id: channelId
+    });
+
+    const response = promise.then((res) => res);
+
+    return response;
+  };
+
+  
+export const GET_youtubeConfirm = (accessToken: string | null) => {
+    console.log("accessToken", accessToken);
+    const promise = axios.get(`${baseUrl}/api/youtube/confirm/`);
+  
+    const res = promise.then((res) => res);
+  
+    return res;
+  }

@@ -5,7 +5,7 @@ import {useSetRecoilState} from 'recoil';
 import { useRecoilState } from 'recoil';
 
 import {userState} from '../recoil/user';
-import { POST_logout } from '../api/auth';
+import { POST_logout, PATCH_youtubeAuth } from '../api/auth';
 import { PATCH_editProfile } from '../api/user';
 import SettingForm from "../components/SettingForm"
 import { userType } from '../type';
@@ -22,7 +22,10 @@ export default function Setting() {
     const [phoneNumber, setPhoneNumber] = useState('');
     const [companyName, setCompanyName] = useState('');
     const [role, setRole] = useState(user.role === 'BUSINESS' ? 'Business' : 'influence');
+    const [channelId, setChannelId] = useState("");
     const [disabled, setDisabled] = useState(true);
+    const [isAddiDisabled, setIsAddiDisabled] = useState(true);
+    
 
     useEffect(() => {
         if(localStorage.getItem("current_user")) {
@@ -73,6 +76,20 @@ export default function Setting() {
         setCompanyName(e.target.value);
     }
 
+    const changeChannelId = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setChannelId(e.target.value);
+    }
+
+    const confirmChannelId = () => {
+        PATCH_youtubeAuth(channelId)
+        .then((res) => {
+            console.log("PATCH_youtubeAuth success", res)
+        })
+        .catch((err) => {
+            console.log("PATCH_youtubeAuth err", err);
+        })
+    }
+
     const submitEdit = () => {
         setDisabled(true);
 
@@ -110,6 +127,15 @@ export default function Setting() {
     const clickEdit = () => {
         setDisabled(false);
     }
+
+    const clickAddiEdit = () => {
+        setIsAddiDisabled(false);
+    }
+
+    const submitAddiEdit = () => {
+        setIsAddiDisabled(true);
+    }
+
 
     const logout = () => {
         localStorage.removeItem("access_token");
@@ -164,7 +190,13 @@ export default function Setting() {
             changeProfileImage={changeProfileImage}
             changePhoneNumber={changePhoneNumber}
             changeCompanyName={changeCompanyName}
+            changeChannelId={changeChannelId}
             logout={logout}
+            channelId={channelId}
+            confirmChannelId={confirmChannelId}
+            isAddiDisabled={isAddiDisabled}
+            clickAddiEdit={clickAddiEdit}
+            submitAddiEdit={submitAddiEdit}
             />
         </main>
     )
