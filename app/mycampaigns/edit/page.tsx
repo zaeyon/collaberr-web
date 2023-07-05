@@ -109,7 +109,7 @@ export default function Edit() {
 
     const submitCampaignCreate = () => {
         setIsVisModal(false);
-        const newCampaign: campaignType = {
+        const newCampaign: any = {
             brand_name: brandName,
             title,
             thumbnail: null,
