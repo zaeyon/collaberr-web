@@ -87,7 +87,7 @@ export default function Targets() {
   };
   
 
-export const COUNTRY_RATE_DATA = {
+const COUNTRY_RATE_DATA = {
   labels: ['Country 1', 'Country 2', 'Country 3', 'Country 4', 'Country 5', 'Country 6', 'Country 7', 'Country 8', 'Country 9', 'Country 10' ],
   datasets: [
     {
