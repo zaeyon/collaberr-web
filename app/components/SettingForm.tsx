@@ -1,6 +1,6 @@
 'use client';
 import styled from '@emotion/styled';
-import {useState, useRef} from 'react';
+import React, {useState, useRef} from 'react';
 
 import InfoInput from './InfoInput';
 import FileInput from './FileInput';
@@ -32,6 +32,7 @@ interface props {
     phoneNumber: string;
     companyName: string;
     role: string;
+    channelId: string;
     submitEdit: () => void;
     clickEdit: () => void;
     changeUsername: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -41,10 +42,15 @@ interface props {
     changeProfileImage: (file: any, src: any) => void;
     changePhoneNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
     changeCompanyName: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    changeChannelId: (e: React.ChangeEvent<HTMLInputElement>) => void;
     logout: () => void;
+    confirmChannelId: () => void;
+    isAddiDisabled: boolean;
+    clickAddiEdit: () => void;
+    submitAddiEdit: () => void;
 }
 
-export default function SettingForm({disabled, username, firstName, lastName, email, profileImageFile, phoneNumber, companyName, role,submitEdit,clickEdit, changeUsername, changeFirstName, changeLastName, changeEmail, changeProfileImage, changePhoneNumber, changeCompanyName, logout}: props) {
+export default function SettingForm({disabled, username, firstName, lastName, email, profileImageFile, phoneNumber, companyName, role,submitEdit,clickEdit, changeUsername, changeFirstName, changeLastName, changeEmail, changeProfileImage, changePhoneNumber, changeCompanyName, logout, channelId, changeChannelId, confirmChannelId, isAddiDisabled, clickAddiEdit, submitAddiEdit}: props) {
 
     const profileImageInputRef = useRef<HTMLInputElement>();
 
@@ -73,7 +79,6 @@ export default function SettingForm({disabled, username, firstName, lastName, em
                 style="tertiery"
                 state="default"/>
             )}
-            
             </Header>
             <InfoInput
             disabled={disabled}
@@ -112,21 +117,41 @@ export default function SettingForm({disabled, username, firstName, lastName, em
             />
             <Header>
             <h2>Additional Information</h2>
+            {isAddiDisabled && (
             <Button
+            onClick={clickAddiEdit}
             label="Edit"
             size="xsmall"
             style="tertiery"
             state="default"
             />
+            )}
+            {!isAddiDisabled && (
+                <Button
+                onClick={submitAddiEdit}
+                label="Save"
+                size="xsmall"
+                style="primary"
+                state="default"/>
+            )}
             </Header>
             <InfoInput
-            disabled={disabled}
+            disabled={isAddiDisabled}
+            value={channelId}
+            label={"Channel Information"}
+            onChangeInput={changeChannelId}
+            placeholder={"Enter your youtube channel url"}
+            button={"Confirm"}
+            clickButton={confirmChannelId}
+            />
+            <InfoInput
+            disabled={isAddiDisabled}
             value={phoneNumber}
             label={"Phone number"}
             onChangeInput={changePhoneNumber}
             />
             <InfoInput
-            disabled={disabled}
+            disabled={isAddiDisabled}
             value={companyName}
             label={"Company name"}
             onChangeInput={changeCompanyName}

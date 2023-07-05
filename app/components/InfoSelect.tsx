@@ -35,7 +35,7 @@ color: #35424C;
 font-family: 'Pretendard';
 
 :hover {
-    border: 1px solid #ACB8C8;
+    border: ${(props) => props.disabled ? '1px solid #E6EAEF' : '1px solid #ACB8C8'};
 }
 
 :focus  {

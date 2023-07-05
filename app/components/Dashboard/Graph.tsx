@@ -9,9 +9,8 @@ import {
     LineElement,
     Title,
     Tooltip,
-    ArcElement
+    
   } from 'chart.js';
-import { redirect } from 'next/dist/server/api-utils';
 
   ChartJS.register(
     CategoryScale,
@@ -20,7 +19,6 @@ import { redirect } from 'next/dist/server/api-utils';
     LineElement,
     Title,
     Tooltip,
-    ArcElement,
   );
 
   interface LegendMarkProps {

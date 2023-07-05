@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import Image from 'next/image';
 
+import Button from './Button';
 import icon_clip from '../assets/icons/icon_clip.png';
 
 interface ContainerProps {
@@ -40,11 +41,19 @@ text-align: left;
 color: #35424C;
 `;
 
+const InputDiv = styled.div`
+margin-top: 6px;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`
+
 const Input = styled.input<InputProps>`
+width: 100%;
 position: ${(props) => props.type === "file" ? "absolute" : "static"};
 display: ${(props) => props.type === "file" ? "none" : "block"};
 background-color: white;
-margin-top: 6px;
 padding: 14px 18px;
 border-radius: 8px;
 color: ${(props) => props.disabled ? '#D1D7DF' : '#35424C'};
@@ -118,14 +127,17 @@ interface props {
     isInvaildEmail?: boolean;
     isInconPassword?: boolean;
     description?: string;
+    button?: string;
+    clickButton?: any;
 }
 
-export default function InfoInput({ type = "text",accept = "", disabled = false, value, onChangeInput, label, placeholder, isExistedEmail, isExistedUsername, isInvaildEmail, description, isInconPassword}: props) {
+export default function InfoInput({ type = "text",accept = "", disabled = false, value, onChangeInput, label, placeholder, isExistedEmail, isExistedUsername, isInvaildEmail, description, isInconPassword, button = "", clickButton}: props) {
     
     return (
         <Container
         label={label}>
             <Label>{label}</Label>
+            <InputDiv>
             <Input
             accept={accept}
             disabled={disabled}
@@ -137,6 +149,18 @@ export default function InfoInput({ type = "text",accept = "", disabled = false,
             isExistedEmail={isExistedEmail}
             isInvaildEmail={isInvaildEmail}
             isInconPassword={isInconPassword}/>
+            {button && (
+                <span
+                style={{marginLeft: 16}}>
+                <Button
+                label={button}
+                size={"medium"}
+                style={"tertiery"}
+                state={disabled ? "disabled" : "default"}
+                onClick={clickButton}/>
+                </span>
+            )}
+            </InputDiv>
             {isExistedEmail && (
                 <Error>
                 Account with this email already exists.
