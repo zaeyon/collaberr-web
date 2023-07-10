@@ -18,7 +18,7 @@ export default function Table({title, subTitle, marginTop, tableMarginTop, heade
         <div
         style={{marginTop: marginTop, width: "100%"}}>
             {title && (
-                <h2>{title}</h2>
+                <h3>{title}</h3>
             )}
             {subTitle && (
                 <div

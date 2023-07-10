@@ -231,7 +231,6 @@ export default function Edit() {
                 setShownEndDate(year + "-" + "0" + month + "-" + startDateArr[2]);
             }
         }
-        
     }
     
     return (

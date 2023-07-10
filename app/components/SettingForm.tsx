@@ -32,7 +32,6 @@ interface props {
     phoneNumber: string;
     companyName: string;
     role: string;
-    channelId: string;
     channelUrl: string;
     submitEdit: () => void;
     clickEdit: () => void;
@@ -43,17 +42,15 @@ interface props {
     changeProfileImage: (file: any, src: any) => void;
     changePhoneNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
     changeCompanyName: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    changeChannelId: (e: React.ChangeEvent<HTMLInputElement>) => void;
     changeChannelUrl: (e: React.ChangeEvent<HTMLInputElement>) => void;
     logout: () => void;
-    confirmChannelId: () => void;
     confirmChannelUrl: () => void;
     isAddiDisabled: boolean;
     clickAddiEdit: () => void;
     submitAddiEdit: () => void;
 }
 
-export default function SettingForm({disabled, username, firstName, lastName, email, profileImageFile, phoneNumber, companyName, role,submitEdit,clickEdit, changeUsername, changeFirstName, changeLastName, changeEmail, changeProfileImage, changePhoneNumber, changeCompanyName, logout, channelId, changeChannelId, confirmChannelId, isAddiDisabled, clickAddiEdit, submitAddiEdit, channelUrl, changeChannelUrl, confirmChannelUrl}: props) {
+export default function SettingForm({disabled, username, firstName, lastName, email, profileImageFile, phoneNumber, companyName, role,submitEdit,clickEdit, changeUsername, changeFirstName, changeLastName, changeEmail, changeProfileImage, changePhoneNumber, changeCompanyName, logout, isAddiDisabled, clickAddiEdit, submitAddiEdit, channelUrl, changeChannelUrl, confirmChannelUrl}: props) {
 
     const profileImageInputRef = useRef<HTMLInputElement>();
 
@@ -65,7 +62,7 @@ export default function SettingForm({disabled, username, firstName, lastName, em
     return (
         <Container>
             <Header>
-            <h2>Basic Information</h2>
+            <h3>Basic Information</h3>
           
             </Header>
             <InfoInput
@@ -100,19 +97,11 @@ export default function SettingForm({disabled, username, firstName, lastName, em
             description={"Please upload PNG, JPEG files only"}
             />
             <Header>
-            <h2>Additional Information</h2>
+            <h3>Additional Information</h3>
             </Header>
             <InfoInput
-            value={channelId}
-            label={"Channel Information"}
-            onChangeInput={changeChannelId}
-            placeholder={"Enter your youtube channel url"}
-            button={"Confirm"}
-            clickButton={confirmChannelId}
-            />
-            <InfoInput
             value={channelUrl}
-            label={"Channel Url"}
+            label={"Channel Information"}
             onChangeInput={changeChannelUrl}
             placeholder={"Enter your youtube channel url"}
             button={"Confirm"}

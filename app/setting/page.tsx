@@ -86,42 +86,11 @@ export default function Setting() {
         setChannelUrl(e.target.value);
     }
 
-    const confirmChannelId = () => {
-        // PATCH_youtubeAuth(channelId)
-        // .then((res) => {
-        //     console.log("PATCH_youtubeAuth success", res)
-        //     window.open(res.data.authorization_url, '_blank');
-        // })
-        // .catch((err) => {
-        //     console.log("PATCH_youtubeAuth err", err);
-        // })
+    const confirmChannelUrl = () => {
+        const regex = /@.*/;
+        const channelName = channelUrl.match(regex)?.[0];
 
-        // GET_youtubeChannel()
-        // .then((res) => {
-        //     console.log("GET_youtubeChannel success", res)
-        // })
-        // .catch((err) => {
-        //     console.log("GET_youtube fail", err)
-        // })
-    }
-
-    const confirmChannelUrl = async () => {
-        console.log("confirmChannelUrl ", channelUrl);
-
-
-        axios.post('http://localhost:8080/channel', {
-            channel_url: channelUrl
-        })
-        .then((res) => {
-            console.log("confirmChannelUrl success", res)
-        })
-        .catch((err) => {
-            console.log("confirmChannelUrl err", err)
-        })
-
-        //const channelId = html.match(/(?<=channelId(":"|"\scontent="))[^"]+/g)[0];
-        /*
-        PATCH_youtubeAuth(channelUrl)
+        PATCH_youtubeAuth(channelName)
         .then((res) => {
             console.log("PATCH_youtubeAuth success", res)
             window.open(res.data.authorization_url, '_blank');
@@ -129,7 +98,7 @@ export default function Setting() {
         .catch((err) => {
             console.log("PATCH_youtubeAuth err", err);
         })
-        */
+
     }
 
     const submitEdit = () => {
@@ -230,10 +199,7 @@ export default function Setting() {
             changeProfileImage={changeProfileImage}
             changePhoneNumber={changePhoneNumber}
             changeCompanyName={changeCompanyName}
-            changeChannelId={changeChannelId}
             logout={logout}
-            channelId={channelId}
-            confirmChannelId={confirmChannelId}
             confirmChannelUrl={confirmChannelUrl}
             isAddiDisabled={isAddiDisabled}
             clickAddiEdit={clickAddiEdit}

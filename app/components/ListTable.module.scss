@@ -33,7 +33,7 @@
 }
 
 .tableHeader {
-    padding: 0px 8px;
+    padding: 0px 4px;
     height: 40px;
     display: flex;
     align-items: center;
@@ -66,7 +66,7 @@
 
 .dataColumn {
     min-width: 0;
-    padding: 0px 8px;
+    padding: 0px 0px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -91,7 +91,7 @@
     white-space: nowrap;
     overflow: hidden;
 
-    &.proceeding {
+    &.proceeding, &.participation_confirmed {
         background-color: #3AB09E;
         color:  #FFF;
     }
@@ -115,4 +115,16 @@
         background-color: #F1F4F7;
         color: #445462;
     }
+
+    &.request {
+        background-color: #E0F5F2;
+        color: #3AB09E;
+
+    }
+
+    &.participation_rejected {
+        background-color: #FEECF0;
+        color: #F25476;
+    }
+
 }

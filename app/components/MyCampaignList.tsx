@@ -65,7 +65,7 @@ export default function MyCampaignList() {
     return (
         <Container>
             <Header>
-                <h2>전체 캠페인</h2>
+                <h3>전체 캠페인</h3>
                 <Button
                 size={"small"}
                 style={"primary"}

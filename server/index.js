@@ -21,6 +21,8 @@ app.post("/channel", function (appReq, appRes) {
     })
     .catch((err) => {
       console.log("GET channel url failed", err);
+      appRes.status(500);
+      appRes.json({ message: err.message });
     });
 });
 

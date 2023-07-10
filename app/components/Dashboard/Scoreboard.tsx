@@ -4,11 +4,13 @@ import Tooltip from '../Tooltip';
 
 interface props {
     data: any [];
+    marginTop?: number;
 }
 
-export default function Scoreboard({data}: props) {
+export default function Scoreboard({data, marginTop = 0}: props) {
     return (
         <div
+        style={{marginTop: marginTop}}
         className={styles.container}>
         {data.map((item, index) => {
             return (

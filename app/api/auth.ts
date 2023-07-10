@@ -40,11 +40,10 @@ export const POST_refreshToken = () => {
     return res;
 }
 
-export const PATCH_youtubeAuth = (channelId: string) => {
-    console.log("PATCH_youtubeAuth channelId", channelId);
+export const PATCH_youtubeAuth = (channelName: string | undefined) => {
+    console.log("PATCH_youtubeAuth channelName", channelName);
     const promise =  axios.patch(`${baseUrl}/api/youtube/auth/`, {
-        "channel_name": "test",
-        "channel_id": channelId
+        "channel_name": channelName,
     });
 
     const response = promise.then((res) => res);
