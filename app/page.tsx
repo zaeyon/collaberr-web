@@ -13,10 +13,11 @@ export default function Home() {
     GET_youtubeAuth()
       .then((res) => {
         console.log("GET_youtubeAuth success", res);
-        window.location.href = res.data.authorization_url;
+        window.open(res.data.authorization_url, '_blank');
       })
       .catch((err) => {
         console.log("GET_youtube failed", err);
+        
       });
   }
 

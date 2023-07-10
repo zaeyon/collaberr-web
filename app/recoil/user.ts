@@ -11,3 +11,8 @@ export const userState = atom({
         role: "",
     }
 })
+
+export const isVisDropdownState = atom({
+    key: 'isVisDropdownState',
+    default: false,
+})

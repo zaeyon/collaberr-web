@@ -33,7 +33,7 @@
 }
 
 .tableHeader {
-    padding: 0px 8px;
+    padding: 0px 4px;
     height: 40px;
     display: flex;
     align-items: center;
@@ -59,16 +59,72 @@
 }
 
 .dataItem {
-    padding: 0px 8px;
+    padding: 0px 0px;
     display: flex;
     align-items: center;
-    justify-content: center;
 }
 
 .dataColumn {
     min-width: 0;
-    padding: 0px 8px;
+    padding: 0px 0px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    
+}
+
+.stateBadge {
+    display: flex;
+    padding: 4px 8px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 16px;
+
+    font-size: 11px;
+    font-family: 'Pretendard';
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%;
+    letter-spacing: -0.165px;
+
+    white-space: nowrap;
+    overflow: hidden;
+
+    &.proceeding, &.participation_confirmed {
+        background-color: #3AB09E;
+        color:  #FFF;
+    }
+
+    &.recruitment_complete {
+        background-color: #FFF9EB;
+        color: #FFB81F;
+    }
+
+    &.recruiting {
+        background-color: #FFB81F;
+        color: #FFFFFF;
+    }
+
+    &.writing {
+        background-color: #3183F6;
+        color: #FFFFFF;
+    }
+
+    &.progress_complete {
+        background-color: #F1F4F7;
+        color: #445462;
+    }
+
+    &.request {
+        background-color: #E0F5F2;
+        color: #3AB09E;
+
+    }
+
+    &.participation_rejected {
+        background-color: #FEECF0;
+        color: #F25476;
+    }
+
 }

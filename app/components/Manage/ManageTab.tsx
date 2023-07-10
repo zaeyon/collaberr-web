@@ -1,0 +1,103 @@
+import Image from 'next/image';
+import styled from '@emotion/styled';
+
+import Button from '../Button';
+import icon_exit from '@/app/assets/icons/icon_exit.png';
+
+interface TabItemProps {
+    readonly isActive: boolean;
+}
+
+const Container = styled.div`
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+`;
+
+const Header = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+`;
+
+const DateDiv = styled.div`
+    margin-top: 8px;
+    color: var(--gray-gray-600, #536878);
+    font-family: "Pretendard";
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%;
+    letter-spacing: -0.255px;
+`;
+
+const ExitIcon = styled(Image)`
+    position: fixed;
+    top: 95px;
+    right: 32px;
+`
+
+const TabsDiv = styled.div`
+    margin-top: 32px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
+
+const TabItem = styled.span<TabItemProps>`
+    border-radius: 24px;
+    background-color: ${(props) => props.isActive ? '#F1F4F7' : '#FFFFFF'};
+    padding: 10px 18px;
+    color: ${(props) => props.isActive ?"#242D35" : "#536878"};
+    font-family: "Pretendard";
+    font-size: 17px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 160%;
+    letter-spacing: -0.255px;
+    cursor: pointer;
+`;
+
+interface props {
+    moveToCampaignDetail: () => void;
+    changeTab: (tab: string) => void;
+    pathname: string;
+}
+
+export default function ManageTab({moveToCampaignDetail, changeTab, pathname}: props) {
+    return (
+        <Container>
+            <Header>
+                <h2>신상 굿즈(슬리퍼+비치백 세트), 신제품(NEW 쉬림프) 출시 홍보 캠페인</h2>
+                <Button
+                onClick={moveToCampaignDetail}
+                style={"tertiery"}
+                size={"xsmall"}
+                state={"default"}
+                label={"캠페인 보기"}/>
+            </Header>
+            <DateDiv>
+            2023.00.00 - 2023.00.00
+            </DateDiv>
+            <TabsDiv>
+                <TabItem
+                onClick={() => changeTab("recruit")}
+                isActive={!pathname.includes("content") && !pathname.includes("result")}>
+                    {"모집 관리"}
+                </TabItem>
+                <TabItem
+                onClick={() => changeTab("content")}
+                isActive={pathname.includes("content")}>
+                    {"콘텐츠 관리"}
+                </TabItem>
+                <TabItem
+                onClick={() => changeTab("result")}
+                isActive={pathname.includes("result")}>
+                    {"성과 보기"}
+                </TabItem>
+            </TabsDiv>
+        </Container>
+
+    )
+}

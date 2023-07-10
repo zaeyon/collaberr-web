@@ -5,11 +5,12 @@ import {useSetRecoilState} from 'recoil';
 import { useRecoilState } from 'recoil';
 
 import {userState} from '../recoil/user';
-import { POST_logout, PATCH_youtubeAuth } from '../api/auth';
+import { POST_logout, PATCH_youtubeAuth, POST_youtubeChannel } from '../api/auth';
 import { PATCH_editProfile } from '../api/user';
 import SettingForm from "../components/SettingForm"
 import { userType } from '../type';
 import { deleteCookie } from '../lib/cookie';
+import axios from 'axios';
 
 export default function Setting() {
     const [user, setUser] = useRecoilState(userState);
@@ -21,8 +22,9 @@ export default function Setting() {
     
     const [phoneNumber, setPhoneNumber] = useState('');
     const [companyName, setCompanyName] = useState('');
-    const [role, setRole] = useState(user.role === 'BUSINESS' ? 'Business' : 'influence');
+    const [role, setRole] = useState(user.role === 'BUSINESS' ? 'Business' : 'Creator');
     const [channelId, setChannelId] = useState("");
+    const [channelUrl, setChannelUrl] = useState("");
     const [disabled, setDisabled] = useState(true);
     const [isAddiDisabled, setIsAddiDisabled] = useState(true);
     
@@ -80,14 +82,23 @@ export default function Setting() {
         setChannelId(e.target.value);
     }
 
-    const confirmChannelId = () => {
-        PATCH_youtubeAuth(channelId)
+    const changeChannelUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setChannelUrl(e.target.value);
+    }
+
+    const confirmChannelUrl = () => {
+        const regex = /@.*/;
+        const channelName = channelUrl.match(regex)?.[0];
+
+        PATCH_youtubeAuth(channelName)
         .then((res) => {
             console.log("PATCH_youtubeAuth success", res)
+            window.open(res.data.authorization_url, '_blank');
         })
         .catch((err) => {
             console.log("PATCH_youtubeAuth err", err);
         })
+
     }
 
     const submitEdit = () => {
@@ -138,8 +149,6 @@ export default function Setting() {
 
 
     const logout = () => {
-        localStorage.removeItem("access_token");
-        localStorage.removeItem("refresh_token");
         localStorage.removeItem("current_user");
         localStorage.removeItem("account_id");
 
@@ -163,8 +172,6 @@ export default function Setting() {
         .catch((err) => {
             console.log("POST_logout fail", err);
         })
-
-
     }
 
 
@@ -183,6 +190,8 @@ export default function Setting() {
             phoneNumber={phoneNumber}
             companyName={companyName}
             role={role}
+            channelUrl={channelUrl}
+            changeChannelUrl={changeChannelUrl}
             changeUsername={changeUsername}
             changeFirstName={changeFirstName}
             changeLastName={changeLastName}
@@ -190,10 +199,8 @@ export default function Setting() {
             changeProfileImage={changeProfileImage}
             changePhoneNumber={changePhoneNumber}
             changeCompanyName={changeCompanyName}
-            changeChannelId={changeChannelId}
             logout={logout}
-            channelId={channelId}
-            confirmChannelId={confirmChannelId}
+            confirmChannelUrl={confirmChannelUrl}
             isAddiDisabled={isAddiDisabled}
             clickAddiEdit={clickAddiEdit}
             submitAddiEdit={submitAddiEdit}

@@ -31,32 +31,35 @@ a {
 }
 
 h1 {
+  color: var(--gray-gray-900, #242D35);
+  font-size: 32px;
   font-family: 'Pretendard';
-  font-size: 40px;
+  font-style: normal;
   font-weight: 700;
-  line-height: 52px;
-  letter-spacing: -0.015em;
-  color: #242D35;
+  line-height: 130%;
+  letter-spacing: -0.48px;
 }
 
 h2 {
+  /* 중간 제목 h5/Bold */
+  color: var(--gray-gray-900, #242D35);
+  font-family: 'Pretendard';
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 160%;
+  letter-spacing: -0.36px;
+}
+
+h3 {  
+  color: var(--gray-gray-900, #242D35);
   font-family: 'Pretendard';
   font-size: 21px;
   font-weight: 600;
-  line-height: 34px;
   letter-spacing: -0.015em;
+  line-height: 160%;
   text-align: left;
   color: #242D35;
-}
-
-h3 {
-  color: var(--gray-gray-900, #242D35);
-  font-size: 21px;  
-  font-family: "Pretendard";
-  font-style: normal;
-  font-weight: 600;
-  line-height: 160%;
-  letter-spacing: -0.315px;
 }
 
 h4 {
@@ -71,12 +74,12 @@ h4 {
 
 p {
   color: var(--gray-gray-600, #536878);
-  font-size: 13px;
+  font-size: 15px;
   font-family: 'Pretendard';
   font-style: normal;
   font-weight: 400;
   line-height: 160%;
-  letter-spacing: -0.195px;
+  letter-spacing: -0.225px;
 }
 
 @media (prefers-color-scheme: dark) {

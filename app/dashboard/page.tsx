@@ -72,7 +72,6 @@ const CAMPAIGN_RAKING_TABLE_HEADER = [
         label: "상세분석",
         width: "9.37"
     }
-
 ]
 
 

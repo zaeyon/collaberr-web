@@ -11,7 +11,7 @@
     padding-right: 24px;
     border-bottom: 1px solid #CFD6DC;
     background-color: white;
-    z-index: 1;
+    z-index: 3;
 }
 
 .container div {
@@ -54,5 +54,6 @@
     letter-spacing: -0.015em;
     text-align: left;
     color: #536878;
+    user-select: none;
     cursor: pointer;
 }

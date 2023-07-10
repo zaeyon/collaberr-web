@@ -1,4 +1,4 @@
-export default function MyCampaignsLayout({children}: {
+export default function ResultManageLayout({children}: {
     children: React.ReactNode
 }) {
     return (

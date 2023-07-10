@@ -10,6 +10,7 @@ import { campaignType } from '@/app/type/campaign';
 
 export default function Page({params}: {params: {id: number}}) {
     const [campaignItem, setCampaignItem] = useState<campaignType>({
+        id: 0,
         brand_name: "",
         title: "",
         thumbnail: "",

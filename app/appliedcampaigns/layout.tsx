@@ -1,4 +1,5 @@
-export default function MyCampaignsLayout({children}: {
+
+export default function AppliedCampaignsLayout({children}: {
     children: React.ReactNode
 }) {
     return (

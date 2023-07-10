@@ -32,7 +32,7 @@ interface props {
     phoneNumber: string;
     companyName: string;
     role: string;
-    channelId: string;
+    channelUrl: string;
     submitEdit: () => void;
     clickEdit: () => void;
     changeUsername: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -42,15 +42,15 @@ interface props {
     changeProfileImage: (file: any, src: any) => void;
     changePhoneNumber: (e: React.ChangeEvent<HTMLInputElement>) => void;
     changeCompanyName: (e: React.ChangeEvent<HTMLInputElement>) => void;
-    changeChannelId: (e: React.ChangeEvent<HTMLInputElement>) => void;
+    changeChannelUrl: (e: React.ChangeEvent<HTMLInputElement>) => void;
     logout: () => void;
-    confirmChannelId: () => void;
+    confirmChannelUrl: () => void;
     isAddiDisabled: boolean;
     clickAddiEdit: () => void;
     submitAddiEdit: () => void;
 }
 
-export default function SettingForm({disabled, username, firstName, lastName, email, profileImageFile, phoneNumber, companyName, role,submitEdit,clickEdit, changeUsername, changeFirstName, changeLastName, changeEmail, changeProfileImage, changePhoneNumber, changeCompanyName, logout, channelId, changeChannelId, confirmChannelId, isAddiDisabled, clickAddiEdit, submitAddiEdit}: props) {
+export default function SettingForm({disabled, username, firstName, lastName, email, profileImageFile, phoneNumber, companyName, role,submitEdit,clickEdit, changeUsername, changeFirstName, changeLastName, changeEmail, changeProfileImage, changePhoneNumber, changeCompanyName, logout, isAddiDisabled, clickAddiEdit, submitAddiEdit, channelUrl, changeChannelUrl, confirmChannelUrl}: props) {
 
     const profileImageInputRef = useRef<HTMLInputElement>();
 
@@ -62,26 +62,10 @@ export default function SettingForm({disabled, username, firstName, lastName, em
     return (
         <Container>
             <Header>
-            <h2>Basic Information</h2>
-            {!disabled && (
-                <Button
-                onClick={submitEdit}
-                label="Save"
-                size="xsmall"
-                style="primary"
-                state="default"/>
-            )}
-            {disabled && (
-                <Button
-                onClick={clickEdit}
-                label="Edit"
-                size="xsmall"
-                style="tertiery"
-                state="default"/>
-            )}
+            <h3>Basic Information</h3>
+          
             </Header>
             <InfoInput
-            disabled={disabled}
             value={username}
             label={"User name"}
             onChangeInput={changeUsername}
@@ -89,13 +73,11 @@ export default function SettingForm({disabled, username, firstName, lastName, em
             <div
             style={{display: 'flex', justifyContent: 'space-between'}}>
             <InfoInput
-            disabled={disabled}
             value={firstName}
             label={"First Name"}
             onChangeInput={changeFirstName}
             />
             <InfoInput
-            disabled={disabled}
             value={lastName}
             label={"Last Name"}
             onChangeInput={changeLastName}
@@ -109,66 +91,45 @@ export default function SettingForm({disabled, username, firstName, lastName, em
             />
             <FileInput
             changeFile={changeProfileImage}
-            disabled={disabled}
             accept={"image/*"}
             value={profileImageFile}
             label={"Profile image"}
             description={"Please upload PNG, JPEG files only"}
             />
             <Header>
-            <h2>Additional Information</h2>
-            {isAddiDisabled && (
-            <Button
-            onClick={clickAddiEdit}
-            label="Edit"
-            size="xsmall"
-            style="tertiery"
-            state="default"
-            />
-            )}
-            {!isAddiDisabled && (
-                <Button
-                onClick={submitAddiEdit}
-                label="Save"
-                size="xsmall"
-                style="primary"
-                state="default"/>
-            )}
+            <h3>Additional Information</h3>
             </Header>
             <InfoInput
-            disabled={isAddiDisabled}
-            value={channelId}
+            value={channelUrl}
             label={"Channel Information"}
-            onChangeInput={changeChannelId}
+            onChangeInput={changeChannelUrl}
             placeholder={"Enter your youtube channel url"}
             button={"Confirm"}
-            clickButton={confirmChannelId}
+            clickButton={confirmChannelUrl}
             />
             <InfoInput
-            disabled={isAddiDisabled}
             value={phoneNumber}
             label={"Phone number"}
             onChangeInput={changePhoneNumber}
             />
             <InfoInput
-            disabled={isAddiDisabled}
             value={companyName}
             label={"Company name"}
             onChangeInput={changeCompanyName}
             />
             <InfoSelect
             disabled={true}
-            options={[{id: 1, value: "Business"}, {id: 2, value: "Influence"}]}
+            options={[{id: 1, value: "Business"}, {id: 2, value: "Creator"}]}
             value={role}
             label={'Role'}
             />
             <Footer>
                 <Button
-                label="Log out"
-                style="danger"
+                label="Save"
+                style="primary"
                 size="medium"
                 state="default"
-                onClick={logout}
+                onClick={submitEdit}
                 />
             </Footer>
         </Container>
