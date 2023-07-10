@@ -179,12 +179,12 @@ const CONFIRMED_CONTENT_TABLE_DATA = [
     {
         state: "completed_approval",
         name: "Creator Name",
-        content_url: "https://www.youtube.com/"
+        content_url: "https://www.youtube.com/watch?v=c0-xisl-Nes"
     },
     {
         state: "completed_approval",
         name: "Creator Name",
-        content_url: "https://www.youtube.com/"
+        content_url: "https://www.youtube.com/watch?v=HO0AyUK-ASM"
     },
     {
         state: "completed_approval",
