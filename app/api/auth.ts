@@ -43,7 +43,7 @@ export const POST_refreshToken = () => {
 export const PATCH_youtubeAuth = (channelName: string | undefined) => {
     console.log("PATCH_youtubeAuth channelName", channelName);
     const promise =  axios.patch(`${baseUrl}/api/youtube/auth/`, {
-        "channel_name": channelName,
+        "channel_handle": channelName,
     });
 
     const response = promise.then((res) => res);
