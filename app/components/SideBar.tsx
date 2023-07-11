@@ -20,7 +20,7 @@ export default function SideBar() {
                 Creator
             </div>
             <CategoryLinkItem
-            label={"Applied Campaigns"}
+            label={"My Campaigns"}
             href={"/appliedcampaigns"}
             />
             <div

@@ -1,7 +1,10 @@
 'use client';
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import styled from '@emotion/styled';
+import { useRecoilState } from 'recoil';
+import { myCampaignsState } from '../recoil/campaign';
 
+import { GET_showMyCampaigns } from '../api/campaign';
 import Scoreboard from '../components/Dashboard/Scoreboard';
 import ListTable from '../components/ListTable';
 
@@ -11,6 +14,39 @@ padding: 40px 0px;
 
 
 export default function Dashboard() {
+    const [myCampaigns, setMyCampaigns] = useRecoilState(myCampaignsState);
+
+    useEffect(() => {
+        GET_showMyCampaigns()
+        .then((res) => {
+            console.log("GET_showMyCampaigns success", res); 
+            setMyCampaigns(res.data);
+        })
+        .catch((err) => {
+            console.log("GET_showMyCampaign err", err);
+        })
+
+    }, [])
+    
+
+    const SCOREBOARD_DATA = [
+        {
+            label: "진행중인 캠페인",
+            value: `${myCampaigns.length}개`
+        },
+        {
+            label: "전체 투자 비용",
+            value: "$1,000"
+        },
+        {
+            label: "전체 조회수",
+            value: "223,000회"
+        },
+        {
+            label: "전체 참여수",
+            value: "150,001회"
+        }
+    ]
     
 
     return (
@@ -26,24 +62,7 @@ export default function Dashboard() {
     )
 }
 
-const SCOREBOARD_DATA = [
-    {
-        label: "진행중인 캠페인",
-        value: "6개"
-    },
-    {
-        label: "전체 투자 비용",
-        value: "$1,000"
-    },
-    {
-        label: "전체 조회수",
-        value: "223,000회"
-    },
-    {
-        label: "전체 참여수",
-        value: "150,001회"
-    }
-]
+
 
 const CAMPAIGN_RAKING_TABLE_HEADER = [
     {

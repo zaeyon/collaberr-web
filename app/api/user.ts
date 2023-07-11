@@ -11,14 +11,10 @@ export const GET_userInfo = (accountId: any) => {
     return res;
 }
 
-export const PATCH_editProfile = (accountId: string | null, accessToken: string | null, editedUser: userType) => {
+export const PATCH_editProfile = (accountId: string | null,  editedUser: userType) => {
     console.log("PATCH_editProfile editedUser", editedUser);
     
-    const promise = axios.patch(`${baseUrl}/api/accounts/${accountId}/`, editedUser, {
-        headers: {
-            Authorization: `Bearer ${accessToken}`
-        }
-    })
+    const promise = axios.patch(`${baseUrl}/api/accounts/${accountId}/`, editedUser)
 
     const res = promise.then((res) => res);
 

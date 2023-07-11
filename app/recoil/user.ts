@@ -16,3 +16,12 @@ export const isVisDropdownState = atom({
     key: 'isVisDropdownState',
     default: false,
 })
+
+export const toastState = atom({
+    key: 'toastState',
+    default: {
+        visible: false,
+        message: "",
+        type: "",
+    }
+})

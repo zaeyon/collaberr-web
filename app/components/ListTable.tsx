@@ -129,7 +129,29 @@ export default function ListTable({title, subTitle, marginTop, tableMarginTop, h
                                                 </span>
                                         </div>
                                     )
-                                } else if(item[0] === 'state')  {
+                                } else if(item[0] === "approval_button") {
+                                    return (
+                                        <div
+                                        style={{justifyContent: "center", width: `${headerColumns[index].width}%`}}
+                                        className={styles.dataItem}
+                                        key={index}>
+                                                <span
+                                                style={{marginLeft: 5}}
+                                                className={styles.dataColumn}>
+                                                <Link
+                                                href={`/appliedcampaigns/confirm`}>
+                                                <Button
+                                                label={"요청"}
+                                                style={"tertiery"}
+                                                size={"xsmall"}
+                                                state={"default"}/>
+                                                </Link>
+                                                </span>
+                                        </div>
+                                    )
+                                }
+                                
+                                else if(item[0] === 'state')  {
                                     return (
                                         <div
                                         style={{justifyContent:"center", width: `${headerColumns?.[index]?.width}%`}}
