@@ -1,9 +1,13 @@
 import styles from './SideBar.module.scss';
 import Link from 'next/link'
+import { userState } from '../recoil/user';
+import { useRecoilValue } from 'recoil';
 
 import CategoryLinkItem from './CategoryLinkItem';
 
 export default function SideBar() {
+    const user = useRecoilValue(userState);
+
     return (
         <div
         className={styles.container}>
@@ -15,6 +19,12 @@ export default function SideBar() {
             label={"All Campaigns"}
             href={"/campaigns"}
             />
+            <CategoryLinkItem
+            label={"Creators"}
+            href={"/creators"}
+            />
+            {user.role === "CREATOR" && (
+            <>  
             <div
             className={styles.categoryClassification}>
                 Creator
@@ -23,18 +33,26 @@ export default function SideBar() {
             label={"My Campaigns"}
             href={"/appliedcampaigns"}
             />
-            <div
-            className={styles.categoryClassification}>
-                Business
-            </div>
-            <CategoryLinkItem
-            label={"My Campaigns"}
-            href={"/mycampaigns"}
-            />
-            <CategoryLinkItem
-            label={"Dashboard"}
-            href={"/dashboard"}
-            />
+            </>
+            )}
+            {user.role === "BUSINESS" && (
+                <>
+                  <div
+                  className={styles.categoryClassification}>
+                  Business
+                  </div>
+                  <CategoryLinkItem
+                  label={"My Campaigns"}
+                  href={"/mycampaigns"}
+                  />
+                <CategoryLinkItem
+                label={"Dashboard"}
+                href={"/dashboard"}
+                />
+                </>
+
+            )}
+          
         </div>
     )
 }
