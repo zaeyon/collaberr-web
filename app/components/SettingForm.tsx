@@ -89,12 +89,12 @@ export default function SettingForm({disabled, username, firstName, lastName, em
             label={"Email"}
             onChangeInput={changeEmail}
             />
-            <FileInput
-            changeFile={changeProfileImage}
-            accept={"image/*"}
-            value={profileImageFile}
-            label={"Profile image"}
-            description={"Please upload PNG, JPEG files only"}
+            
+            <InfoSelect
+            disabled={true}
+            options={[{id: 1, value: "Business"}, {id: 2, value: "Creator"}]}
+            value={role}
+            label={'Role'}
             />
             <Header>
             <h3>Additional Information</h3>
@@ -117,11 +117,12 @@ export default function SettingForm({disabled, username, firstName, lastName, em
             label={"Company name"}
             onChangeInput={changeCompanyName}
             />
-            <InfoSelect
-            disabled={true}
-            options={[{id: 1, value: "Business"}, {id: 2, value: "Creator"}]}
-            value={role}
-            label={'Role'}
+            <FileInput
+            changeFile={changeProfileImage}
+            accept={"image/*"}
+            value={profileImageFile}
+            label={"Profile image"}
+            description={"Please upload PNG, JPEG files only"}
             />
             <Footer>
                 <Button

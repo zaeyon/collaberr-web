@@ -50,7 +50,8 @@ export default function DashboardLayout({children} : {
             clickRightButton={clickRightButton}
             />
             <Tab
-            curTab={curTab}
+            marginTop={52}
+            root={"dashboard"}
             changeTab={changeTab}/>
             {children}
             </main>

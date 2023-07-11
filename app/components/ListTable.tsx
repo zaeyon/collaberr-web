@@ -13,6 +13,7 @@ import icon_youtube from '@/app/assets/icons/icon_youtube.png';
 import icon_instagram from '@/app/assets/icons/icon_instagram.png';
 import icon_tiktok from '@/app/assets/icons/icon_tiktok.png';
 import icon_outlink from '@/app/assets/icons/icon_outlink.png';
+import icon_copy from '@/app/assets/icons/icon_copy.png';
 
 const cx = classNames.bind(styles);
 
@@ -36,6 +37,11 @@ interface props {
 }
 
 export default function ListTable({title, subTitle, marginTop, tableMarginTop, headerColumns, data, clickCheckbox, clickAllCheckbox, allSelected}: props) {
+
+    const copyText = (text: string) => {
+        window.navigator.clipboard.writeText(text);
+    }
+
     return (
         <Container
         style={{marginTop: marginTop}}>
@@ -57,8 +63,8 @@ export default function ListTable({title, subTitle, marginTop, tableMarginTop, h
                     {headerColumns.map((item, index) => {
                         return (
                             <div
-                            style={{width: `${item.width}%`, justifyContent: item.label === "Campaign" || item.label === "크리에이터" ? "flex-start" : "center"}}
-                            className={styles.tableHeader}
+                            style={{width: `${item.width}%`, justifyContent: item.label === "Campaign" || item.label === "크리에이터" || item.label === "콘텐츠 링크" ? "flex-start" : "center"}}
+                            className={styles.headerItem}
                             key={index}>
                                 {item.label === "selected" && (
                                     <Checkbox
@@ -123,7 +129,29 @@ export default function ListTable({title, subTitle, marginTop, tableMarginTop, h
                                                 </span>
                                         </div>
                                     )
-                                } else if(item[0] === 'state')  {
+                                } else if(item[0] === "approval_button") {
+                                    return (
+                                        <div
+                                        style={{justifyContent: "center", width: `${headerColumns[index].width}%`}}
+                                        className={styles.dataItem}
+                                        key={index}>
+                                                <span
+                                                style={{marginLeft: 5}}
+                                                className={styles.dataColumn}>
+                                                <Link
+                                                href={`/appliedcampaigns/confirm`}>
+                                                <Button
+                                                label={"요청"}
+                                                style={"tertiery"}
+                                                size={"xsmall"}
+                                                state={"default"}/>
+                                                </Link>
+                                                </span>
+                                        </div>
+                                    )
+                                }
+                                
+                                else if(item[0] === 'state')  {
                                     return (
                                         <div
                                         style={{justifyContent:"center", width: `${headerColumns?.[index]?.width}%`}}
@@ -139,6 +167,14 @@ export default function ListTable({title, subTitle, marginTop, tableMarginTop, h
                                             {item[1] === 'request' && '참여요청'}
                                             {item[1] === 'participation_confirmed' && '참여확정'}
                                             {item[1] === 'participation_rejected' && '거절됨'}
+                                            {item[1] === 'waiting_for_approval' && '승인대기'}
+                                            {item[1] === 'unregistered' && '미등록'}
+                                            {item[1] === 'completed_approval' && '참여확정'
+                                            }
+                                            {item[1] === 'rejected_approval' && '거절됨'
+                                            }
+
+                                            
                                             </span>
                                         </div>
                                     )
@@ -185,6 +221,25 @@ export default function ListTable({title, subTitle, marginTop, tableMarginTop, h
                                             alt={"icon_outlink"}
                                             src={icon_outlink}/>
                                             </Link>
+                                        </div>
+                                    )
+                                } else if(item[0] === 'content_url')  {
+                                    return (
+                                        <div
+                                        style={{justifyContent:"space-between", width: `${headerColumns?.[index]?.width}%`, alignItems: 'center'}}
+                                        className={cx('dataItem', 'link')}
+                                        key={index}>
+                                            <Link
+                                            target={"_blank"}
+                                            href={item[1]}>
+                                            {item[1]}</Link>
+                                            <Image
+                                            onClick={() => copyText(item[1])}
+                                            style={{cursor: 'pointer'}}
+                                            width={20}
+                                            height={20}
+                                            alt={"icon_copy"}
+                                            src={icon_copy}/>
                                         </div>
                                     )
                                 }

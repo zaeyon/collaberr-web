@@ -32,8 +32,8 @@
     width: 100%;
 }
 
-.tableHeader {
-    padding: 0px 4px;
+.headerItem {
+    padding: 0px 8px;
     height: 40px;
     display: flex;
     align-items: center;
@@ -56,12 +56,23 @@
     height: 52px;
     color: var(--gray-gray-600, #536878);
     border-bottom: 1px solid var(--gray-gray-200, #E6EAEF);
+    font-family: 'Pretendard';
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%;
+    letter-spacing: -0.225px;
 }
 
 .dataItem {
-    padding: 0px 0px;
+    padding: 0px 8px;
     display: flex;
     align-items: center;
+
+    &.link {
+        color: var(--gray-gray-500, #8696AB);
+text-decoration-line: underline;
+    }
 }
 
 .dataColumn {
@@ -91,7 +102,7 @@
     white-space: nowrap;
     overflow: hidden;
 
-    &.proceeding, &.participation_confirmed {
+    &.proceeding, &.participation_confirmed, &.completed_approval {
         background-color: #3AB09E;
         color:  #FFF;
     }
@@ -116,15 +127,20 @@
         color: #445462;
     }
 
-    &.request {
+    &.request, &.waiting_for_approval {
         background-color: #E0F5F2;
         color: #3AB09E;
 
     }
 
-    &.participation_rejected {
+    &.participation_rejected, &.rejected_approval {
         background-color: #FEECF0;
         color: #F25476;
+    }
+
+    &.unregistered {
+        background-color: #F1F4F7;
+        color: #445462;
     }
 
 }

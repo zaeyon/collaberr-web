@@ -4,6 +4,7 @@ import {useRouter} from 'next/navigation';
 import {useSetRecoilState} from 'recoil';
 import { useRecoilState } from 'recoil';
 
+import { getCookie } from '../lib/cookie';
 import {userState} from '../recoil/user';
 import { POST_logout, PATCH_youtubeAuth, POST_youtubeChannel } from '../api/auth';
 import { PATCH_editProfile } from '../api/user';
@@ -106,23 +107,22 @@ export default function Setting() {
 
         let editedUser: any = {};
 
-        const accountId = localStorage.getItem("account_id");
-        const accessToken = localStorage.getItem("access_token");
+        const accountId = getCookie("account_id");
 
         if(user.username !== username) editedUser["username"] = username;
         if(user.firstName !== firstName) editedUser["first_name"] = firstName;
         if(user.lastName !== lastName) editedUser["last_name"] = lastName;
 
-        PATCH_editProfile(accountId, accessToken, editedUser)
+        PATCH_editProfile(accountId, editedUser)
         .then((res) => {
             console.log("PATCH_editProfile success", res);
             const currentUser = {
                 isLogin: true,
-                email: res.data.email,
+                email: user.email,
                 username: res.data.username,
                 firstName: res.data.first_name,
                 lastName: res.data.last_name,
-                role: res.data.role,
+                role: user.role,
             }
 
             localStorage.setItem("current_user", JSON.stringify(currentUser));

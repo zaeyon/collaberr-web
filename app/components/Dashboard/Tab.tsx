@@ -44,48 +44,53 @@ const ActiveBorder = styled.div`
 `;
 
 interface props {
-    curTab: string;
+    marginTop: number;
+    root: string;
     changeTab: (tab: string) => void; 
 }
 
-export default function Tab({curTab, changeTab}: props) {
+export default function Tab({changeTab, root, marginTop = 52}: props) {
     const pathname =  usePathname();
+    const pathnameEnd = pathname.split("/")[pathname.split("/").length-1];
 
     return (
-        <Container>
+        <Container
+        style={{marginTop: marginTop}}>
             <Header>
+                {root === "dashboard" && (
                 <TabItem
                 onClick={() => changeTab("/")}>
                     캠페인 현황
-                    {pathname === "/dashboard" && (
+                    {pathnameEnd === "dashboard" && (
                     <ActiveBorder/>
                     )}
                 </TabItem>
+                )}
                 <TabItem
                 onClick={() => changeTab("/overview")}>
                     성과 요약
-                    {pathname === "/dashboard/overview" && (
+                    {pathnameEnd === "overview" && (
                     <ActiveBorder/>
                     )}
                 </TabItem>
                 <TabItem
                 onClick={() => changeTab("/views")}>
                     캠페인 조회
-                    {pathname === "/dashboard/views" && (
+                    {pathnameEnd === "views" && (
                     <ActiveBorder/>
                     )}
                 </TabItem>
                 <TabItem
                 onClick={() => changeTab("/actions")}>
                     캠페인 행동
-                    {pathname === "/dashboard/actions" && (
+                    {pathnameEnd === "actions" && (
                     <ActiveBorder/>
                     )}
                 </TabItem>
                 <TabItem
                 onClick={() => changeTab("/targets")}>
                     캠페인 고객
-                    {pathname === "/dashboard/targets" && (
+                    {pathnameEnd === "targets" && (
                     <ActiveBorder/>
                     )}
                 </TabItem>

@@ -31,8 +31,11 @@ width: 100%;
 padding: 14px 18px;
 border-radius: 8px;
 border: 1px solid #E6EAEF;
-color: #35424C;
+color: ${(props) => props.disabled ? '#D1D7DF' : '#35424C'};
 font-family: 'Pretendard';
+font-size: 15px;
+font-style: normal;
+font-weight: 400;
 
 :hover {
     border: ${(props) => props.disabled ? '1px solid #E6EAEF' : '1px solid #ACB8C8'};
