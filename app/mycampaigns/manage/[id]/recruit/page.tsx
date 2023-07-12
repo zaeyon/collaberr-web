@@ -75,6 +75,7 @@ export default function RecruitManage() {
             clickCheckbox={clickCheckbox}
             clickAllCheckbox={clickAllCheckbox}
             allSelected={allSelected}
+            emptyTitle={"아직 참가를 신청한 크리에이터가 없습니다."}
             />
             <RequestTableFooter>
                 <Button
@@ -95,13 +96,14 @@ export default function RecruitManage() {
             tableMarginTop={8}
             title={"모집된 크리에이터"}
             headerColumns={CREATOR_TABLE_HEADER}
-            data={CONFIRMED_CREATOR_TABLE_DATA}/>
+            data={CONFIRMED_CREATOR_TABLE_DATA}
+            emptyTitle={"아직 참가를 신청한 크리에이터가 없습니다."}/>
             <ListTable
             marginTop={64}
             tableMarginTop={8}
             title={"거절된 크리에이터"}
             headerColumns={CREATOR_TABLE_HEADER}
-            data={REJECTED_CREATOR_TABLE_DATA}/>
+            data={REJECTED_CREATOR_TABLE_DATA}emptyTitle={"아직 참가를 신청한 크리에이터가 없습니다."}/>
         </Container>
     )
 }

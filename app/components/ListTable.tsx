@@ -8,6 +8,7 @@ import classNames from 'classnames/bind';
 import Button from './Button';
 import Tooltip from './Tooltip';
 import Checkbox from './Checkbox';
+import EmptyTable from './EmptyTable';
 
 import icon_youtube from '@/app/assets/icons/icon_youtube.png';
 import icon_instagram from '@/app/assets/icons/icon_instagram.png';
@@ -34,9 +35,12 @@ interface props {
     clickCheckbox?: (index?: number) => void;
     clickAllCheckbox?: () => void;
     allSelected?: boolean;
+    emptyTitle: string;
+    emptyDescrip?: string;
+
 }
 
-export default function ListTable({title, subTitle, marginTop, tableMarginTop, headerColumns, data, clickCheckbox, clickAllCheckbox, allSelected}: props) {
+export default function ListTable({title, subTitle, marginTop, tableMarginTop, headerColumns, data, clickCheckbox, clickAllCheckbox, allSelected, emptyTitle, emptyDescrip}: props) {
 
     const copyText = (text: string) => {
         window.navigator.clipboard.writeText(text);
@@ -259,9 +263,12 @@ export default function ListTable({title, subTitle, marginTop, tableMarginTop, h
                         })}
                     </div>
                 )
-               })
-
-               }
+               })}
+               {data.length === 0 && (
+                <EmptyTable
+                title={emptyTitle}
+                description={emptyDescrip}/>
+               )}
             </div>
 
         </Container>

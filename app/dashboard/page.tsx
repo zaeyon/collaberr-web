@@ -57,7 +57,9 @@ export default function Dashboard() {
             <ListTable
             tableMarginTop={40}
             headerColumns={CAMPAIGN_RAKING_TABLE_HEADER}
-            data={CAMPAIGNS_RANKING_DATA}/>
+            data={CAMPAIGNS_RANKING_DATA}
+            emptyTitle={"아직 등록된 캠페인이 없습니다."}
+            emptyDescrip={"새로운 캠페인을 생성해주세요"}/>
         </Container>
     )
 }

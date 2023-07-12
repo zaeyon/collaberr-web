@@ -76,7 +76,9 @@ export default function MyCampaignList() {
             <DynamicListTable
             data={myCampaigns}
             tableMarginTop={14}
-            headerColumns={MY_CAMPAIGNS_TABLE_HEADER}/>
+            headerColumns={MY_CAMPAIGNS_TABLE_HEADER}
+            emptyTitle={"아직 등록된 캠페인이 없습니다."}
+            emptyDescrip={"새로운 캠페인을 생성해주세요."}/>
         </Container>
     )
 }

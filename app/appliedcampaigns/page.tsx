@@ -11,7 +11,7 @@ export default function AppliedCampaigns() {
     const toastRef = useRef<any>();
 
     useEffect(() => {
-        if(toast.visible) {
+        if(toast.visible && toast.request === "/appliedcampaigns/confirm") {
             toastRef.current?.show();
 
         }
@@ -32,10 +32,10 @@ export default function AppliedCampaigns() {
             tableMarginTop={8}
             headerColumns={MY_CAMPAIGNS_TABLE_HEADER}
             data={MY_CAMPAIGNS_TABLE_DATA}
+            emptyTitle={"아직 참가한 캠페인이 없습니다."}
             />
             <Toast
-            ref={toastRef}
-            message='콘텐츠 승인이 요청 되었습니다.'/>
+            ref={toastRef}/>
         </main>
     )
 }

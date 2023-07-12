@@ -6,10 +6,10 @@ import { useRecoilState } from 'recoil';
 import { toastState } from '../recoil/user';
 
 import icon_check_circle from '@/app/assets/icons/icon_check-circle.png';
-
+import icon_exclamation from '@/app/assets/icons/icon_exclamation.png';
+import icon_warning from '@/app/assets/icons/icon_warning.png';
 
 interface props {
-    message: string;
 }
 
 // eslint-disable-next-line react/display-name
@@ -29,6 +29,7 @@ export const Toast = forwardRef((props: props, ref) => {
                     visible: false,
                     message: "",
                     type: "",
+                    request: "",
                 })
               }
           },
@@ -51,7 +52,7 @@ export const Toast = forwardRef((props: props, ref) => {
 
         setTimeout(() => {
             hide();
-        }, 1300)
+        }, 1500)
     }
 
     const hide =  () => {
@@ -78,7 +79,7 @@ export const Toast = forwardRef((props: props, ref) => {
             width={24}
             height={24}
             alt={"icon_check_circle"}
-            src={toast.type === "confirm" ? icon_check_circle : ""}/>
+            src={toast.type === 'confirm' ? icon_check_circle : toast.type === 'exclamation' ? icon_exclamation : toast.type === 'warning' ? icon_warning : icon_check_circle}/>
             {toast.message}
         </animated.div>
     )

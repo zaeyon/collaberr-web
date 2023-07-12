@@ -22,7 +22,8 @@ export default function Confirm() {
             setToast({
                 visible: true,
                 message: "캠페인 승인이 요청되었습니다",
-                type: "confirm"
+                type: "confirm",
+                request: "/appliedcampaigns/confirm"
             })
         }, 300)
 

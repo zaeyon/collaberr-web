@@ -12,6 +12,9 @@ import {userState} from '../recoil/user';
 
 const Container = styled.div`
 padding-bottom: 50px;
+
+display: flex;
+justify-content: center;
 `;
  
 export default function Signup() {

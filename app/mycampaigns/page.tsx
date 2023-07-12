@@ -1,5 +1,5 @@
 'use client';
-import {useEffect, useState} from 'react';
+import {useEffect, useRef} from 'react';
 import {headers} from 'next/headers'
 import styles from './page.module.scss';
 import { useRecoilState } from 'recoil';
@@ -8,11 +8,23 @@ import { baseUrl } from '../api';
 import MyCampaignList from '../components/MyCampaignList';
 import { GET_showMyCampaigns } from '../api/campaign';
 import { myCampaignsState } from '../recoil/campaign';
+import { Toast } from '../components/Toast';
+import { toastState } from '../recoil/user';
 
 
 
 export default function MyCampaigns() {
     const [myCampaigns, setMyCampaigns] = useRecoilState(myCampaignsState);
+    const [toast, setToast] = useRecoilState(toastState);
+    const toastRef = useRef<any>();
+
+    useEffect(() => {
+        if(toast.visible && toast.request === "/mycampaigns/create") {
+            toastRef.current?.show();
+
+        }
+
+    }, [toast])
 
     useEffect(() => {
         GET_showMyCampaigns()
@@ -31,6 +43,8 @@ export default function MyCampaigns() {
             <h1>My Campaigns</h1>
             <div className={styles.description}>Manage your campaigns.</div>
             <MyCampaignList/>
+            <Toast
+            ref={toastRef}/>
         </main>
     )
 }

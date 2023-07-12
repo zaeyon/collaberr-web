@@ -3,9 +3,10 @@ import {campaignType} from '@/app/type/campaign';
 
 interface props {
     campaignItem: campaignType;
+    clickJoinCampaign: () => void;
 }
 
-export default function JoinCampaign({campaignItem}: props) {
+export default function JoinCampaign({campaignItem, clickJoinCampaign}: props) {
     return (
         <div
         className={styles.joinContainer}>
@@ -53,6 +54,7 @@ export default function JoinCampaign({campaignItem}: props) {
                 </div>
             </div>
             <div
+            onClick={() => clickJoinCampaign()}
             className={styles.joinButton}>
               Join Campaign  
             </div>
