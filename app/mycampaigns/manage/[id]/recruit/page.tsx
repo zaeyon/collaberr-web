@@ -1,8 +1,10 @@
 'use client';
 import {useState, useCallback, useEffect} from 'react';
 import styled from '@emotion/styled';
-import { useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import {useRouter} from 'next/navigation';
+
+import { GET_showCreatorForCampaign } from '@/app/api/campaign';
 
 import ManageTab from '@/app/components/Manage/ManageTab';
 import Scoreboard from '@/app/components/Dashboard/Scoreboard';
@@ -23,17 +25,56 @@ const RequestTableFooter = styled.div`
 `;
 
 export default function RecruitManage() {
-    const [requestedCreatorArr, setRequestedCreatorArr] = useState(CAMPAIGN_JOIN_REQUEST_TABLE_DATA);
+    const [requestedCreatorArr, setRequestedCreatorArr] = useState<any>([]);
+    const [approvedCreatorArr, setApprovedCreatorArr] = useState<any>([]);
+    const [declinedCreatorArr, setDeclinedCreatorArr] = useState<any>([]);
+    const [selectedCreatorArr, setSelectedCreatorArr] = useState<number[]>([]);
     const [allSelected, setAllSelected] = useState(false);
+    
     const router = useRouter();
+    const params =  useParams();
+
+    useEffect(() => {
+        console.log("RecruitManage params", params);
+        GET_showCreatorForCampaign(Number(params.id))
+        .then((res) => {
+            console.log("GET_showCreatorForCampaign res", res)
+            setRequestedCreatorArr(res.data.requested.map((item: any) => {
+                return {
+                    selected: false,
+                    ...item,
+                }
+            }));
+            setApprovedCreatorArr(res.data.approved);
+            setDeclinedCreatorArr(res.data.declined);
+        })
+        .catch((err) => {
+            console.log("GET_showCreatorForCampaign err", err);
+        })
+    }, [])
 
    
 
     const clickCheckbox = useCallback((index?: number) => {
         let tmpArr = [...requestedCreatorArr];
         tmpArr[index ? index : 0].selected = !tmpArr[index ? index : 0].selected;
-        setRequestedCreatorArr(tmpArr);
+
         
+        setSelectedCreatorArr((prev) => {
+            if(!prev.includes(tmpArr[index ? index : 0].id)) {
+                return [
+                    ...prev,
+                    tmpArr[index ? index : 0].id
+                ]
+            } else {
+                const removeIndex = prev.findIndex((item: any) => item.id === tmpArr[index ? index : 0].id);
+                prev.splice(removeIndex, 1);
+
+                return prev;
+            }
+        })
+
+        setRequestedCreatorArr(tmpArr);
     }, [requestedCreatorArr])
 
     const clickAllCheckbox = useCallback(() => {
@@ -48,6 +89,7 @@ export default function RecruitManage() {
             })
 
             setRequestedCreatorArr(unSelectedArr);
+            setSelectedCreatorArr([]);
         } else {
             setAllSelected(true);
             const selectedArr = tmpArr.map((item) => {
@@ -57,6 +99,7 @@ export default function RecruitManage() {
                 }
             })
             setRequestedCreatorArr(selectedArr)
+            setSelectedCreatorArr(requestedCreatorArr.map((item: any) => item.id))
         }
     }, [requestedCreatorArr, allSelected])
 
@@ -82,13 +125,13 @@ export default function RecruitManage() {
                 label={"참여 거절"}
                 style={"tertiery"}
                 size={"small"}
-                state={"default"}
+                state={selectedCreatorArr.length > 0 ? "default" : "disabled"}
                 />
                 <Button
                 label={"참여 확정"}
                 style={"primary"}
                 size={"small"}
-                state={"default"}
+                state={selectedCreatorArr.length > 0 ? "default" : "disabled"}
                 />
             </RequestTableFooter>
             <ListTable
@@ -96,14 +139,15 @@ export default function RecruitManage() {
             tableMarginTop={8}
             title={"모집된 크리에이터"}
             headerColumns={CREATOR_TABLE_HEADER}
-            data={CONFIRMED_CREATOR_TABLE_DATA}
-            emptyTitle={"아직 참가를 신청한 크리에이터가 없습니다."}/>
+            data={approvedCreatorArr}
+            emptyTitle={"모집된 크리에이터가 없습니다."}/>
             <ListTable
             marginTop={64}
             tableMarginTop={8}
             title={"거절된 크리에이터"}
             headerColumns={CREATOR_TABLE_HEADER}
-            data={REJECTED_CREATOR_TABLE_DATA}emptyTitle={"아직 참가를 신청한 크리에이터가 없습니다."}/>
+            data={declinedCreatorArr}
+            emptyTitle={"거절된 크리에이터가 없습니다."}/>
         </Container>
     )
 }

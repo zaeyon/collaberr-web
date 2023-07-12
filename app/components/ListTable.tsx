@@ -67,7 +67,7 @@ export default function ListTable({title, subTitle, marginTop, tableMarginTop, h
                     {headerColumns.map((item, index) => {
                         return (
                             <div
-                            style={{width: `${item.width}%`, justifyContent: item.label === "Campaign" || item.label === "크리에이터" || item.label === "콘텐츠 링크" ? "flex-start" : "center"}}
+                            style={{width: item.label === 'selected' ? 40 : `${item.width}%`, justifyContent: item.label === "Campaign" || item.label === "크리에이터" || item.label === "콘텐츠 링크" ? "flex-start" : "center"}}
                             className={styles.headerItem}
                             key={index}>
                                 {item.label === "selected" && (
@@ -200,7 +200,7 @@ export default function ListTable({title, subTitle, marginTop, tableMarginTop, h
                                 } else if(item[0] === 'selected')  {
                                     return (
                                         <div
-                                        style={{justifyContent:"center", width: `${headerColumns?.[index]?.width}%`}}
+                                        style={{justifyContent:"center", width: 40}}
                                         className={styles.dataItem}
                                         key={index}>
                                             <Checkbox

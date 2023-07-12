@@ -38,3 +38,11 @@ export const PATCH_editCampaign = (campaignId: number, editedCampaign: campaignT
 
     return response;
 }
+
+export const GET_showCreatorForCampaign = (campaignId: number) => {
+    const promise = axios.get(`${baseUrl}/api/campaigns/${campaignId}/creator/all`)
+    const response = promise.then((res) => res);
+
+    return response;
+}
+
