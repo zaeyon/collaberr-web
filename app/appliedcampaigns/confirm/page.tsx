@@ -7,7 +7,7 @@ import { useSetRecoilState } from 'recoil';
 import InfoInput from '@/app/components/InfoInput';
 import Button from '@/app/components/Button';
 import { toastState } from '@/app/recoil/user';
-import {Toast} from '@/app/components/Toast';
+import Toast from '@/app/components/Toast';
 
 export default function Confirm() {
     const setToast = useSetRecoilState(toastState);

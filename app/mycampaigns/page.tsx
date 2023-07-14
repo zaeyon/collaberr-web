@@ -8,7 +8,7 @@ import { baseUrl } from '../api';
 import MyCampaignList from '../components/MyCampaignList';
 import { GET_showMyCampaigns } from '../api/campaign';
 import { myCampaignsState } from '../recoil/campaign';
-import { Toast } from '../components/Toast';
+import Toast from '../components/Toast';
 import { toastState } from '../recoil/user';
 
 

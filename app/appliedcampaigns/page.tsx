@@ -4,7 +4,7 @@ import { useRecoilState } from 'recoil';
 import { toastState } from '../recoil/user';
 
 import ListTable from "../components/ListTable"
-import { Toast } from "../components/Toast";
+import Toast from "../components/Toast";
 
 export default function AppliedCampaigns() {
     const [toast, setToast] = useRecoilState(toastState);

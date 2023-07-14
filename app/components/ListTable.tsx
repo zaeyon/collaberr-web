@@ -168,9 +168,9 @@ export default function ListTable({title, subTitle, marginTop, tableMarginTop, h
                                             {item[1] === 'recruiting' && '모집중'}
                                             {item[1] === 'writing' && '작성중'}
                                             {item[1] === 'progress_complete' && '진행완료'}
-                                            {item[1] === 'request' && '참여요청'}
-                                            {item[1] === 'participation_confirmed' && '참여확정'}
-                                            {item[1] === 'participation_rejected' && '거절됨'}
+                                            {item[1] === 'request_recruit' && '참여요청'}
+                                            {item[1] === 'approve_recruit' && '참여확정'}
+                                            {item[1] === 'decline_recruit' && '거절됨'}
                                             {item[1] === 'waiting_for_approval' && '승인대기'}
                                             {item[1] === 'unregistered' && '미등록'}
                                             {item[1] === 'completed_approval' && '참여확정'

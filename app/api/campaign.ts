@@ -46,3 +46,16 @@ export const GET_showCreatorForCampaign = (campaignId: number) => {
     return response;
 }
 
+export const PUT_setCreatorsState = (campaignId: string, creatorIds: number [], state: string) => {
+    console.log("PUT_setCreatorsState campaignId", campaignId);
+    console.log("PUT_setCreatorsState creatorIds", creatorIds);
+    console.log("PUT_setCreatorsState state", state);
+    const promise = axios.put(`${baseUrl}/api/campaigns/${campaignId}/creator/?state=${state}`, {
+        creator_ids: String(creatorIds),
+    })
+
+    const response = promise.then((res) => res);
+
+    return response;
+}
+

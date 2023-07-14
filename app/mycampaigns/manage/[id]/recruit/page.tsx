@@ -4,12 +4,13 @@ import styled from '@emotion/styled';
 import { useParams } from 'next/navigation';
 import {useRouter} from 'next/navigation';
 
-import { GET_showCreatorForCampaign } from '@/app/api/campaign';
+import { GET_showCreatorForCampaign, PUT_setCreatorsState } from '@/app/api/campaign';
 
 import ManageTab from '@/app/components/Manage/ManageTab';
 import Scoreboard from '@/app/components/Dashboard/Scoreboard';
 import ListTable from '@/app/components/ListTable';
 import Button from '@/app/components/Button';
+import Toast from '@/app/components/Toast';
 
 const Container = styled.div`
     
@@ -28,7 +29,7 @@ export default function RecruitManage() {
     const [requestedCreatorArr, setRequestedCreatorArr] = useState<any>([]);
     const [approvedCreatorArr, setApprovedCreatorArr] = useState<any>([]);
     const [declinedCreatorArr, setDeclinedCreatorArr] = useState<any>([]);
-    const [selectedCreatorArr, setSelectedCreatorArr] = useState<number[]>([]);
+    const [selectedCreatorArr, setSelectedCreatorArr] = useState<any []>([]);
     const [allSelected, setAllSelected] = useState(false);
     
     const router = useRouter();
@@ -42,11 +43,22 @@ export default function RecruitManage() {
             setRequestedCreatorArr(res.data.requested.map((item: any) => {
                 return {
                     selected: false,
+                    state: 'request_recruit',
                     ...item,
                 }
             }));
-            setApprovedCreatorArr(res.data.approved);
-            setDeclinedCreatorArr(res.data.declined);
+            setApprovedCreatorArr(res.data.approved.map((item: any) => {
+                return {
+                    state: 'approve_recruit',
+                    ...item,
+                }
+            }));
+            setDeclinedCreatorArr(res.data.declined.map((item: any) => {
+                return {
+                    state: 'decline_recruit',
+                    ...item,
+                }
+            }));
         })
         .catch((err) => {
             console.log("GET_showCreatorForCampaign err", err);
@@ -61,13 +73,14 @@ export default function RecruitManage() {
 
         
         setSelectedCreatorArr((prev) => {
-            if(!prev.includes(tmpArr[index ? index : 0].id)) {
+            if(!prev.includes(tmpArr[index ? index : 0])) {
                 return [
                     ...prev,
-                    tmpArr[index ? index : 0].id
+                    tmpArr[index ? index : 0]
                 ]
             } else {
-                const removeIndex = prev.findIndex((item: any) => item.id === tmpArr[index ? index : 0].id);
+                const removeIndex = prev.findIndex((item: any) => item === tmpArr[index ? index : 0]);
+
                 prev.splice(removeIndex, 1);
 
                 return prev;
@@ -99,9 +112,51 @@ export default function RecruitManage() {
                 }
             })
             setRequestedCreatorArr(selectedArr)
-            setSelectedCreatorArr(requestedCreatorArr.map((item: any) => item.id))
+            setSelectedCreatorArr(requestedCreatorArr.map((item: any) => item))
         }
+
     }, [requestedCreatorArr, allSelected])
+
+    const clickSetCreatorsState = (state: string) => {
+        const selectedCreatorIdArr = selectedCreatorArr.map((item) => item.id);
+
+        PUT_setCreatorsState(params.id, selectedCreatorIdArr, state)
+        .then((res) => {
+            console.log("PUT_setCreatorsState res", res);
+            setAllSelected(false);
+            setSelectedCreatorArr([]);
+            setRequestedCreatorArr((prev :any) => 
+                 prev.filter((item: any) => !item.selected)
+            )            
+
+            if(state === "approve") {
+                
+                const tmpCreatorArr = selectedCreatorArr.map((item) => {
+                    delete item.selected;
+                    return {
+                        ...item,
+                        state: 'approve_recruit'
+                    };
+                })
+
+                setApprovedCreatorArr((prev: any) => prev.concat(tmpCreatorArr));
+            }
+            if(state === "decline") {
+
+                const tmpCreatorArr = selectedCreatorArr.map((item) => {
+                    delete item.selected;
+                    return {
+                        ...item,
+                        state: "decline_recruit"
+                    }
+                })
+                setDeclinedCreatorArr((prev: any) => prev.concat(tmpCreatorArr));
+            }
+        })
+        .catch((err) => {
+            console.log("PUT_setCreatorsState err", err);
+        })
+    }
 
     return (
         <Container>
@@ -122,12 +177,14 @@ export default function RecruitManage() {
             />
             <RequestTableFooter>
                 <Button
+                onClick={() => clickSetCreatorsState("decline")}
                 label={"참여 거절"}
                 style={"tertiery"}
                 size={"small"}
                 state={selectedCreatorArr.length > 0 ? "default" : "disabled"}
                 />
                 <Button
+                onClick={() => clickSetCreatorsState("approve")}
                 label={"참여 확정"}
                 style={"primary"}
                 size={"small"}
@@ -148,6 +205,7 @@ export default function RecruitManage() {
             headerColumns={CREATOR_TABLE_HEADER}
             data={declinedCreatorArr}
             emptyTitle={"거절된 크리에이터가 없습니다."}/>
+            <Toast/>
         </Container>
     )
 }

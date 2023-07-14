@@ -11,7 +11,7 @@ import CampaignDetail from '@/app/components/CampaignDetail';
 import JoinCampaign from '@/app/components/JoinCampaign';
 import { campaignType } from '@/app/type/campaign';
 
-import { Toast } from '@/app/components/Toast';
+import Toast from '@/app/components/Toast';
 
 export default function Page({params}: {params: {id: number}}) {
     const [toast, setToast] = useRecoilState(toastState);
@@ -53,7 +53,7 @@ export default function Page({params}: {params: {id: number}}) {
             setToast({
                 visible: true,
                 message: "Successfully applied.",
-                type: "exclamation",
+                type: "confirm",
                 request: "/campaigns/joincampaign"
             })
 

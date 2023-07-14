@@ -13,7 +13,7 @@ interface props {
 }
 
 // eslint-disable-next-line react/display-name
-export const Toast = forwardRef((props: props, ref) => {
+ const Toast = forwardRef((props: props, ref) => {
     const [toast, setToast] = useRecoilState(toastState);
 
     const [springs, api] = useSpring(() => ({
@@ -85,3 +85,4 @@ export const Toast = forwardRef((props: props, ref) => {
     )
 });
 
+export default Toast;
