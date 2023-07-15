@@ -5,7 +5,7 @@ import icon_exit from '@/app/assets/icons/icon_exit.png';
 import Button from './Button';
 
 const Container = styled.div`
-    z-index: 2;
+    z-index: 4;
     position: fixed;
     top: 0;
     left: 0;

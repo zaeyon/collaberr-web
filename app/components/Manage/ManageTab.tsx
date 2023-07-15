@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 
 import Button from '../Button';
 import icon_exit from '@/app/assets/icons/icon_exit.png';
+import { campaignType } from '@/app/type/campaign';
 
 interface TabItemProps {
     readonly isActive: boolean;
@@ -63,13 +64,14 @@ interface props {
     moveToCampaignDetail: () => void;
     changeTab: (tab: string) => void;
     pathname: string;
+    campaignItem: campaignType;
 }
 
-export default function ManageTab({moveToCampaignDetail, changeTab, pathname}: props) {
+export default function ManageTab({moveToCampaignDetail, changeTab, pathname, campaignItem}: props) {
     return (
         <Container>
             <Header>
-                <h2>신상 굿즈(슬리퍼+비치백 세트), 신제품(NEW 쉬림프) 출시 홍보 캠페인</h2>
+                <h2>{campaignItem.title}</h2>
                 <Button
                 onClick={moveToCampaignDetail}
                 style={"tertiery"}
@@ -78,7 +80,7 @@ export default function ManageTab({moveToCampaignDetail, changeTab, pathname}: p
                 label={"캠페인 보기"}/>
             </Header>
             <DateDiv>
-            2023.00.00 - 2023.00.00
+            {campaignItem.start_date} - {campaignItem.end_date}
             </DateDiv>
             <TabsDiv>
                 <TabItem

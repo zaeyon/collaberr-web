@@ -12,6 +12,8 @@ import { userState } from '../recoil/user';
 import { getCookie } from '../lib/cookie';
 
 const Container = styled.div`
+display: flex;
+justify-content: center;
 `;
 
 export default function Login() {

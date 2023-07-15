@@ -31,7 +31,8 @@ export default function Overview() {
             marginTop={64}
             tableMarginTop={28}
             headerColumns={TOP_CREATOR_TABLE_HEADER}
-            data={TOP_CREATOP_TABLE_DATA}/>
+            data={TOP_CREATOP_TABLE_DATA}
+            emptyTitle={"아직 등록된 크리에이터가 없습니다."}/>
         </Container>
     )
 }

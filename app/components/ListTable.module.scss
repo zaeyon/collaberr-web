@@ -102,7 +102,7 @@ text-decoration-line: underline;
     white-space: nowrap;
     overflow: hidden;
 
-    &.proceeding, &.participation_confirmed, &.completed_approval {
+    &.proceeding, &.approve_recruit, &.completed_approval {
         background-color: #3AB09E;
         color:  #FFF;
     }
@@ -127,13 +127,13 @@ text-decoration-line: underline;
         color: #445462;
     }
 
-    &.request, &.waiting_for_approval {
+    &.request_recruit, &.waiting_for_approval {
         background-color: #E0F5F2;
         color: #3AB09E;
 
     }
 
-    &.participation_rejected, &.rejected_approval {
+    &.decline_recruit, &.rejected_approval {
         background-color: #FEECF0;
         color: #F25476;
     }

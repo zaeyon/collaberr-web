@@ -26,6 +26,7 @@ export default function Overview() {
             changeTab={changeTab}
             graphData={graphData}/>
             <ListTable
+            emptyTitle={"아직 참가를 신청한 크리에이터가 없습니다."}
             title={"TOP 크리에이터"}
             subTitle={"2023.00.00 기준"}
             marginTop={64}

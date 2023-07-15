@@ -2,6 +2,7 @@
 import React, {useState, useEffect, useRef} from 'react';
 import styled from '@emotion/styled';
 import { useRouter } from 'next/navigation';
+import { useSetRecoilState } from 'recoil';
 
 import CampaignPreview from '@/app/components/CampaignPreview';
 import CamapignForm from '@/app/components/CampaignForm';
@@ -9,6 +10,8 @@ import ConfirmModal from '@/app/components/ConfirmModal';
 import { getFormattedDate } from '@/app/lib/date';
 import { POST_createCampaign } from '@/app/api/campaign';
 import { campaignType } from '@/app/type/campaign';
+import { toastState } from '@/app/recoil/user';
+
 
 const Container = styled.div`
 `;
@@ -47,11 +50,14 @@ export default function Create() {
     const [period, setPeriod] = useState("");
 
     const [isVisModal, setIsVisModal] = useState<boolean>(false);
+    
+    const setToast = useSetRecoilState(toastState); 
 
     const router = useRouter();
 
     const shownRecruitStartDate = useRef("");
     const shownRecruitEndDate = useRef("");
+
 
     useEffect(() => {
         if(brandName && title && thumbnailImageFile && category !== 'default' && platform && startDate  && recruitEndDate && description && missionType !== "default" && bid) {
@@ -99,6 +105,15 @@ export default function Create() {
         .then((res) => {
             console.log("POST_createCampaign success", res)
             router.push('/mycampaigns');
+            
+            setToast({
+                visible: true,
+                message: "Campaign registered successfully!",
+                type: "confirm",
+                request: "/mycampaigns/create"
+            })
+
+            
         })
         .catch((err) => {
             console.log("POST_createCampaign err", err)

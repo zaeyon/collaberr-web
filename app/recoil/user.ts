@@ -23,5 +23,11 @@ export const toastState = atom({
         visible: false,
         message: "",
         type: "",
+        request: "",
     }
+})
+
+export const isVisSidebarState = atom({
+    key: 'isVisSidebarState',
+    default: true
 })

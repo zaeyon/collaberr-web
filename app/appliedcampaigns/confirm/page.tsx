@@ -7,7 +7,7 @@ import { useSetRecoilState } from 'recoil';
 import InfoInput from '@/app/components/InfoInput';
 import Button from '@/app/components/Button';
 import { toastState } from '@/app/recoil/user';
-import {Toast} from '@/app/components/Toast';
+import Toast from '@/app/components/Toast';
 
 export default function Confirm() {
     const setToast = useSetRecoilState(toastState);
@@ -22,7 +22,8 @@ export default function Confirm() {
             setToast({
                 visible: true,
                 message: "캠페인 승인이 요청되었습니다",
-                type: "confirm"
+                type: "confirm",
+                request: "/appliedcampaigns/confirm"
             })
         }, 300)
 

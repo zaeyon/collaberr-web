@@ -1,13 +1,16 @@
 'use client';
 import {useState, useCallback, useEffect} from 'react';
 import styled from '@emotion/styled';
-import { useSearchParams } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import {useRouter} from 'next/navigation';
+
+import { GET_showCreatorForCampaign, PUT_setCreatorsState } from '@/app/api/campaign';
 
 import ManageTab from '@/app/components/Manage/ManageTab';
 import Scoreboard from '@/app/components/Dashboard/Scoreboard';
 import ListTable from '@/app/components/ListTable';
 import Button from '@/app/components/Button';
+import Toast from '@/app/components/Toast';
 
 const Container = styled.div`
     
@@ -23,17 +26,68 @@ const RequestTableFooter = styled.div`
 `;
 
 export default function RecruitManage() {
-    const [requestedCreatorArr, setRequestedCreatorArr] = useState(CAMPAIGN_JOIN_REQUEST_TABLE_DATA);
+    const [requestedCreatorArr, setRequestedCreatorArr] = useState<any>([]);
+    const [approvedCreatorArr, setApprovedCreatorArr] = useState<any>([]);
+    const [declinedCreatorArr, setDeclinedCreatorArr] = useState<any>([]);
+    const [selectedCreatorArr, setSelectedCreatorArr] = useState<any []>([]);
     const [allSelected, setAllSelected] = useState(false);
+    
     const router = useRouter();
+    const params =  useParams();
+
+    useEffect(() => {
+        console.log("RecruitManage params", params);
+        GET_showCreatorForCampaign(Number(params.id))
+        .then((res) => {
+            console.log("GET_showCreatorForCampaign res", res)
+            setRequestedCreatorArr(res.data.requested.map((item: any) => {
+                return {
+                    selected: false,
+                    state: 'request_recruit',
+                    ...item,
+                }
+            }));
+            setApprovedCreatorArr(res.data.approved.map((item: any) => {
+                return {
+                    state: 'approve_recruit',
+                    ...item,
+                }
+            }));
+            setDeclinedCreatorArr(res.data.declined.map((item: any) => {
+                return {
+                    state: 'decline_recruit',
+                    ...item,
+                }
+            }));
+        })
+        .catch((err) => {
+            console.log("GET_showCreatorForCampaign err", err);
+        })
+    }, [])
 
    
 
     const clickCheckbox = useCallback((index?: number) => {
         let tmpArr = [...requestedCreatorArr];
         tmpArr[index ? index : 0].selected = !tmpArr[index ? index : 0].selected;
-        setRequestedCreatorArr(tmpArr);
+
         
+        setSelectedCreatorArr((prev) => {
+            if(!prev.includes(tmpArr[index ? index : 0])) {
+                return [
+                    ...prev,
+                    tmpArr[index ? index : 0]
+                ]
+            } else {
+                const removeIndex = prev.findIndex((item: any) => item === tmpArr[index ? index : 0]);
+
+                prev.splice(removeIndex, 1);
+
+                return prev;
+            }
+        })
+
+        setRequestedCreatorArr(tmpArr);
     }, [requestedCreatorArr])
 
     const clickAllCheckbox = useCallback(() => {
@@ -48,6 +102,7 @@ export default function RecruitManage() {
             })
 
             setRequestedCreatorArr(unSelectedArr);
+            setSelectedCreatorArr([]);
         } else {
             setAllSelected(true);
             const selectedArr = tmpArr.map((item) => {
@@ -57,8 +112,51 @@ export default function RecruitManage() {
                 }
             })
             setRequestedCreatorArr(selectedArr)
+            setSelectedCreatorArr(requestedCreatorArr.map((item: any) => item))
         }
+
     }, [requestedCreatorArr, allSelected])
+
+    const clickSetCreatorsState = (state: string) => {
+        const selectedCreatorIdArr = selectedCreatorArr.map((item) => item.id);
+
+        PUT_setCreatorsState(params.id, selectedCreatorIdArr, state)
+        .then((res) => {
+            console.log("PUT_setCreatorsState res", res);
+            setAllSelected(false);
+            setSelectedCreatorArr([]);
+            setRequestedCreatorArr((prev :any) => 
+                 prev.filter((item: any) => !item.selected)
+            )            
+
+            if(state === "approve") {
+                
+                const tmpCreatorArr = selectedCreatorArr.map((item) => {
+                    delete item.selected;
+                    return {
+                        ...item,
+                        state: 'approve_recruit'
+                    };
+                })
+
+                setApprovedCreatorArr((prev: any) => prev.concat(tmpCreatorArr));
+            }
+            if(state === "decline") {
+
+                const tmpCreatorArr = selectedCreatorArr.map((item) => {
+                    delete item.selected;
+                    return {
+                        ...item,
+                        state: "decline_recruit"
+                    }
+                })
+                setDeclinedCreatorArr((prev: any) => prev.concat(tmpCreatorArr));
+            }
+        })
+        .catch((err) => {
+            console.log("PUT_setCreatorsState err", err);
+        })
+    }
 
     return (
         <Container>
@@ -75,19 +173,22 @@ export default function RecruitManage() {
             clickCheckbox={clickCheckbox}
             clickAllCheckbox={clickAllCheckbox}
             allSelected={allSelected}
+            emptyTitle={"아직 참가를 신청한 크리에이터가 없습니다."}
             />
             <RequestTableFooter>
                 <Button
+                onClick={() => clickSetCreatorsState("decline")}
                 label={"참여 거절"}
                 style={"tertiery"}
                 size={"small"}
-                state={"default"}
+                state={selectedCreatorArr.length > 0 ? "default" : "disabled"}
                 />
                 <Button
+                onClick={() => clickSetCreatorsState("approve")}
                 label={"참여 확정"}
                 style={"primary"}
                 size={"small"}
-                state={"default"}
+                state={selectedCreatorArr.length > 0 ? "default" : "disabled"}
                 />
             </RequestTableFooter>
             <ListTable
@@ -95,13 +196,16 @@ export default function RecruitManage() {
             tableMarginTop={8}
             title={"모집된 크리에이터"}
             headerColumns={CREATOR_TABLE_HEADER}
-            data={CONFIRMED_CREATOR_TABLE_DATA}/>
+            data={approvedCreatorArr}
+            emptyTitle={"모집된 크리에이터가 없습니다."}/>
             <ListTable
             marginTop={64}
             tableMarginTop={8}
             title={"거절된 크리에이터"}
             headerColumns={CREATOR_TABLE_HEADER}
-            data={REJECTED_CREATOR_TABLE_DATA}/>
+            data={declinedCreatorArr}
+            emptyTitle={"거절된 크리에이터가 없습니다."}/>
+            <Toast/>
         </Container>
     )
 }

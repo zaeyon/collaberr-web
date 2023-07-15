@@ -69,6 +69,8 @@ export default function ContentManage() {
             clickCheckbox={clickCheckbox}
             clickAllCheckbox={clickAllCheckbox}
             allSelected={allSelected}
+            emptyTitle={"아직 업로드 예정인 콘텐츠가 없습니다."}
+            emptyDescrip={"크리에이터 참가가 확정되면 목록에 나타납니다."}
             />
             <RequestTableFooter>
                 <Button
@@ -89,13 +91,17 @@ export default function ContentManage() {
             tableMarginTop={8}
             title={"승인이 완료된 콘텐츠"}
             headerColumns={CONTENT_TABLE_HEADER}
-            data={CONFIRMED_CONTENT_TABLE_DATA}/>
+            data={CONFIRMED_CONTENT_TABLE_DATA}
+            emptyTitle={"아직 업로드 예정인 콘텐츠가 없습니다."}
+            emptyDescrip={"크리에이터 참가가 확정되면 목록에 나타납니다."}/>
             <ListTable
             marginTop={48}
             tableMarginTop={8}
             title={"승인이 거부된 콘텐츠"}
             headerColumns={CONTENT_TABLE_HEADER}
-            data={REJECTED_CONTENT_TABLE_DATA}/>
+            data={REJECTED_CONTENT_TABLE_DATA}
+            emptyTitle={"아직 업로드 예정인 콘텐츠가 없습니다."}
+            emptyDescrip={"크리에이터 참가가 확정되면 목록에 나타납니다."}/>
         </Container>
     )
 }

@@ -3,9 +3,9 @@ import styles from './TopBar.module.scss';
 import Image from 'next/image';
 import Link from 'next/link';
 import { deleteCookie } from '../lib/cookie';
-import { POST_logout } from '../api/auth';
+import { POST_logout, POST_refreshToken } from '../api/auth';
 import {useRecoilState} from 'recoil';
-import {userState, isVisDropdownState} from '../recoil/user';
+import {userState, isVisDropdownState, isVisSidebarState} from '../recoil/user';
 import {useRouter} from 'next/navigation';
 
 import Dropdown from './Dropdown';
@@ -15,13 +15,16 @@ import collaberr_icon from '../assets/collaberr_icon.png';
 import hamburger_icon from '../assets/icons/icon_hamburger.png';
 
 interface props {
-    onClickHamburger: () => void;
 }
 
-export default function TopBar({onClickHamburger}: props) {
+export default function TopBar({}: props) {
     const [user, setUser] = useRecoilState(userState);
     const [isVisDropdown, setIsVisDropdown] = useRecoilState(isVisDropdownState);
+    const [isVisSidebar, setIsVisSidebar] = useRecoilState(isVisSidebarState);
+
     const router = useRouter();
+
+    
 
     useEffect(() => {
       if(localStorage.getItem("current_user")) {
@@ -79,8 +82,16 @@ export default function TopBar({onClickHamburger}: props) {
 
     const clickUsername = () => {
       setIsVisDropdown(!isVisDropdown)
-
     }
+
+    const clickLogin = () => {
+      setIsVisSidebar(false);
+    }
+
+
+  const clickHamburger = () => {
+    setIsVisSidebar(!isVisSidebar);
+  }
 
     return (
         <div
@@ -88,7 +99,7 @@ export default function TopBar({onClickHamburger}: props) {
             <div>
                 <Image
                 style={{cursor: 'pointer'}}
-                onClick={() => onClickHamburger()}
+                onClick={() => clickHamburger()}
                 width={24}
                 height={24}
                 src={hamburger_icon}
@@ -126,6 +137,7 @@ export default function TopBar({onClickHamburger}: props) {
             )}
             {!user.isLogin && (
                 <Link
+                onClick={() => clickLogin()}
                 href={"/login"}
                 className={styles.login}>
                 Login

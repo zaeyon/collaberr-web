@@ -94,7 +94,9 @@ export default function Setting() {
         PATCH_youtubeAuth(channelName)
         .then((res) => {
             console.log("PATCH_youtubeAuth success", res)
-            window.open(res.data.authorization_url, '_blank');
+            //window.open(res.data.authorization_url, '_blank');
+            window.open("http://localhost:3001/youtubeConfirm")
+
         })
         .catch((err) => {
             console.log("PATCH_youtubeAuth err", err);

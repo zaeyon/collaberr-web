@@ -15,6 +15,7 @@ export default function Checkbox({clickCheckbox, selected, index}: props) {
     if(selected) {
         return (
         <Image
+        style={{cursor: "pointer"}}
         onClick={() => clickCheckbox(index)}
         width={24}
         height={24}
