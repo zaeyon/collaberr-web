@@ -10,19 +10,10 @@ export default function YoutubeConfirmTest() {
     const router = useRouter();
 
     useEffect(() => {
-        console.log("YoutubeConfirm useEffect");
-        const accessToken = localStorage.getItem('access_token');
-
-        GET_youtubeConfirm(accessToken)
-        .then((res) => {
-            console.log("GET_youtubeConfirm success", res)
-            deleteCookie("credentials");
-        })
-        .catch((err) => {
-            console.log("GET_youtubeConfirm err", err);
-        })
-
+        console.log("window.close()")
+        window.close();
     }, [])
+    
     return (
         <main>
             <h1>Youtube Confirm Page</h1>
