@@ -5,6 +5,7 @@ import CreatorDetail from "../components/Creators/CreatorDetail";
 
 export default function Creators() {
   const [isVisCreatorDetail, setIsVisCreatorDetail] = useState(false);
+  const [curTab, setCurTab] = useState("follower");
 
   const openCreatorDetail = () => {
     setIsVisCreatorDetail(true);
@@ -14,12 +15,20 @@ export default function Creators() {
     setIsVisCreatorDetail(false);
   };
 
+  const changeTab = (tab: string) => {
+    setCurTab(tab);
+  };
+
   return (
     <main>
       <h1>Creators</h1>
       <CreatorList openCreatorDetail={openCreatorDetail} />
       {isVisCreatorDetail && (
-        <CreatorDetail clickModalOutside={clickModalOutside} />
+        <CreatorDetail
+          curTab={curTab}
+          changeTab={changeTab}
+          clickModalOutside={clickModalOutside}
+        />
       )}
     </main>
   );

@@ -1,12 +1,16 @@
 "use client";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { animated, useSpring } from "@react-spring/web";
-import { useEffect } from "react";
 import styled from "@emotion/styled";
 import Link from "next/link";
 import Image from "next/image";
 
+import { GET_channelVideos } from "@/app/api/youtube";
+import Tab from "./Tab/Tab";
 import Button from "../Button";
 import icon_profile_default from "@/app/assets/icons/icon_profile-fill.png";
+import { set } from "cypress/types/lodash";
 
 const Container = styled.div`
   top: 0;
@@ -116,10 +120,29 @@ const MainInfoDivider = styled.div`
 `;
 
 interface props {
+  curTab: string;
+  changeTab: (tab: string) => void;
   clickModalOutside: () => void;
 }
 
-export default function CreatorDetail({ clickModalOutside }: props) {
+export default function CreatorDetail({
+  clickModalOutside,
+  curTab,
+  changeTab,
+}: props) {
+  const [channelVideos, setChannelVideos] = useState([]);
+
+  useEffect(() => {
+    GET_channelVideos("UCOByc6akvw27KbJ1p9jn3BQ")
+      .then((res) => {
+        console.log("GET_channelVideos success", res);
+        setChannelVideos(res.data.items);
+      })
+      .catch((err) => {
+        console.log("GET_channelVideos err", err);
+      });
+  }, []);
+
   useEffect(() => {
     console.log("Creator Detaul Open");
     api.start({
@@ -146,13 +169,15 @@ export default function CreatorDetail({ clickModalOutside }: props) {
       <Container onClick={() => clickModalOutside()}></Container>
       <animated.div
         style={{
-          padding: "64px 16px 100px 16px",
+          padding: "64px 16px 0px 16px",
           position: "fixed",
           zIndex: 5,
+          bottom: 0,
           top: 0,
           backgroundColor: "white",
           height: "100%",
           width: 984,
+          overflowY: "scroll",
           ...modalSprings,
         }}
       >
@@ -212,6 +237,12 @@ export default function CreatorDetail({ clickModalOutside }: props) {
             <MainInfoValue>{"2023.12.22"}</MainInfoValue>
           </MainInfoItem>
         </MainInfoListDiv>
+        <Tab
+          marginTop={40}
+          curTab={curTab}
+          changeTab={changeTab}
+          channelVideos={channelVideos}
+        />
       </animated.div>
     </>
   );
