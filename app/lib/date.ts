@@ -1,9 +1,9 @@
-export const getFormattedDate = (date: any) => {
+export const getFormattedDate = (date: any, separator: string) => {
     const year = date.getFullYear();
     const month = leftPad(date.getMonth() + 1);
     const day = leftPad(date.getDate());
 
-    return [year, month, day].join("-");
+    return [year, month, day].join(separator);
 
 }
 

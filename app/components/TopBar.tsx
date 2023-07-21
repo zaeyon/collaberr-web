@@ -1,36 +1,64 @@
-import { useEffect, useState } from 'react';
-import styles from './TopBar.module.scss'; 
-import Image from 'next/image';
-import Link from 'next/link';
-import { deleteCookie } from '../lib/cookie';
-import { POST_logout, POST_refreshToken } from '../api/auth';
-import {useRecoilState} from 'recoil';
-import {userState, isVisDropdownState, isVisSidebarState} from '../recoil/user';
-import {useRouter} from 'next/navigation';
+import { useEffect, useState } from "react";
+import styles from "./TopBar.module.scss";
+import Image from "next/image";
+import Link from "next/link";
+import { deleteCookie } from "../lib/cookie";
+import { POST_logout, POST_refreshToken } from "../api/auth";
+import { useRecoilState } from "recoil";
+import {
+  userState,
+  isVisDropdownState,
+  isVisSidebarState,
+} from "../recoil/user";
+import { useRouter } from "next/navigation";
 
-import Dropdown from './Dropdown';
+import Dropdown from "./Dropdown";
 
-import collaberr_logo from '../assets/collaberr_logo.png';
-import collaberr_icon from '../assets/collaberr_icon.png';
-import hamburger_icon from '../assets/icons/icon_hamburger.png';
+import collaberr_logo from "../assets/collaberr_logo.png";
+import collaberr_icon from "../assets/collaberr_icon.png";
+import hamburger_icon from "../assets/icons/icon_hamburger.png";
 
-interface props {
-}
+interface props {}
 
 export default function TopBar({}: props) {
-    const [user, setUser] = useRecoilState(userState);
-    const [isVisDropdown, setIsVisDropdown] = useRecoilState(isVisDropdownState);
-    const [isVisSidebar, setIsVisSidebar] = useRecoilState(isVisSidebarState);
+  const [user, setUser] = useRecoilState(userState);
+  const [isVisDropdown, setIsVisDropdown] = useRecoilState(isVisDropdownState);
+  const [isVisSidebar, setIsVisSidebar] = useRecoilState(isVisSidebarState);
 
-    const router = useRouter();
+  const router = useRouter();
 
-    
+  useEffect(() => {
+    if (localStorage.getItem("current_user")) {
+      const currentUser = JSON.parse(
+        localStorage.getItem("current_user") || "{}"
+      );
+      setUser(currentUser);
+    } else {
+      setUser({
+        isLogin: false,
+        email: "",
+        username: "",
+        firstName: "",
+        lastName: "",
+        role: "",
+      });
+    }
+  }, [setUser]);
 
-    useEffect(() => {
-      if(localStorage.getItem("current_user")) {
-        const currentUser = JSON.parse(localStorage.getItem("current_user") || '{}')
-        setUser(currentUser)
-      } else {
+  const dropdownItems = [
+    {
+      label: "계정 설정",
+      onClick: () => {
+        setIsVisDropdown(false);
+        router.push("/setting");
+      },
+    },
+    {
+      label: "로그아웃",
+      onClick: () => {
+        localStorage.removeItem("current_user");
+        localStorage.removeItem("account_id");
+
         setUser({
           isLogin: false,
           email: "",
@@ -38,112 +66,80 @@ export default function TopBar({}: props) {
           firstName: "",
           lastName: "",
           role: "",
-        })
-      }
-    }, [setUser])
+        });
 
-    const dropdownItems = [
-      {
-        label: '계정 설정',
-        onClick: () => {
-          setIsVisDropdown(false);
-          router.push('/setting');
-        }
-      },
-      {
-        label: '로그아웃',
-        onClick: () => {
-          localStorage.removeItem("current_user");
-          localStorage.removeItem("account_id");
+        router.push("/");
 
-          setUser({
-              isLogin: false,
-              email: "",
-              username: "",
-              firstName: "",
-              lastName: "",
-              role: "",
-          })
+        deleteCookie("csrftoken");
 
-          router.push('/');
-
-          deleteCookie("csrftoken");
-
-          POST_logout()
+        POST_logout()
           .then((res) => {
-              console.log("POST_logout success", res);
+            console.log("POST_logout success", res);
           })
           .catch((err) => {
-              console.log("POST_logout fail", err);
-          })
-        }
-      }
-    ]
+            console.log("POST_logout fail", err);
+          });
+      },
+    },
+  ];
 
-    const clickUsername = () => {
-      setIsVisDropdown(!isVisDropdown)
-    }
+  const clickUsername = () => {
+    setIsVisDropdown(!isVisDropdown);
+  };
 
-    const clickLogin = () => {
-      setIsVisSidebar(false);
-    }
-
+  const clickLogin = () => {
+    //setIsVisSidebar(false);
+  };
 
   const clickHamburger = () => {
     setIsVisSidebar(!isVisSidebar);
-  }
+  };
 
-    return (
-        <div
-        className={styles.container}>
-            <div>
-                <Image
-                style={{cursor: 'pointer'}}
-                onClick={() => clickHamburger()}
-                width={24}
-                height={24}
-                src={hamburger_icon}
-                alt={"hamburger_icon"}/>
-            <Link
-            className={styles.homeLink}
-            href={"/"}>
-            <div>
-                <Image
-                width={24}
-                height={24}
-                className={styles.collaberrIcon}
-                src={collaberr_icon}
-                alt={"collaberr-icon"}/>
-                <Image
-                width={114.4}
-                height={21.6}
-                className={styles.collaberrLogo}
-                src={collaberr_logo}
-                alt={"collaberr-logo"}/>
-            </div>
-            </Link>
-            </div>
-            {user.isLogin && (
-                <div
-                onClick={() => clickUsername()}
-                className={styles.username}>
-                {user.username}
-                {isVisDropdown && (
-                  <Dropdown
-                  items={dropdownItems}
-                  />
-                )}
-                </div>
-            )}
-            {!user.isLogin && (
-                <Link
-                onClick={() => clickLogin()}
-                href={"/login"}
-                className={styles.login}>
-                Login
-                </Link>
-            )}
+  return (
+    <div className={styles.container}>
+      <div>
+        <Image
+          style={{ cursor: "pointer" }}
+          onClick={() => clickHamburger()}
+          width={24}
+          height={24}
+          src={hamburger_icon}
+          alt={"hamburger_icon"}
+        />
+        <Link className={styles.homeLink} href={"/"}>
+          <div>
+            <Image
+              width={24}
+              height={24}
+              className={styles.collaberrIcon}
+              src={collaberr_icon}
+              alt={"collaberr-icon"}
+            />
+            <Image
+              width={114.4}
+              height={21.6}
+              className={styles.collaberrLogo}
+              src={collaberr_logo}
+              alt={"collaberr-logo"}
+            />
+          </div>
+        </Link>
+      </div>
+      {user.isLogin && (
+        <div onClick={() => clickUsername()} className={styles.username}>
+          {user.username}
+          {isVisDropdown && <Dropdown items={dropdownItems} />}
         </div>
-    )
+      )}
+      {!user.isLogin && (
+        <Link
+          onClick={() => clickLogin()}
+          href={"/login"}
+          className={styles.login}
+        >
+          Login
+        </Link>
+      )}
+    </div>
+  );
 }
-

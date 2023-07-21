@@ -30,6 +30,6 @@
     ".next/types/**/*.ts",
     "app/mycampaigns/page.tsx",
     "server/index.js"
-  ],
+, "app/components/Skeleton/Card.jsx"  ],
   "exclude": ["node_modules"]
 }
