@@ -32,7 +32,7 @@ export default function Create() {
   const [platform, setPlarform] = useState("");
   const [description, setDescription] = useState("");
   const [missionType, setMissionType] = useState("default");
-  const [bid, setBid] = useState<number>();
+  const [bid, setBid] = useState<any>("");
   const [files, setFiles] = useState<any>([]);
   const [curProgress, setCurProgress] = useState<number>(1);
   const [isInvaildForm, setInvaildForm] = useState<boolean>(true);
@@ -63,18 +63,14 @@ export default function Create() {
       category !== "default" &&
       platform &&
       startDate &&
+      endDate &&
       recruitEndDate &&
+      recruitStartDate &&
       description &&
       missionType !== "default" &&
       bid
     ) {
-      if (period && period !== "Custom") {
-        setInvaildForm(false);
-      } else if (period === "Custom" && endDate) {
-        setInvaildForm(false);
-      } else {
-        setInvaildForm(true);
-      }
+      setInvaildForm(false);
     } else {
       setInvaildForm(true);
     }
@@ -113,7 +109,7 @@ export default function Create() {
       platform,
       start_date: shownStartDate,
       end_date: shownEndDate,
-      recruit_start_date: "2000-11-11",
+      recruit_start_date: shownRecruitStartDate.current,
       recruit_end_date: shownRecruitEndDate.current,
       description,
       mission_type: missionType,

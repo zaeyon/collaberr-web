@@ -2,22 +2,32 @@
 import { useEffect, useState } from "react";
 import styles from "./page.module.scss";
 import { useRecoilState } from "recoil";
+import dynamic from "next/dynamic";
 
+import { baseUrl } from "../api";
 import { GET_showAllCampaigns } from "../api/campaign";
 import { allCampaignsState } from "../recoil/campaign";
 import CampaignGrid from "../components/CampaignGrid";
 import Card from "../components/Skeleton/Card";
 
+const CampaignCardGrid = dynamic(() => import("../components/CampaignGrid"), {
+  ssr: false,
+});
+
 export default function Campaigns() {
   const [allCampaigns, setAllCampaigns] = useRecoilState(allCampaignsState);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(
+    allCampaigns.length > 0 ? false : true
+  );
 
   useEffect(() => {
+    console.time("GET_showAllCampaigns");
     GET_showAllCampaigns()
       .then((res) => {
+        console.timeEnd("GET_showAllCampaigns");
         console.log("GET_showAllCampaigns sucess", res);
         setLoading(false);
-        setAllCampaigns(res?.data);
+        setAllCampaigns(res);
       })
       .catch((err) => {
         setLoading(false);

@@ -5,7 +5,7 @@ import Card from "./Skeleton/Card";
 
 interface props {
   campaignArr: any;
-  loading: boolean;
+  loading?: boolean;
 }
 
 export default function CampaignGrid({ campaignArr, loading }: props) {

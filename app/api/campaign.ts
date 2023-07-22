@@ -1,3 +1,4 @@
+import {cache} from 'react';
 import axios, {baseUrl} from '.';
 import { campaignType } from '../type/campaign';
 import { POST_refreshToken } from './auth';
@@ -10,11 +11,13 @@ export const POST_createCampaign = (newCampaign: campaignType) => {
     return response
 }
 
-export const GET_showAllCampaigns = () => {
-    const promise = axios.get(`${baseUrl}/api/campaigns/all/`);
-    const response = promise
-    .then((res) => res);
-    return response;
+export const GET_showAllCampaigns = async () => {
+    const res = await fetch(`${baseUrl}/api/campaigns/all/`);
+    //const response = promise.then((res) => res);
+    if(!res.ok) {
+       throw Error("Error");
+    }
+    return res.json();
 }
 
 export const GET_showMyCampaigns = () => {
