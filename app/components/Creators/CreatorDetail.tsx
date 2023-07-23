@@ -6,11 +6,12 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 import Image from "next/image";
 
-import { GET_channelVideos } from "@/app/api/youtube";
+import { GET_channelVideos, GET_channelInfo } from "@/app/api/youtube";
+import { getYoutubeTopic, getCountryName } from "@/app/lib/youtube";
+import { getFormattedDate } from "@/app/lib/date";
 import Tab from "./Tab/Tab";
 import Button from "../Button";
 import icon_profile_default from "@/app/assets/icons/icon_profile-fill.png";
-import { set } from "cypress/types/lodash";
 
 const Container = styled.div`
   top: 0;
@@ -45,6 +46,10 @@ const Header = styled.div`
 const ProfileDiv = styled.div`
   display: flex;
   flex-direction: row;
+`;
+
+const ProfileImage = styled(Image)`
+  border-radius: 100px;
 `;
 
 const ChannelNameDiv = styled.span`
@@ -130,9 +135,19 @@ export default function CreatorDetail({
   curTab,
   changeTab,
 }: props) {
+  const [channelInfo, setChannelInfo] = useState<any>({});
   const [channelVideos, setChannelVideos] = useState([]);
 
   useEffect(() => {
+    GET_channelInfo("UCOByc6akvw27KbJ1p9jn3BQ")
+      .then((res) => {
+        console.log("GET_channelInfo success", res);
+        setChannelInfo(res.data.items[0]);
+      })
+      .catch((err) => {
+        console.log("GET_channelInfo err", err);
+      });
+
     GET_channelVideos("UCOByc6akvw27KbJ1p9jn3BQ")
       .then((res) => {
         console.log("GET_channelVideos success", res);
@@ -183,19 +198,23 @@ export default function CreatorDetail({
       >
         <Header>
           <ProfileDiv>
-            <Image
+            <ProfileImage
               width={64}
               height={64}
-              src={icon_profile_default}
+              src={
+                channelInfo?.snippet?.thumbnails.medium.url
+                  ? channelInfo?.snippet?.thumbnails.medium.url
+                  : icon_profile_default
+              }
               alt={"icon_profile_default"}
             />
             <ChannelNameDiv>
-              <Name>누가영Nugayoung</Name>
-              <Handle>@nugayoung6857</Handle>
+              <Name>{channelInfo?.snippet?.title}</Name>
+              <Handle>{channelInfo?.snippet?.customUrl}</Handle>
             </ChannelNameDiv>
           </ProfileDiv>
           <Link
-            href={"https://www.youtube.com/@nugayoung6857"}
+            href={`https://www.youtube.com/${channelInfo?.snippet?.customUrl}`}
             target={"_blank"}
           >
             <Button
@@ -207,34 +226,51 @@ export default function CreatorDetail({
           </Link>
         </Header>
         <CategoryListDiv>
-          {["뷰티", "라이프"].map((item, index) => {
-            return <CategoryItem key={index}>{item}</CategoryItem>;
-          })}
+          {channelInfo?.topicDetails?.topicIds.map(
+            (item: string, index: number) => {
+              return (
+                <CategoryItem key={index}>{getYoutubeTopic(item)}</CategoryItem>
+              );
+            }
+          )}
         </CategoryListDiv>
         <MainInfoListDiv>
           <MainInfoItem>
             <MainInfoLabel>{"구독자"}</MainInfoLabel>
-            <MainInfoValue>{"156,223명"}</MainInfoValue>
+            <MainInfoValue>{`${Number(
+              channelInfo?.statistics?.subscriberCount
+            ).toLocaleString()}명`}</MainInfoValue>
           </MainInfoItem>
           <MainInfoDivider />
           <MainInfoItem>
             <MainInfoLabel>{"총 조회수"}</MainInfoLabel>
-            <MainInfoValue>{"3,290,045회"}</MainInfoValue>
+            <MainInfoValue>{`${Number(
+              channelInfo?.statistics?.viewCount
+            ).toLocaleString()}회`}</MainInfoValue>
           </MainInfoItem>
           <MainInfoDivider />
           <MainInfoItem>
             <MainInfoLabel>{"등록 영상"}</MainInfoLabel>
-            <MainInfoValue>{"35개"}</MainInfoValue>
+            <MainInfoValue>{`${Number(
+              channelInfo?.statistics?.videoCount
+            ).toLocaleString()}개`}</MainInfoValue>
           </MainInfoItem>
           <MainInfoDivider />
           <MainInfoItem>
-            <MainInfoLabel>{"국개"}</MainInfoLabel>
-            <MainInfoValue>{"대한민국"}</MainInfoValue>
+            <MainInfoLabel>{"국가"}</MainInfoLabel>
+            <MainInfoValue>
+              {getCountryName(channelInfo?.snippet?.country)}
+            </MainInfoValue>
           </MainInfoItem>
           <MainInfoDivider />
           <MainInfoItem>
             <MainInfoLabel>{"가입일"}</MainInfoLabel>
-            <MainInfoValue>{"2023.12.22"}</MainInfoValue>
+            <MainInfoValue>
+              {getFormattedDate(
+                new Date(channelInfo?.snippet?.publishedAt),
+                "."
+              )}
+            </MainInfoValue>
           </MainInfoItem>
         </MainInfoListDiv>
         <Tab
