@@ -14,3 +14,29 @@ function leftPad(value: number) {
 
     return `0${value}`;
 }
+
+export const getElapsedTime = (date: string) => {
+    
+    const startDate: any = new Date(date);
+    const endDate: any = new Date();
+
+    const diff = (endDate - startDate) / 1000;
+
+    const times = [
+        {name: '년', ms: 60 * 60 * 24 * 365},
+        {name: '월', ms: 60 * 60 * 24 * 30},
+        {name: '일', ms: 60 * 60 * 24},
+        {name: '시간', ms: 60 * 60},
+        {name: '분', ms: 60},
+    ]
+
+    for(const time of times) {
+        const betTime = Math.floor(diff / time.ms);
+
+        if(betTime > 0) {
+            return `${betTime}${time.name} 전`
+        }
+    }
+
+    return '방금 전'
+}

@@ -6,9 +6,13 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 import Image from "next/image";
 
-import { GET_channelVideos, GET_channelInfo } from "@/app/api/youtube";
+import {
+  GET_channelVideos,
+  GET_channelInfo,
+  GET_channelVideosPublisedAfter,
+} from "@/app/api/youtube";
 import { getYoutubeTopic, getCountryName } from "@/app/lib/youtube";
-import { getFormattedDate } from "@/app/lib/date";
+import { getFormattedDate, getElapsedTime } from "@/app/lib/date";
 import Tab from "./Tab/Tab";
 import Button from "../Button";
 import icon_profile_default from "@/app/assets/icons/icon_profile-fill.png";
@@ -137,8 +141,44 @@ export default function CreatorDetail({
 }: props) {
   const [channelInfo, setChannelInfo] = useState<any>({});
   const [channelVideos, setChannelVideos] = useState([]);
+  const [uploadAnalysis, setUploadAnalysis] = useState({
+    recentlyUploadCount: 0,
+    monthlyUploadCount: {},
+    recentlyUploadElapsedTime: "",
+  });
 
   useEffect(() => {
+    const nowDate: any = new Date();
+    const prevDate = new Date(nowDate);
+    let uploadForYear: any = {};
+    let recentlyUploadCount = 0;
+
+    prevDate.setFullYear(nowDate.getFullYear() - 1);
+    console.log("1년 전", prevDate.toISOString());
+    console.log("nowDate.getMonth()", nowDate.getMonth());
+
+    if (nowDate.getMonth() + 1 === 12) {
+      for (let i = 1; i <= 12; i++) {
+        uploadForYear[`${nowDate.getFullYear()}년 ${i}월`] = 0;
+      }
+    } else {
+      for (let i = 1; i <= 12; i++) {
+        if (i < 12 - Number(nowDate.getMonth())) {
+          console.log("i <= 12 - nowDate.getMonth() + 1", i);
+          uploadForYear[
+            `${nowDate.getFullYear() - 1}년 ${nowDate.getMonth() + 1 + i}월`
+          ] = 0;
+        } else {
+          console.log("i", i);
+          uploadForYear[
+            `${nowDate.getFullYear()}년 ${i - nowDate.getMonth() + 1}월`
+          ] = 0;
+        }
+      }
+    }
+
+    console.log("monthsForYear", uploadForYear);
+
     GET_channelInfo("UCOByc6akvw27KbJ1p9jn3BQ")
       .then((res) => {
         console.log("GET_channelInfo success", res);
@@ -152,9 +192,51 @@ export default function CreatorDetail({
       .then((res) => {
         console.log("GET_channelVideos success", res);
         setChannelVideos(res.data.items);
+        setUploadAnalysis((prev) => {
+          return {
+            ...prev,
+            recentlyUploadElapsedTime: getElapsedTime(
+              res.data.items[0].snippet.publishedAt
+            ),
+          };
+        });
       })
       .catch((err) => {
         console.log("GET_channelVideos err", err);
+      });
+
+    GET_channelVideosPublisedAfter(
+      "UCOByc6akvw27KbJ1p9jn3BQ",
+      prevDate.toISOString()
+    )
+      .then((res: any) => {
+        console.log("GET_channelVideosPublisedAfter success", res);
+        res.forEach((video: any) => {
+          const year = new Date(video.snippet.publishedAt).getFullYear();
+          const month = new Date(video.snippet.publishedAt).getMonth() + 1;
+          const monthPrevDate = new Date(nowDate);
+
+          if (
+            new Date(video.snippet.publishedAt) >
+            new Date(monthPrevDate.setMonth(nowDate.getMonth() - 1))
+          ) {
+            recentlyUploadCount += 1;
+          }
+          uploadForYear[`${year}년 ${month}월`] += 1;
+        });
+
+        console.log("uploadForYear 할당", uploadForYear);
+
+        setUploadAnalysis((prev) => {
+          return {
+            ...prev,
+            recentlyUploadCount: recentlyUploadCount,
+            monthlyUploadCount: uploadForYear,
+          };
+        });
+      })
+      .catch((err: any) => {
+        console.log("GET_channelVideosPublisedAfter err", err);
       });
   }, []);
 
@@ -278,6 +360,7 @@ export default function CreatorDetail({
           curTab={curTab}
           changeTab={changeTab}
           channelVideos={channelVideos}
+          uploadAnalysis={uploadAnalysis}
         />
       </animated.div>
     </>
