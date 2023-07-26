@@ -40,3 +40,10 @@ export const getElapsedTime = (date: string) => {
 
     return '방금 전'
 }
+
+export const getDday = (date: string) => {
+    const endDate: any = new Date(date);
+    const nowDate: any = new Date();
+
+    return Math.ceil((endDate - nowDate)/(1000*60*60*24));
+}

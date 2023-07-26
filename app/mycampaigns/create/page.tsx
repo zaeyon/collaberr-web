@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "@emotion/styled";
 import { useRouter } from "next/navigation";
-import { useSetRecoilState } from "recoil";
+import { useSetRecoilState, useRecoilState } from "recoil";
 
 import CampaignPreview from "@/app/components/CampaignPreview";
 import CamapignForm from "@/app/components/CampaignForm";
@@ -48,7 +48,7 @@ export default function Create() {
 
   const [isVisModal, setIsVisModal] = useState<boolean>(false);
 
-  const setToast = useSetRecoilState(toastState);
+  const [toast, setToast] = useRecoilState(toastState);
 
   const router = useRouter();
 
@@ -122,12 +122,14 @@ export default function Create() {
         console.log("POST_createCampaign success", res);
         router.push("/mycampaigns");
 
-        setToast({
-          visible: true,
-          message: "Campaign registered successfully!",
-          type: "confirm",
-          request: "/mycampaigns/create",
-        });
+        if (!toast.visible) {
+          setToast({
+            visible: true,
+            message: "Campaign registered successfully!",
+            type: "confirm",
+            request: "/mycampaigns/create",
+          });
+        }
       })
       .catch((err) => {
         console.log("POST_createCampaign err", err);
