@@ -12,10 +12,13 @@ import JoinCampaign from "@/app/components/JoinCampaign";
 import { campaignType } from "@/app/type/campaign";
 
 import Toast from "@/app/components/Toast";
+import ReviewCreatorInfoModal from "@/app/components/ReviewCreatorInfoModal";
 
 export default function Page({ params }: { params: { id: number } }) {
   const [toast, setToast] = useRecoilState(toastState);
   const [isBookmark, setIsBookmark] = useState(false);
+  const [isReviewCreatorInfoModal, setIsReviewCreatorInfoModal] =
+    useState(false);
   const toastRef = useRef<any>();
 
   const [campaignItem, setCampaignItem] = useState<campaignType>({
@@ -38,7 +41,7 @@ export default function Page({ params }: { params: { id: number } }) {
   useEffect(() => {
     GET_showCampaign(params.id)
       .then((res) => {
-        console.log("GET_shownCampaign success", res);
+        console.log("GET_showCampaign success", res);
         setCampaignItem(res.data);
       })
       .catch((err) => {
@@ -47,6 +50,10 @@ export default function Page({ params }: { params: { id: number } }) {
   }, []);
 
   const clickJoinCampaign = () => {
+    setIsReviewCreatorInfoModal(true);
+  };
+
+  const submitJoinCampaign = () => {
     POST_joinCampaign(params.id)
       .then((res) => {
         console.log("POST_joinCampaign success", res);
@@ -58,11 +65,11 @@ export default function Page({ params }: { params: { id: number } }) {
             request: "/campaigns/joincampaign",
           });
           toastRef.current.show();
+          setIsReviewCreatorInfoModal(false);
         }
       })
       .catch((err) => {
         console.log("POST_joinCampaign err", err);
-
         if (!toast.visible) {
           setToast({
             visible: true,
@@ -73,6 +80,10 @@ export default function Page({ params }: { params: { id: number } }) {
           toastRef.current.show();
         }
       });
+  };
+
+  const closeModal = () => {
+    setIsReviewCreatorInfoModal(false);
   };
 
   const clickBookmark = () => {
@@ -113,6 +124,12 @@ export default function Page({ params }: { params: { id: number } }) {
         clickJoinCampaign={clickJoinCampaign}
       />
       <Toast ref={toastRef} />
+      {isReviewCreatorInfoModal && (
+        <ReviewCreatorInfoModal
+          closeModal={closeModal}
+          submitJoinCampaign={submitJoinCampaign}
+        />
+      )}
     </main>
   );
 }

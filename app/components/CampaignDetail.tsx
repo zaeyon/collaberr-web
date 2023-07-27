@@ -23,8 +23,8 @@ interface props {
   missionType: string;
   bid: number | undefined;
   files: any;
-  isBookmark: boolean;
-  clickBookmark: () => void;
+  isBookmark?: boolean;
+  clickBookmark?: () => void;
 }
 
 export default function CampaignDetail({
@@ -65,7 +65,10 @@ export default function CampaignDetail({
         <div className={styles.brandName}>
           {brandName ? brandName : "Brand Name"}
           {type === "detail" && (
-            <p onClick={() => clickBookmark()} className={styles.bookmark}>
+            <p
+              onClick={() => (clickBookmark ? clickBookmark() : "")}
+              className={styles.bookmark}
+            >
               <Image
                 style={{
                   marginRight: 4,

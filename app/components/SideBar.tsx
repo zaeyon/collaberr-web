@@ -18,7 +18,8 @@ export default function SideBar() {
         display:
           pathname === "/login" ||
           pathname === "/signup" ||
-          pathname === "/passwordreset"
+          pathname === "/passwordreset" ||
+          pathname === "/setting"
             ? "none"
             : "flex",
       }}

@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useSetRecoilState } from "recoil";
 import { useRecoilState } from "recoil";
+import styled from "@emotion/styled";
 
 import { getCookie } from "../lib/cookie";
 import { userState } from "../recoil/user";
@@ -16,6 +17,13 @@ import SettingForm from "../components/SettingForm";
 import { userType } from "../type";
 import { deleteCookie } from "../lib/cookie";
 import axios from "axios";
+
+const Container = styled.div`
+  padding-bottom: 1350px;
+
+  display: flex;
+  justify-content: center;
+`;
 
 export default function Setting() {
   const [user, setUser] = useRecoilState(userState);
@@ -178,8 +186,7 @@ export default function Setting() {
   };
 
   return (
-    <main>
-      <h1>Settings</h1>
+    <Container>
       <SettingForm
         clickEdit={clickEdit}
         submitEdit={submitEdit}
@@ -207,6 +214,6 @@ export default function Setting() {
         clickAddiEdit={clickAddiEdit}
         submitAddiEdit={submitAddiEdit}
       />
-    </main>
+    </Container>
   );
 }

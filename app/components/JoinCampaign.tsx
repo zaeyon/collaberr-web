@@ -23,9 +23,9 @@ export default function JoinCampaign({
         <div className={styles.subItem}>
           <div className={styles.subLabel}>모집 마감일</div>
           <div className={styles.subValue}>
-            {campaignItem.end_date}
+            {campaignItem.recruit_end_date}
             <span className={styles.addInfo}>
-              {"D-" + getDday(campaignItem.end_date)}
+              {"D-" + getDday(campaignItem.recruit_end_date)}
             </span>
           </div>
         </div>

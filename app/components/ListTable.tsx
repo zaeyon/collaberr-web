@@ -72,7 +72,8 @@ export default function ListTable({
                     item.label === "Campaign" ||
                     item.label === "크리에이터" ||
                     item.label === "콘텐츠 링크" ||
-                    item.label === "채널명"
+                    item.label === "채널명" ||
+                    item.label === "캠페인명"
                       ? "flex-start"
                       : "center",
                 }}

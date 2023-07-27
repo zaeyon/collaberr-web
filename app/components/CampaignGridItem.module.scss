@@ -5,6 +5,15 @@
 
 }
 
+.thumbnailDiv {
+    position: relative;
+
+    width:309px;
+    height:180px;
+    border-radius: 16px;
+    background-color: #F1F4F7;
+}
+
 .thumbnail {
     width:309px;
     height:180px;
@@ -32,6 +41,26 @@
 }
 
 .platformIcon {
-    margin-top: 8px;
     border-radius: 100;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+}
+
+.bookmarkIcon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    opacity: 0.3;
+}
+
+.viewCount {
+    margin-top: 10px;
+    color:  #8696AB;
+    font-family: 'Pretendard';
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%; /* 20.8px */
+    letter-spacing: -0.195px;
 }

@@ -1,4 +1,5 @@
-export const getFormattedDate = (date: any, separator: string) => {
+export const getFormattedDate = (tmpDate: any, separator: string) => {
+    const date = new Date(tmpDate);
     const year = date.getFullYear();
     const month = leftPad(date.getMonth() + 1);
     const day = leftPad(date.getDate());

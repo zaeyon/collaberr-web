@@ -2,6 +2,7 @@ import React, { forwardRef, useState } from "react";
 import styled from "@emotion/styled";
 import Image from "next/image";
 import DatePicker from "react-datepicker";
+import { addDays } from "date-fns";
 import "react-datepicker/dist/react-datepicker.css";
 
 import icon_calendar from "../assets/icons/icon_calendar.png";
@@ -181,6 +182,16 @@ export default function PeriodPicker({
     )
   );
 
+  const getAfterDates = (startDate: any) => {
+    let dates = [startDate];
+
+    for (let i = 0; i < 1000; i++) {
+      dates.push(addDays(startDate, i));
+    }
+
+    return dates;
+  };
+
   return (
     <Container label={label}>
       {label && (
@@ -208,6 +219,7 @@ export default function PeriodPicker({
           selected={startDate}
           dateFormat="yyyy-MM-dd"
           onChange={(date) => changeStartDate(date)}
+          includeDates={getAfterDates(new Date())}
           customInput={<CustomDatePicker />}
         />
         {type === "period" && <DateDivider>{"-"}</DateDivider>}
@@ -216,6 +228,7 @@ export default function PeriodPicker({
             placeholderText="End date"
             dateFormat="yyyy-MM-dd"
             selected={endDate}
+            includeDates={getAfterDates(new Date(startDate))}
             onChange={(date) => changeEndDate(date)}
             customInput={<CustomDatePicker />}
           />
