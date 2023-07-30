@@ -1,6 +1,6 @@
 "use client";
 
-import styles from "./CampaignGridItem.module.scss";
+import styles from "./CampaignCard.module.scss";
 import { motion, MotionConfig } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -15,7 +15,7 @@ interface props {
   campaign: any;
 }
 
-export default function GampaignGridItem({ campaign }: props) {
+export default function CampaignCard({ campaign }: props) {
   const thumbnailAni = {
     initial: { boxShadow: "0px 0px 0px 0px" },
     animate: {
