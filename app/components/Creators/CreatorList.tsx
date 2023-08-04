@@ -3,7 +3,9 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 
 import ListTable from "../ListTable";
+import CreatorsTableItem from "./CreatorsTableItem";
 import default_profile_image from "@/app/assets/icons/icon_profile-fill.png";
+import SkeletonCreatorsTableItem from "../loader/SkeletonCreatorsTableItem";
 
 interface PlatformItemProps {
   platform: string;
@@ -38,10 +40,16 @@ const PlatformItem = styled.div<PlatformItemProps>`
 `;
 
 interface props {
-  openCreatorDetail: () => void;
+  loading: boolean;
+  allCreatorsData: any;
+  openCreatorDetail: (channelId: string) => void;
 }
 
-export default function CreatorList({ openCreatorDetail }: props) {
+export default function CreatorList({
+  loading,
+  openCreatorDetail,
+  allCreatorsData,
+}: props) {
   const [curPlatform, setCurPlatform] = useState("youtube");
 
   const changeCurPlatform = (platform: string) => {
@@ -59,7 +67,8 @@ export default function CreatorList({ openCreatorDetail }: props) {
           유튜브
         </PlatformItem>
         <PlatformItem
-          onClick={() => changeCurPlatform("instagram")}
+          style={{ cursor: "default", userSelect: "none" }}
+          onClick={() => 0}
           platform={"instagram"}
           curPlatform={curPlatform}
         >
@@ -67,18 +76,34 @@ export default function CreatorList({ openCreatorDetail }: props) {
         </PlatformItem>
       </SelectPlatformDiv>
       <ListTable
+        loading={loading}
         marginTop={48}
         tableMarginTop={8}
         headerColumns={CREATORS_TABLE_HEADER}
-        data={CREATORS_TABLE_DATA}
+        data={allCreatorsData}
         emptyTitle={"아직 등록된 크리에이터가 없습니다."}
-        openCreatorDetail={openCreatorDetail}
+        renderTableItem={(item: any) => (
+          <CreatorsTableItem
+            key={item.channel_id}
+            creatorData={item}
+            openCreatorDetail={openCreatorDetail}
+          />
+        )}
+        renderSkeletonItem={() => <SkeletonCreatorsTableItem />}
       />
     </Container>
   );
 }
 
 const CREATORS_TABLE_HEADER = [
+  {
+    label: "channelId",
+    width: 0,
+  },
+  {
+    label: "profileImage",
+    width: 0,
+  },
   {
     label: "채널명",
     width: "29.16",

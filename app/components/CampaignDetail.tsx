@@ -57,7 +57,7 @@ export default function CampaignDetail({
             <Image
               className={styles.thumbnailImage}
               fill={true}
-              src={thumbnail}
+              src={thumbnailImageSrc}
               alt={"campaign_thumbnail"}
             />
           )}

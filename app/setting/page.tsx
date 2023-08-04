@@ -110,9 +110,11 @@ export default function Setting() {
       .then((res) => {
         console.log("PATCH_youtubeAuth success", res);
         window.open(res.data.authorization_url, "_blank");
+        window.close();
       })
       .catch((err) => {
         console.log("PATCH_youtubeAuth err", err);
+        window.close();
       });
   };
 

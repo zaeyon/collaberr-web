@@ -1,6 +1,6 @@
 import { baseUrl } from ".";
 import axios from "axios";
-const YOUTUBE_API_KEY = "AIzaSyABkAxt7ImPulsiCYKoLzS34kHTawwNTRk";
+const YOUTUBE_API_KEY = "AIzaSyCjOasAZOb_7DBmq_AXOyR_ZoUqiq7IiiM";
 const YOUTUBE_BASE_URL = 'https://www.googleapis.com/youtube/v3';
 
 export const GET_youtubeAuth = () => {
@@ -32,9 +32,11 @@ export const GET_channelVideosPublisedAfter = (channelId: string, date: string) 
   let pageToken = ""; 
   let videos: any = [];
   let totalResult = 0;
+  const nowDate = new Date();
+  const publisedBefore = `${nowDate.getFullYear()}-${nowDate.getMonth() + 1}-00T00:00:00Z`;
 
   const promise: any =  axios.get(
-    `${YOUTUBE_BASE_URL}/search?key=${YOUTUBE_API_KEY}&channelId=${channelId}&part=snippet&type=video&order=date&maxResults=50&publishedAfter=${date}`
+    `${YOUTUBE_BASE_URL}/search?key=${YOUTUBE_API_KEY}&channelId=${channelId}&part=snippet&type=video&order=date&maxResults=50&publishedAfter=${date}&publisedBefore=${publisedBefore}`
   ).then(async (res) => {
     videos = [...res.data.items];
     console.log("res", res);
@@ -42,7 +44,7 @@ export const GET_channelVideosPublisedAfter = (channelId: string, date: string) 
       totalResult = res.data.pageInfo.totalResults;
       while(totalResult > videos.length) {
         await axios.get(
-          `${YOUTUBE_BASE_URL}/search?key=${YOUTUBE_API_KEY}&channelId=${channelId}&part=snippet&type=video&order=date&maxResults=50&pageToken=${pageToken}&publishedAfter=${date}`
+          `${YOUTUBE_BASE_URL}/search?key=${YOUTUBE_API_KEY}&channelId=${channelId}&part=snippet&type=video&order=date&maxResults=50&pageToken=${pageToken}&publishedAfter=${date}&publisedBefore=${publisedBefore}`
         ).then((res) => {
           videos = [...videos, ...res.data.items]
           if(videos.length < totalResult) pageToken = res.data.nextPageToken;

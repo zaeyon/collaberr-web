@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import styled from "@emotion/styled";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { myCampaignsState, campaignStatusTableState } from "../recoil/campaign";
@@ -15,12 +15,27 @@ const Container = styled.div`
 export default function Dashboard() {
   const [myCampaigns, setMyCampaigns] = useRecoilState(myCampaignsState);
   const campaignStatusTableList = useRecoilValue(campaignStatusTableState);
+  const totalInvestmentCost = useRef<number>();
+  const totalViews = useRef<number>();
+  const totalParticipation = useRef<number>();
 
   useEffect(() => {
     GET_showMyCampaigns()
       .then((res) => {
         console.log("GET_showMyCampaigns success", res);
         setMyCampaigns(res.data);
+        totalInvestmentCost.current = res.data.reduce(
+          (sum: number, item: any) => {
+            return (sum += item.reward * item.approved_creators.length);
+          },
+          0
+        );
+        totalParticipation.current = res.data.reduce(
+          (sum: number, item: any) => {
+            return (sum += item.approved_creators.length);
+          },
+          0
+        );
       })
       .catch((err) => {
         console.log("GET_showMyCampaign err", err);
@@ -30,19 +45,23 @@ export default function Dashboard() {
   const SCOREBOARD_DATA = [
     {
       label: "진행중인 캠페인",
-      value: `${myCampaigns.length}개`,
+      value: myCampaigns.length ? `${myCampaigns.length}개` : "-",
     },
     {
       label: "전체 투자 비용",
-      value: "$1,000",
+      value: totalInvestmentCost.current
+        ? `$${totalInvestmentCost.current.toLocaleString()}`
+        : "-",
     },
     {
       label: "전체 조회수",
-      value: "223,000회",
+      value: totalViews.current ? `${totalViews.current}회` : "-",
     },
     {
       label: "전체 참여수",
-      value: "150,001회",
+      value: totalParticipation.current
+        ? `${totalParticipation.current}회`
+        : "-",
     },
   ];
 

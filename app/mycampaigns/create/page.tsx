@@ -104,7 +104,7 @@ export default function Create() {
     const newCampaign: any = {
       brand_name: brandName,
       title,
-      thumbnail: null,
+      thumbnail: thumbnailImageFile,
       category,
       platform,
       start_date: shownStartDate,
@@ -114,7 +114,7 @@ export default function Create() {
       description,
       mission_type: missionType,
       reward: bid,
-      additional_files: null,
+      additional_files: files[0],
     };
 
     POST_createCampaign(newCampaign)
@@ -145,6 +145,8 @@ export default function Create() {
   };
 
   const changeThumbnailImage = (file: any, src: any) => {
+    console.log("changeThumbnailImage file", file);
+    console.log("changeThumbnailImage src", src);
     setThumbnailImageFile(file);
     setThumbnailImageSrc(src);
   };

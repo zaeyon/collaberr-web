@@ -8,7 +8,7 @@ import { baseUrl } from "../api";
 import { GET_showAllCampaigns } from "../api/campaign";
 import { allCampaignsState } from "../recoil/campaign";
 import CampaignGrid from "../components/CampaignGrid";
-import Card from "../components/Skeleton/Card";
+import SkeletonCard from "../components/loader/SkeletonCard";
 
 export default function Campaigns() {
   const [allCampaigns, setAllCampaigns] = useRecoilState(allCampaignsState);

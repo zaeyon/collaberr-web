@@ -36,7 +36,13 @@ export default function CreatorRanking({
       </div>
       <div className={styles.rankingList}>
         {creatorRankingData.map((creator: any, index: number) => {
-          return <CreatorRankingItem key={index} creatorData={creator} />;
+          return (
+            <CreatorRankingItem
+              index={index}
+              key={index}
+              creatorData={creator}
+            />
+          );
         })}
       </div>
     </div>

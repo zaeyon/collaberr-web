@@ -57,6 +57,17 @@ $primary_disabled_font: #F7F9FB;
         font-weight: 400;
     }
 
+    &.large {
+        width: 100%;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 160%; /* 27.2px */
+        display: flex;
+        justify-content: center;
+    }
+
     &.primary {
         @include button-style($primary_back, $primary_font, $primary_hover)
     }

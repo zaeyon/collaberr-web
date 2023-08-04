@@ -1,38 +1,15 @@
 import {atom,  selector} from 'recoil';
 import { getFormattedDate } from '../lib/date';
+import { campaignListType } from '../type/campaign';
 
 export const allCampaignsState = atom({
     key: 'allCampaignsState',
     default: []
 })
 
-export const myCampaignsState = atom({
+export const myCampaignsState = atom<campaignListType []>({
     key: 'myCampaignsState',
-    default: [
-        {
-        id: 0,
-        brand_name: '',
-        title: '',
-        thumbnail: '',
-        category: '',
-        platform: '',
-        start_date: '',
-        end_date: '',
-        recruit_start_date: '',
-        recruit_end_date: '',
-        description: '',
-        mission_type: '',
-        reward: '',
-        additional_files: '',
-        is_completed: false,
-        is_draft: false,
-        is_recruiting: false,
-        is_recruited: false,
-        is_active: false,
-        is_deleted: false,
-         
-        }
-    ]
+    default: []
 })
 
 const MY_CAMPAIGNS_STATE_DATA = [

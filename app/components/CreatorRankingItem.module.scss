@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     padding: 16px 0px;   
     font-family: "Pretendard";
     line-height: 160%; /* 24px */
@@ -10,7 +11,14 @@
     border-bottom: 1px solid #E6EAEF;
 }
 
+.basicInfoDiv { 
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
 .profileImage {
+    border-radius: 100px;
     margin-left: 25px;
 
 }
@@ -33,4 +41,32 @@
     color: #536878;
     font-size: 15px;
     font-weight: 400;
+}
+
+.statisticsItem {
+    color:  #445462;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;;
+    gap: 4px;
+font-family: "Pretendard";
+font-size: 13px;
+font-style: normal;
+font-weight: 400;
+line-height: 160%; /* 20.8px */
+letter-spacing: -0.195px;
+}
+
+.statisticsLabel {
+    color:  #8696AB;
+}
+
+.statisticsDiv {
+    gap: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
 }

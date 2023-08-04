@@ -1,7 +1,7 @@
 import styles from "./CampaignGrid.module.scss";
 
 import CampaignCard from "../components/CampaignCard";
-import Card from "./Skeleton/Card";
+import SkeletonCard from "./loader/SkeletonCard";
 
 interface props {
   campaignArr: any;
@@ -15,11 +15,13 @@ export default function CampaignGrid({ campaignArr, loading }: props) {
       <div className={styles.gridContainer}>
         {!loading &&
           campaignArr.map((campaign: any, index: number) => {
-            return <CampaignCard key={index} campaign={campaign} />;
+            return (
+              <CampaignCard type={"grid"} key={index} campaign={campaign} />
+            );
           })}
         {loading &&
           [0, 1, 2, 4, 5, 6].map((_, index) => {
-            return <Card key={index} />;
+            return <SkeletonCard key={index} />;
           })}
       </div>
     </div>

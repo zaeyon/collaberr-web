@@ -132,12 +132,14 @@ interface props {
   curTab: string;
   changeTab: (tab: string) => void;
   clickModalOutside: () => void;
+  channelId: string;
 }
 
 export default function CreatorDetail({
   clickModalOutside,
   curTab,
   changeTab,
+  channelId,
 }: props) {
   const [channelInfo, setChannelInfo] = useState<any>({});
   const [channelVideos, setChannelVideos] = useState([]);
@@ -154,6 +156,7 @@ export default function CreatorDetail({
     let recentlyUploadCount = 0;
 
     prevDate.setFullYear(nowDate.getFullYear() - 1);
+    prevDate.setMonth(nowDate.getMonth());
     console.log("1년 전", prevDate.toISOString());
     console.log("nowDate.getMonth()", nowDate.getMonth());
 
@@ -163,15 +166,15 @@ export default function CreatorDetail({
       }
     } else {
       for (let i = 1; i <= 12; i++) {
-        if (i < 12 - Number(nowDate.getMonth())) {
+        if (i < 12 - Number(nowDate.getMonth()) + 1) {
           console.log("i <= 12 - nowDate.getMonth() + 1", i);
           uploadForYear[
-            `${nowDate.getFullYear() - 1}년 ${nowDate.getMonth() + 1 + i}월`
+            `${nowDate.getFullYear() - 1}년 ${nowDate.getMonth() + i}월`
           ] = 0;
         } else {
           console.log("i", i);
           uploadForYear[
-            `${nowDate.getFullYear()}년 ${i - nowDate.getMonth() + 1}월`
+            `${nowDate.getFullYear()}년 ${i - nowDate.getMonth() + 2}월`
           ] = 0;
         }
       }
@@ -179,7 +182,7 @@ export default function CreatorDetail({
 
     console.log("monthsForYear", uploadForYear);
 
-    GET_channelInfo("UCOByc6akvw27KbJ1p9jn3BQ")
+    GET_channelInfo(channelId)
       .then((res) => {
         console.log("GET_channelInfo success", res);
         setChannelInfo(res.data.items[0]);
@@ -188,7 +191,7 @@ export default function CreatorDetail({
         console.log("GET_channelInfo err", err);
       });
 
-    GET_channelVideos("UCOByc6akvw27KbJ1p9jn3BQ")
+    GET_channelVideos(channelId)
       .then((res) => {
         console.log("GET_channelVideos success", res);
         setChannelVideos(res.data.items);
@@ -205,17 +208,15 @@ export default function CreatorDetail({
         console.log("GET_channelVideos err", err);
       });
 
-    GET_channelVideosPublisedAfter(
-      "UCOByc6akvw27KbJ1p9jn3BQ",
-      prevDate.toISOString()
-    )
+    GET_channelVideosPublisedAfter(channelId, prevDate.toISOString())
       .then((res: any) => {
         console.log("GET_channelVideosPublisedAfter success", res);
         res.forEach((video: any) => {
-          const year = new Date(video.snippet.publishedAt).getFullYear();
-          const month = new Date(video.snippet.publishedAt).getMonth() + 1;
+          const year = Number(video.snippet.publishedAt.split("-")[0]);
+          const month = Number(video.snippet.publishedAt.split("-")[1]);
           const monthPrevDate = new Date(nowDate);
 
+          console.log("year month", year, month);
           if (
             new Date(video.snippet.publishedAt) >
             new Date(monthPrevDate.setMonth(nowDate.getMonth() - 1))

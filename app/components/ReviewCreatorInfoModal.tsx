@@ -154,7 +154,7 @@ export default function ReviewCreatorInfoModal({
         <Description>
           원활한 캠페인 진행을 위해서 입력된 크리에이터
           <br />
-          정보 를 다시 한번 확인해주세요
+          정보를 다시 한번 확인해주세요
         </Description>
         <Form>
           <InfoInput

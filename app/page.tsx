@@ -3,15 +3,21 @@ import { SetStateAction, useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { useRouter } from "next/navigation";
 import styles from "./page.module.scss";
+import Image from "next/image";
 import { allCampaignsState } from "./recoil/campaign";
+import { allCreatorsState } from "./recoil/creator";
 
 import CampaignCarousel from "./components/CampaignCarousel";
 import Button from "./components/Button";
 import CreatorRanking from "./components/CreatorRanking";
 import { GET_showAllCampaigns } from "./api/campaign";
+import { GET_showAllCreators } from "./api/creator";
+
+import icon_chevron_right from "@/app/assets/icons/icon_chevron-right.png";
 
 export default function Home() {
   const [allCampaigns, setAllCampaigns] = useRecoilState(allCampaignsState);
+  const [allCreators, setAllCreators] = useRecoilState(allCreatorsState);
   const [loading, setLoading] = useState(
     allCampaigns.length > 0 ? false : true
   );
@@ -41,34 +47,57 @@ export default function Home() {
         setLoading(false);
         console.log("GET_showAllCampaign fail", err);
       });
+
+    GET_showAllCreators()
+      .then((res) => {
+        console.log("GET_showAllCreators success", res);
+        setAllCreators(res);
+      })
+      .catch((err) => {
+        console.log("GET_showAllCreators fail err", err);
+      });
   }, []);
 
   return (
     <main className={styles.container}>
       <h3 className={styles.title}>인기 캠페인</h3>
-      <p className={styles.description}>
-        지금 크리에이터들에게 가장 인기있는 캠페인
-      </p>
+      <div className={styles.descriptionDiv}>
+        <p className={styles.description}>
+          지금 크리에이터들에게 가장 인기있는 캠페인
+        </p>
+        <div
+          onClick={() => router.push("/campaigns")}
+          className={styles.showAll}
+        >
+          전체보기
+          <Image
+            width={20}
+            height={20}
+            src={icon_chevron_right}
+            alt={"icon_chevron_right"}
+          />
+        </div>
+      </div>
       <div className={styles.popularCampaigns}>
         <CampaignCarousel loading={loading} campaignsData={allCampaigns} />
-        <Button
-          onClick={() => router.push("/campaigns")}
-          style="tertiery"
-          size="xsmall"
-          state="default"
-          label="전체보기"
-        />
       </div>
-      {/* <h3 className={styles.title}>내가 본 캠페인</h3>
+      {/* <div className={styles.descriptionDiv}>
+        <h3 className={styles.title}>내가 본 캠페인</h3>
+        <div
+          onClick={() => router.push("/campaigns")}
+          className={styles.showAll}
+        >
+          전체보기
+          <Image
+            width={20}
+            height={20}
+            src={icon_chevron_right}
+            alt={"icon_chevron_right"}
+          />
+        </div>
+      </div>
       <div className={styles.sawCampaigns}>
         <CampaignCarousel loading={loading} campaignsData={allCampaigns} />
-        <Button
-          onClick={() => router.push("/campaigns")}
-          style="tertiery"
-          size="xsmall"
-          state="default"
-          label="전체보기"
-        />
       </div> */}
       <h3 className={styles.title}>크리에이터 랭킹</h3>
       <p className={styles.description}>
@@ -78,7 +107,7 @@ export default function Home() {
         <CreatorRanking
           selectCategory={selectCategory}
           curCategory={curCategory}
-          creatorRankingData={CREATOR_RANKING_DATA}
+          creatorRankingData={allCreators}
         />
       </div>
     </main>

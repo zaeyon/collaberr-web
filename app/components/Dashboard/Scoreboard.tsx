@@ -27,7 +27,7 @@ export default function Scoreboard({ data, marginTop = 0, gap = 20 }: props) {
                 />
               )}
             </div>
-            <div className={styles.value}>{item.value}</div>
+            <div className={styles.value}>{item.value ? item.value : " "}</div>
             {item.change && (
               <div
                 style={{
