@@ -1,4 +1,5 @@
-export const getFormattedDate = (date: any, separator: string) => {
+export const getFormattedDate = (tmpDate: any, separator: string) => {
+    const date = new Date(tmpDate);
     const year = date.getFullYear();
     const month = leftPad(date.getMonth() + 1);
     const day = leftPad(date.getDate());
@@ -13,4 +14,37 @@ function leftPad(value: number) {
     }
 
     return `0${value}`;
+}
+
+export const getElapsedTime = (date: string) => {
+    
+    const startDate: any = new Date(date);
+    const endDate: any = new Date();
+
+    const diff = (endDate - startDate) / 1000;
+
+    const times = [
+        {name: '년', ms: 60 * 60 * 24 * 365},
+        {name: '월', ms: 60 * 60 * 24 * 30},
+        {name: '일', ms: 60 * 60 * 24},
+        {name: '시간', ms: 60 * 60},
+        {name: '분', ms: 60},
+    ]
+
+    for(const time of times) {
+        const betTime = Math.floor(diff / time.ms);
+
+        if(betTime > 0) {
+            return `${betTime}${time.name} 전`
+        }
+    }
+
+    return '방금 전'
+}
+
+export const getDday = (date: string) => {
+    const endDate: any = new Date(date);
+    const nowDate: any = new Date();
+
+    return Math.ceil((endDate - nowDate)/(1000*60*60*24));
 }

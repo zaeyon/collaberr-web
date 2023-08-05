@@ -1,15 +1,22 @@
 
 .mainInfoContainer {
+    width: 700px;
     display: flex; 
     flex-direction: column;
     word-wrap: break-word;
 
 }
 
+.head {
+    padding-bottom: 12px;
+    border-bottom: 1px solid #F1F4F7;
+}
+
 .thumbnailImageDiv {
     border-radius: 16px;
     background-color: #F1F4F7;
     position: relative;
+    width: 600px;
     height: 350px;
 }
 
@@ -19,35 +26,89 @@
 }
 
 .brandName {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     margin-top: 32px;
-    font-family: 'Pretendard';
-    font-size: 17px;
-    font-weight: 400;
-    line-height: 27px;
-    letter-spacing: -0.015em;
-    text-align: left;
-    color: #8696AB;
+    color:  #35424C;
+    font-family: "Pretendard";
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%; /* 24px */
+    letter-spacing: -0.225px;
 }
 
-.title {
-    font-family: 'Pretendard';
-    font-size: 24px;
-    font-weight: 600;
-    line-height: 38px;
-    letter-spacing: -0.015em;
-    color: #242D35;
-}
-
-.subItem  {
+.bookmark {
+    width: 110px;
+    position: relative;
     display: flex;
     flex-direction: row;
     align-items: center;
+    color: #F25476;
+    font-family: "Pretendard";
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%; /* 24px */
+    letter-spacing: -0.225px;
+    cursor: pointer;
+}
+
+.title {
+    margin-top: 6px;
     font-family: 'Pretendard';
-    font-size: 17px;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 160%;
+    letter-spacing: -0.36px;
+    color: #242D35;
+}
+
+.subItemList {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 4px;
+}
+
+
+.subItem  {
+    padding: 4px 10px;
+    color:  #445462;
+    font-family: "Pretendard";
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%; /* 20.8px */
+    letter-spacing: -0.195px;
+    border-radius: 16px;
+    background-color: #F1F4F7;
+}
+
+
+.indicatorItemList {
+    margin-top: 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+}
+
+.indicatorItem {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: var(--gray-gray-500, #8696AB);
+    font-family: 'Pretendard';
+    font-size: 15px;
+    font-style: normal;
     font-weight: 400;
-    line-height: 27px;
-    letter-spacing: -0.015em;
-    text-align: left;
+    line-height: 160%; /* 24px */
+    letter-spacing: -0.225px;
+    gap: 4px;
 }
 
 

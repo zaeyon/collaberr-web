@@ -1,12 +1,24 @@
-export interface campaignListType {
+export interface campaignListType { 
     id: number;
-    state: string;
+    brand_name: string;
     title: string;
+    thumbnail: any;
+    category: string;
     platform: string;
-    mission_type: string;
     start_date: string;
     end_date: string;
-    
+    recruit_start_date: string;
+    recruit_end_date: string;
+    description: string;
+    mission_type: string;
+    reward: number;
+    additional_files: any;
+    is_completed: boolean;
+    is_draft: boolean;
+    is_recruiting: boolean;
+    is_recruited: boolean;
+    is_active: boolean;
+    is_deleted: boolean;
 }
 
 export interface campaignType {
@@ -24,4 +36,6 @@ export interface campaignType {
     mission_type: string;
     reward: number | undefined;
     additional_files: any;
+
+
 }

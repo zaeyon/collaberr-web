@@ -59,6 +59,7 @@ interface props {
   marginTop: number;
   changeTab: (tab: string) => void;
   channelVideos: any[];
+  uploadAnalysis: any;
 }
 
 export default function Tab({
@@ -66,6 +67,7 @@ export default function Tab({
   changeTab,
   marginTop = 52,
   channelVideos,
+  uploadAnalysis,
 }: props) {
   return (
     <Container style={{ marginTop: marginTop }}>
@@ -91,7 +93,12 @@ export default function Tab({
         {curTab === "follower" && <Follower />}
         {curTab === "view" && <View />}
         {curTab === "action" && <Action />}
-        {curTab === "upload" && <Upload channelVideos={channelVideos} />}
+        {curTab === "upload" && (
+          <Upload
+            uploadAnalysis={uploadAnalysis}
+            channelVideos={channelVideos}
+          />
+        )}
       </Body>
     </Container>
   );

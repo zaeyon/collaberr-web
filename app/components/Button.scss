@@ -17,6 +17,7 @@ $primary_disabled_font: #F7F9FB;
     border-radius: 8px;
     font-family: "Pretendard";
     letter-spacing: -0.015em;
+    white-space: nowrap;
     text-align: left;
     border: none;
 
@@ -54,6 +55,17 @@ $primary_disabled_font: #F7F9FB;
         line-height: 160%;
         font-size: 15px;
         font-weight: 400;
+    }
+
+    &.large {
+        width: 100%;
+        padding-top: 16px;
+        padding-bottom: 16px;
+        font-size: 17px;
+        font-weight: 400;
+        line-height: 160%; /* 27.2px */
+        display: flex;
+        justify-content: center;
     }
 
     &.primary {

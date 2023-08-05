@@ -1,0 +1,70 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.thumbnailDiv {
+    position: relative;
+
+    width:309px;
+    height:180px;
+    border-radius: 16px;
+    background-color: #F1F4F7;
+
+    // &.carousel {
+    //     width: 228px;
+    //     height: 132px;
+    // }
+}
+
+.thumbnail {
+    width:309px;
+    height:180px;
+    border-radius: 16px;
+    background-color: #F1F4F7;
+    object-fit: cover;
+}
+
+.brandName {
+    margin-top: 16px;
+    font-family: 'Pretendard';
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 21px;
+    color: #8696AB;
+}
+
+.title {
+    margin-top: 4px;
+    font-family: 'Pretendard';
+    font-size: 17px;
+    font-weight: 600;
+    line-height: 27px;
+    color: #242D35;
+}
+
+.platformIcon {
+    border-radius: 100;
+    position: absolute;
+    top: 8px;
+    left: 8px;
+}
+
+.bookmarkIcon {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    opacity: 0.3;
+}
+
+.viewCount {
+    margin-top: 10px;
+    color:  #8696AB;
+    font-family: 'Pretendard';
+    font-size: 13px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%; /* 20.8px */
+    letter-spacing: -0.195px;
+}

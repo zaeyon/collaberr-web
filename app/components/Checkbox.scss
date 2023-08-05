@@ -1,3 +1,12 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px;
+    height: 24px;
+    user-select: none;
+}
+
 .checkbox {
     width: 24px;
     height: 24px;
@@ -11,4 +20,20 @@
 .checkbox:hover {
     border: 1.5px solid #F25476;
     background-color: #FBC6D1;
+}
+
+.label {
+    margin-left: 6px;
+    color: var(--gray-gray-600, #536878);
+    font-family: "Pretendard";
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 160%;
+    letter-spacing: -0.225px;
+}
+
+.label > .viewTerms {
+    text-decoration: underline;
+    cursor: pointer;
 }

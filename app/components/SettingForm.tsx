@@ -10,9 +10,24 @@ import InfoSelect from "./InfoSelect";
 import Button from "./Button";
 
 const Container = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
   width: 600px;
+  margin-top: 48px;
+  padding: 0px 40px;
+  background-color: white;
 `;
-
+const Title = styled.div`
+  font-family: "Pretendard";
+  font-size: 40px;
+  font-weight: 700;
+  line-height: 52px;
+  letter-spacing: -0.015em;
+  text-align: left;
+`;
 const Header = styled.div`
   margin-top: 56px;
   display: flex;
@@ -88,6 +103,7 @@ export default function SettingForm({
 
   return (
     <Container>
+      <Title>Settings</Title>
       <Header>
         <h3>Basic Information</h3>
       </Header>

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "es6",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -29,7 +29,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "app/mycampaigns/page.tsx",
-    "server/index.js"
-, "app/components/Skeleton/Card.jsx"  ],
+    "server/index.js",
+    "app/components/loader/SkeletonCard.jsx"
+, "app/components/loader/SkeletonTable.jsx", "app/api/campaign.js"  ],
   "exclude": ["node_modules"]
 }

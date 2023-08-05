@@ -2,7 +2,7 @@
 import { useRef } from "react";
 import styles from "./page.module.scss";
 import { useRouter } from "next/navigation";
-import { useSetRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 
 import InfoInput from "@/app/components/InfoInput";
 import Button from "@/app/components/Button";
@@ -10,7 +10,7 @@ import { toastState } from "@/app/recoil/user";
 import Toast from "@/app/components/Toast";
 
 export default function Confirm() {
-  const setToast = useSetRecoilState(toastState);
+  const [toast, setToast] = useRecoilState(toastState);
   const toastRef = useRef<any>();
   const router = useRouter();
 
@@ -18,12 +18,14 @@ export default function Confirm() {
     setTimeout(() => {
       router.push("/appliedcampaigns");
 
-      setToast({
-        visible: true,
-        message: "콘텐츠 승인이 요청되었습니다",
-        type: "confirm",
-        request: "/appliedcampaigns/confirm",
-      });
+      if (!toast.visible) {
+        setToast({
+          visible: true,
+          message: "콘텐츠 승인이 요청되었습니다",
+          type: "confirm",
+          request: "/appliedcampaigns/confirm",
+        });
+      }
     }, 300);
   };
 

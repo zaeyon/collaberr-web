@@ -10,6 +10,9 @@
 }
 
 .head {
+    height: 40px;
+    padding-left: 8px;
+    padding-right: 8px;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -33,7 +36,6 @@
 }
 
 .headerItem {
-    padding: 0px 8px;
     height: 40px;
     display: flex;
     align-items: center;
@@ -81,8 +83,6 @@ text-decoration-line: underline;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
-    
 }
 
 .stateBadge {

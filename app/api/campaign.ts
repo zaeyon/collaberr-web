@@ -3,9 +3,25 @@ import axios, {baseUrl} from '.';
 import { campaignType } from '../type/campaign';
 import { POST_refreshToken } from './auth';
 
-export const POST_createCampaign = (newCampaign: campaignType) => {
+export const POST_createCampaign = (newCampaign: any) => {
     console.log("POST_createCampaign ", newCampaign);
-    const promise = axios.post(`${baseUrl}/api/campaigns/`, newCampaign);
+
+    let formData = new FormData();
+
+  for (let key in newCampaign) {
+    formData.append(key, newCampaign[key]);
+  }
+
+  /* value 확인하기 */
+  for (let key of formData.keys()) {
+    console.log(key, ":", formData.get(key));
+  }
+
+    const promise = axios.post(`${baseUrl}/api/campaigns/`, formData,{
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
     const response = promise.then((res) => res);
 
     return response

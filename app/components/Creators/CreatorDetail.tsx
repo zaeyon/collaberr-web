@@ -6,9 +6,13 @@ import styled from "@emotion/styled";
 import Link from "next/link";
 import Image from "next/image";
 
-import { GET_channelVideos, GET_channelInfo } from "@/app/api/youtube";
+import {
+  GET_channelVideos,
+  GET_channelInfo,
+  GET_channelVideosPublisedAfter,
+} from "@/app/api/youtube";
 import { getYoutubeTopic, getCountryName } from "@/app/lib/youtube";
-import { getFormattedDate } from "@/app/lib/date";
+import { getFormattedDate, getElapsedTime } from "@/app/lib/date";
 import Tab from "./Tab/Tab";
 import Button from "../Button";
 import icon_profile_default from "@/app/assets/icons/icon_profile-fill.png";
@@ -128,18 +132,57 @@ interface props {
   curTab: string;
   changeTab: (tab: string) => void;
   clickModalOutside: () => void;
+  channelId: string;
 }
 
 export default function CreatorDetail({
   clickModalOutside,
   curTab,
   changeTab,
+  channelId,
 }: props) {
   const [channelInfo, setChannelInfo] = useState<any>({});
   const [channelVideos, setChannelVideos] = useState([]);
+  const [uploadAnalysis, setUploadAnalysis] = useState({
+    recentlyUploadCount: 0,
+    monthlyUploadCount: {},
+    recentlyUploadElapsedTime: "",
+  });
 
   useEffect(() => {
-    GET_channelInfo("UCOByc6akvw27KbJ1p9jn3BQ")
+    const nowDate: any = new Date();
+    const prevDate = new Date(nowDate);
+    let uploadForYear: any = {};
+    let recentlyUploadCount = 0;
+
+    prevDate.setFullYear(nowDate.getFullYear() - 1);
+    prevDate.setMonth(nowDate.getMonth());
+    console.log("1년 전", prevDate.toISOString());
+    console.log("nowDate.getMonth()", nowDate.getMonth());
+
+    if (nowDate.getMonth() + 1 === 12) {
+      for (let i = 1; i <= 12; i++) {
+        uploadForYear[`${nowDate.getFullYear()}년 ${i}월`] = 0;
+      }
+    } else {
+      for (let i = 1; i <= 12; i++) {
+        if (i < 12 - Number(nowDate.getMonth()) + 1) {
+          console.log("i <= 12 - nowDate.getMonth() + 1", i);
+          uploadForYear[
+            `${nowDate.getFullYear() - 1}년 ${nowDate.getMonth() + i}월`
+          ] = 0;
+        } else {
+          console.log("i", i);
+          uploadForYear[
+            `${nowDate.getFullYear()}년 ${i - nowDate.getMonth() + 2}월`
+          ] = 0;
+        }
+      }
+    }
+
+    console.log("monthsForYear", uploadForYear);
+
+    GET_channelInfo(channelId)
       .then((res) => {
         console.log("GET_channelInfo success", res);
         setChannelInfo(res.data.items[0]);
@@ -148,13 +191,53 @@ export default function CreatorDetail({
         console.log("GET_channelInfo err", err);
       });
 
-    GET_channelVideos("UCOByc6akvw27KbJ1p9jn3BQ")
+    GET_channelVideos(channelId)
       .then((res) => {
         console.log("GET_channelVideos success", res);
         setChannelVideos(res.data.items);
+        setUploadAnalysis((prev) => {
+          return {
+            ...prev,
+            recentlyUploadElapsedTime: getElapsedTime(
+              res.data.items[0].snippet.publishedAt
+            ),
+          };
+        });
       })
       .catch((err) => {
         console.log("GET_channelVideos err", err);
+      });
+
+    GET_channelVideosPublisedAfter(channelId, prevDate.toISOString())
+      .then((res: any) => {
+        console.log("GET_channelVideosPublisedAfter success", res);
+        res.forEach((video: any) => {
+          const year = Number(video.snippet.publishedAt.split("-")[0]);
+          const month = Number(video.snippet.publishedAt.split("-")[1]);
+          const monthPrevDate = new Date(nowDate);
+
+          console.log("year month", year, month);
+          if (
+            new Date(video.snippet.publishedAt) >
+            new Date(monthPrevDate.setMonth(nowDate.getMonth() - 1))
+          ) {
+            recentlyUploadCount += 1;
+          }
+          uploadForYear[`${year}년 ${month}월`] += 1;
+        });
+
+        console.log("uploadForYear 할당", uploadForYear);
+
+        setUploadAnalysis((prev) => {
+          return {
+            ...prev,
+            recentlyUploadCount: recentlyUploadCount,
+            monthlyUploadCount: uploadForYear,
+          };
+        });
+      })
+      .catch((err: any) => {
+        console.log("GET_channelVideosPublisedAfter err", err);
       });
   }, []);
 
@@ -278,6 +361,7 @@ export default function CreatorDetail({
           curTab={curTab}
           changeTab={changeTab}
           channelVideos={channelVideos}
+          uploadAnalysis={uploadAnalysis}
         />
       </animated.div>
     </>

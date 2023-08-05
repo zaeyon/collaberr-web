@@ -1,7 +1,7 @@
 
 .joinContainer {
-    width: 350px;
-    right: 45px;
+    width: 336px;
+    right: 40px;
     position: fixed;
     display: flex;
     flex-direction: column;
@@ -9,7 +9,7 @@
 }
 
 .summaryInfoContainer {
-    padding: 16px;
+    padding: 20px 16px;
     border-radius: 16px;
     border: 1px solid #E6EAEF;
     display: flex;
@@ -17,54 +17,47 @@
     background-color: white;
 }
 
-.summaryTitle {
-    font-family: 'Pretendard';
+.title {
+    color:  #35424C;
+    font-family: "Pretendard";
     font-size: 17px;
+    font-style: normal;
     font-weight: 600;
-    line-height: 27px;
-    letter-spacing: -0.015em;
-    text-align: left;
-    color: #242D35;
+    line-height: 160%; /* 27.2px */
+    letter-spacing: -0.255px;
 }
 
 .joinButton {
     margin-top: 24px;
-    left: 0px;
-    border-radius: 8px;
-    padding: 16px 28px;
-    background-color: #F25476; 
-    font-family: 'Pretendard';
-    font-size: 17px;
-    font-weight: 400;
-    line-height: 27px;
-    letter-spacing: -0.015em;
-    text-align: left;
-    color: #F7F9FB;
-    cursor: pointer;
 
-    display: flex;
-    justify-content: center;
 }
 
 
 .subItem  {
+    margin-top: 20px;
     display: flex;
-    flex-direction: row;
-    align-items: center;
+    flex-direction: column;
     font-family: 'Pretendard';
-    font-size: 17px;
-    font-weight: 400;
-    line-height: 27px;
-    letter-spacing: -0.015em;
+    font-size: 15px;
+    line-height: 160%;
+    letter-spacing: -0.225px;
     text-align: left;
 }
 
 
 .subItem > .subLabel {
     color: #8696AB;
+    font-weight: 400;
 } 
 
 .subItem > .subValue {
-    margin-left: 20px;
-    color: #445462;
+    margin-top: 4px;
+    color: #35424C;
+    font-weight: 500;
+}
+
+.subValue > .addInfo {
+    color: #F25476;
+    margin-left: 8px;
+
 }

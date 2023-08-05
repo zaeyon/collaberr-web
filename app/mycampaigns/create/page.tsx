@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "@emotion/styled";
 import { useRouter } from "next/navigation";
-import { useSetRecoilState } from "recoil";
+import { useSetRecoilState, useRecoilState } from "recoil";
 
 import CampaignPreview from "@/app/components/CampaignPreview";
 import CamapignForm from "@/app/components/CampaignForm";
@@ -48,7 +48,7 @@ export default function Create() {
 
   const [isVisModal, setIsVisModal] = useState<boolean>(false);
 
-  const setToast = useSetRecoilState(toastState);
+  const [toast, setToast] = useRecoilState(toastState);
 
   const router = useRouter();
 
@@ -104,7 +104,7 @@ export default function Create() {
     const newCampaign: any = {
       brand_name: brandName,
       title,
-      thumbnail: null,
+      thumbnail: thumbnailImageFile,
       category,
       platform,
       start_date: shownStartDate,
@@ -114,7 +114,7 @@ export default function Create() {
       description,
       mission_type: missionType,
       reward: bid,
-      additional_files: null,
+      additional_files: files[0],
     };
 
     POST_createCampaign(newCampaign)
@@ -122,12 +122,14 @@ export default function Create() {
         console.log("POST_createCampaign success", res);
         router.push("/mycampaigns");
 
-        setToast({
-          visible: true,
-          message: "Campaign registered successfully!",
-          type: "confirm",
-          request: "/mycampaigns/create",
-        });
+        if (!toast.visible) {
+          setToast({
+            visible: true,
+            message: "Campaign registered successfully!",
+            type: "confirm",
+            request: "/mycampaigns/create",
+          });
+        }
       })
       .catch((err) => {
         console.log("POST_createCampaign err", err);
@@ -143,6 +145,8 @@ export default function Create() {
   };
 
   const changeThumbnailImage = (file: any, src: any) => {
+    console.log("changeThumbnailImage file", file);
+    console.log("changeThumbnailImage src", src);
     setThumbnailImageFile(file);
     setThumbnailImageSrc(src);
   };

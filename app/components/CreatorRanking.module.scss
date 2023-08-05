@@ -1,0 +1,34 @@
+.categoryList {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 8px;
+}
+
+.categoryItem {
+    padding: 8px 16px;
+    background-color: white;
+    color:  #445462;
+    font-family: 'Pretendard';
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 160%; /* 24px */
+    letter-spacing: -0.225px;
+    border-radius: 40px;
+    border: 1px solid #E6EAEF;
+    cursor: pointer;
+
+    &.selected {
+        background-color: #F25476;
+        color :#F7F9FB;
+    }
+}
+
+.rankingList {
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+    height: 330px;
+    flex-wrap: wrap;
+}
