@@ -27,6 +27,12 @@ const nextConfig = {
         port: "8000",
         pathname: "/**",
       },
+      {
+        protocol: "http",
+        hostname: "ec2-3-37-12-137.ap-northeast-2.compute.amazonaws.com",
+        port: "8000",
+        pathname: "/**",
+      },
     ],
   },
 };
