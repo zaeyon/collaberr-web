@@ -9,7 +9,13 @@ export const POST_createCampaign = (newCampaign: any) => {
     let formData = new FormData();
 
   for (let key in newCampaign) {
-    formData.append(key, newCampaign[key]);
+    if(key === "additional_files") {
+      if(newCampaign[key]) {
+        formData.append(key, newCampaign[key]);
+      }
+    } else {
+      formData.append(key, newCampaign[key]);
+    }
   }
 
   /* value 확인하기 */
